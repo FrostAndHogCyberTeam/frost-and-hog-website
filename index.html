@@ -382,11 +382,25 @@
         }
 
         /* =========================================
-           RESPONSIF (TAMPILAN HP)
+           RESPONSIF (TAMPILAN HP) - FIX BACKGROUND
            ========================================= */
         @media (max-width: 768px) {
-            .hero-section { background-attachment: scroll; }
-            .ski-section { background-attachment: scroll; }
+            /* Matikan efek fixed agar background penuh di HP */
+            .hero-section { 
+                background-attachment: scroll; 
+                min-height: 100svh; /* svh lebih akurat untuk layar HP */
+            }
+            .ski-section { 
+                background-attachment: scroll; 
+                height: 100svh; 
+                min-height: 100svh;
+            }
+            
+            /* Pastikan gambar selalu menutupi area */
+            .hero-section, .ski-section {
+                background-size: cover;
+                background-position: center center;
+            }
             
             .agents-img { height: 200px; }
             .ski-img { height: 150px; bottom: 5%; }
