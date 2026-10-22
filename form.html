@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client Registration | Frost & Hog</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root { --bg-dark: #05080f; --cyan: #00f3ff; --pink: #ff7eb3; --text-light: #e2e8f0; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Inter', sans-serif; background-color: var(--bg-dark); color: var(--text-light); min-height: 100vh; display: flex; justify-content: center; align-items: center; padding: 20px; }
+        
+        .form-container {
+            background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(0, 243, 255, 0.3);
+            border-radius: 20px; padding: 40px; width: 100%; max-width: 500px; backdrop-filter: blur(15px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(0, 243, 255, 0.1);
+            position: relative; overflow: hidden;
+        }
+        .form-container::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px; background: linear-gradient(90deg, var(--cyan), var(--pink)); }
+        
+        h2 { font-family: 'Orbitron', sans-serif; color: var(--cyan); text-align: center; margin-bottom: 30px; text-transform: uppercase; letter-spacing: 2px; }
+        
+        label { display: block; margin-top: 20px; font-weight: 600; color: #a8b2c1; font-size: 0.9rem; }
+        input, textarea {
+            width: 100%; padding: 15px; margin-top: 8px; background: rgba(0,0,0,0.6);
+            border: 1px solid rgba(255,255,255,0.1); color: #fff; border-radius: 8px;
+            font-family: 'Inter', sans-serif; transition: 0.3s;
+        }
+        input:focus, textarea:focus { outline: none; border-color: var(--cyan); box-shadow: 0 0 10px rgba(0, 243, 255, 0.3); }
+        
+        .readonly-input { background: rgba(0, 243, 255, 0.1); color: var(--cyan); font-weight: 800; cursor: not-allowed; border-color: rgba(0, 243, 255, 0.3); }
+        
+        button {
+            width: 100%; margin-top: 30px; padding: 16px; background: var(--cyan); color: #000;
+            border: none; border-radius: 8px; font-weight: 900; font-size: 1rem; cursor: pointer;
+            transition: all 0.3s ease; font-family: 'Orbitron', sans-serif; letter-spacing: 1px;
+        }
+        button:hover { background: var(--pink); color: #fff; box-shadow: 0 0 20px var(--pink); transform: translateY(-2px); }
+        button:disabled { background: #333; color: #888; cursor: not-allowed; transform: none; box-shadow: none; }
+        
+        .back-btn { display: block; text-align: center; margin-top: 20px; color: #8892b0; text-decoration: none; font-size: 0.9rem; transition: 0.3s; }
+        .back-btn:hover { color: #fff; }
+    </style>
+</head>
+<body>
+
+    <div class="form-container">
+        <h2>Client Registration</h2>
+        
+        <form id="clientForm">
+            <label>Layanan (Terisi Otomatis)</label>
+            <input type="text" id="layanan" class="readonly-input" readonly>
+
+            <label>Nama Lengkap / Nama Tim</label>
+            <input type="text" id="nama" placeholder="Masukkan nama Anda" required>
+
+            <label>Kontak (Discord ID / WhatsApp)</label>
+            <input type="text" id="kontak" placeholder="Contoh: user#1234 atau 08123456" required>
+
+            <label>Detail Kebutuhan</label>
+            <textarea id="pesan" rows="4" placeholder="Jelaskan secara singkat proyek atau masalah yang ingin diselesaikan..." required></textarea>
+
+            <button type="submit" id="submitBtn">Kirim Formulir</button>
+        </form>
+        <a href="layanan.html" class="back-btn">← Kembali ke Pilihan Layanan</a>
+    </div>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const layananDipilih = urlParams.get('layanan') || "Konsultasi Umum";
+        document.getElementById('layanan').value = layananDipilih;
+
+        document.getElementById('clientForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const btn = document.getElementById('submitBtn');
+            btn.innerText = "Mengirim Data...";
+            btn.disabled = true;
+
+            const nama = document.getElementById('nama').value;
+            const kontak = document.getElementById('kontak').value;
+            const pesan = document.getElementById('pesan').value;
+
+            const webhookData = {
+                username: "FH2 Registration System",
+                avatar_url: "https://cdn-icons-png.flaticon.com/512/2913/2913465.png",
+                embeds: [{
+                    title: "🚨 PENDAFTARAN KLIEN BARU 🚨",
+                    color: 65312,
+                    fields: [
+                        { name: "Layanan", value: layananDipilih, inline: true },
+                        { name: "Nama", value: nama, inline: true },
+                        { name: "Kontak", value: kontak, inline: false },
+                        { name: "Pesan", value: pesan, inline: false }
+                    ],
+                    footer: { text: "Frost & Hog Cyber Team - Secure Portal" },
+                    timestamp: new Date().toISOString()
+                }]
+            };
+
+            // ==========================================
+            // PASTE LINK WEBHOOK DISCORD KAMU DI BAWAH INI
+            // ==========================================
+            const webhookURL = "https://discord.com/api/webhooks/1562930745431826474/vO1UYMEEa3VpfgObIzqjlRF4CrlN8yjNmWBfNQuYPDRFdv-t71K_BStOe24KSiDX4Iw_";
+
+            fetch(webhookURL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(webhookData)
+            })
+            .then(response => {
+                if(response.ok) {
+                    alert("✅ Pendaftaran Berhasil!\n\nTim kami akan segera menghubungi Anda melalui kontak yang dicantumkan.");
+                    window.location.href = "index.html";
+                } else {
+                    throw new Error('Gagal');
+                }
+            })
+            .catch(error => {
+                alert("❌ Gagal mengirim data. Periksa koneksi internet atau hubungi admin.");
+                btn.innerText = "Kirim Formulir";
+                btn.disabled = false;
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Services | Frost & Hog</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root { --bg-dark: #05080f; --cyan: #00f3ff; --pink: #ff7eb3; --text-light: #e2e8f0; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Inter', sans-serif; background-color: var(--bg-dark); color: var(--text-light); text-align: center; padding: 60px 20px; min-height: 100vh; background-image: linear-gradient(rgba(0, 243, 255, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 243, 255, 0.03) 1px, transparent 1px); background-size: 30px 30px; }
+        
+        h1 { font-family: 'Orbitron', sans-serif; font-size: 3rem; color: var(--cyan); text-shadow: 0 0 15px rgba(0, 243, 255, 0.5); text-transform: uppercase; margin-bottom: 10px; }
+        p.subtitle { color: #8892b0; margin-bottom: 50px; font-size: 1.1rem; }
+
+        .services-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; max-width: 1000px; margin: 0 auto; }
+        
+        .service-card {
+            background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px; padding: 40px 30px; width: 300px; text-decoration: none; color: var(--text-light);
+            transition: all 0.3s ease; backdrop-filter: blur(10px);
+            display: flex; flex-direction: column; align-items: center;
+        }
+        .service-card:hover { transform: translateY(-10px); box-shadow: 0 0 30px rgba(0, 243, 255, 0.2); border-color: var(--cyan); background: rgba(0, 243, 255, 0.05); }
+        
+        .service-icon { font-size: 3rem; margin-bottom: 20px; }
+        
+        .service-card h2 { font-family: 'Orbitron', sans-serif; color: var(--pink); font-size: 1.5rem; margin-bottom: 15px; }
+        .service-card p { color: #a8b2c1; font-size: 0.95rem; line-height: 1.6; }
+        
+        .back-btn { display: inline-block; margin-top: 60px; color: #8892b0; text-decoration: none; font-weight: 600; padding: 10px 20px; border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; transition: 0.3s; }
+        .back-btn:hover { color: #fff; border-color: var(--pink); background: rgba(255, 126, 179, 0.1); }
+    </style>
+</head>
+<body>
+
+    <h1>Hire Our Team</h1>
+    <p class="subtitle">Pilih divisi yang sesuai dengan kebutuhan digital Anda.</p>
+
+    <div class="services-grid">
+        <a href="form.html?layanan=Cyber Security" class="service-card">
+            <div class="service-icon">🛡️</div>
+            <h2>Cyber Security</h2>
+            <p>Audit keamanan, penetration testing, dan proteksi infrastruktur digital Anda dari ancaman siber.</p>
+        </a>
+
+        <a href="form.html?layanan=Design UI/UX" class="service-card">
+            <div class="service-icon">🎨</div>
+            <h2>Design UI/UX</h2>
+            <p>Pembuatan desain antarmuka yang modern, interaktif, dan berpusat pada kenyamanan pengguna.</p>
+        </a>
+
+        <a href="form.html?layanan=Web Developing" class="service-card">
+            <div class="service-icon">💻</div>
+            <h2>Web Developing</h2>
+            <p>Pengembangan website dari landing page interaktif hingga sistem berbasis web yang kompleks.</p>
+        </a>
+    </div>
+
+    <a href="index.html" class="back-btn">← Kembali ke Beranda</a>
+
+</body>
+</html>
