@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Operations Log | Frost & Hog</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root { --bg-dark: #05080f; --cyan: #00f3ff; --pink: #ff7eb3; --gold: #f1c40f; --text-light: #e2e8f0; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Inter', sans-serif; background-color: var(--bg-dark); color: var(--text-light); padding: 80px 20px 60px; overflow-x: hidden; }
+        
+        /* NAVBAR & SIDEBAR */
+        .navbar { position: fixed; top: 0; left: 0; width: 100%; display: flex; justify-content: flex-end; padding: 20px 30px; z-index: 1000; background: linear-gradient(to bottom, rgba(5,8,15,0.9) 0%, transparent 100%); }
+        .menu-btn { font-size: 35px; color: var(--cyan); cursor: pointer; text-shadow: 0 0 10px rgba(0, 243, 255, 0.5); transition: 0.3s; }
+        .menu-btn:hover { transform: scale(1.1); }
+        .sidebar { position: fixed; top: 0; right: -300px; width: 250px; height: 100vh; background: rgba(10, 15, 22, 0.95); backdrop-filter: blur(15px); border-left: 1px solid rgba(0, 243, 255, 0.2); z-index: 1001; transition: 0.4s ease; padding: 80px 20px; display: flex; flex-direction: column; gap: 20px; }
+        .sidebar.active { right: 0; }
+        .close-btn { position: absolute; top: 20px; right: 25px; font-size: 30px; color: var(--pink); cursor: pointer; }
+        .sidebar a { color: var(--text-light); text-decoration: none; font-family: 'Orbitron', sans-serif; font-weight: 700; font-size: 1.1rem; padding: 10px; border-bottom: 1px solid rgba(255,255,255,0.05); transition: 0.3s; }
+        .sidebar a:hover { color: var(--cyan); padding-left: 15px; border-left: 3px solid var(--cyan); }
+        .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 1000; display: none; }
+        .overlay.active { display: block; }
+
+        /* KONTEN */
+        .container { max-width: 900px; margin: 0 auto; }
+        h1 { font-family: 'Orbitron', sans-serif; color: var(--cyan); text-align: center; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 2px; }
+        .subtitle { text-align: center; color: #8892b0; margin-bottom: 50px; font-size: 0.9rem; font-weight: bold; }
+        
+        /* OPERATIONS LOG GRID */
+        .ops-grid { display: flex; flex-direction: column; gap: 25px; }
+        .op-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-left: 4px solid var(--cyan); border-radius: 8px; padding: 25px; transition: 0.3s; }
+        .op-card:hover { transform: translateX(10px); border-color: var(--cyan); box-shadow: 0 0 20px rgba(0,243,255,0.1); }
+        .op-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 10px; }
+        .op-title { font-family: 'Orbitron', sans-serif; font-size: 1.2rem; color: #fff; font-weight: 700; }
+        .op-status { font-size: 0.75rem; padding: 4px 10px; border-radius: 20px; font-weight: 800; letter-spacing: 1px; }
+        .status-success { background: rgba(39, 201, 63, 0.2); color: #27c93f; border: 1px solid #27c93f; }
+        .status-dev { background: rgba(241, 196, 15, 0.2); color: var(--gold); border: 1px solid var(--gold); }
+        .op-desc { font-size: 0.95rem; color: #a8b2c1; margin-bottom: 15px; line-height: 1.6; }
+        .op-tech { display: flex; flex-wrap: wrap; gap: 10px; }
+        .tech-tag { background: rgba(0, 243, 255, 0.1); color: var(--cyan); font-size: 0.75rem; padding: 3px 10px; border-radius: 4px; font-weight: 600; }
+
+        .back-btn { display: inline-block; margin-top: 50px; padding: 12px 25px; background: transparent; color: var(--cyan); border: 1px solid var(--cyan); border-radius: 5px; text-decoration: none; font-weight: bold; transition: 0.3s; }
+        .back-btn:hover { background: var(--cyan); color: #000; box-shadow: 0 0 15px rgba(0,243,255,0.4); }
+        .back-container { text-align: center; }
+    </style>
+</head>
+<body>
+
+    <div class="navbar"><div class="menu-btn" onclick="toggleMenu()">☰</div></div>
+    <div class="sidebar" id="sidebar">
+        <div class="close-btn" onclick="toggleMenu()">×</div>
+        <a href="index.html">Home</a>
+        <!-- Menu Our Services SUDAH DIHAPUS -->
+        <a href="operations.html">Operations Log</a>
+        <a href="legalitas.html">Legal & Copyright</a>
+        <a href="founders.html">Founder Biodata</a>
+    </div>
+    <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
+
+    <div class="container">
+        <h1>Operations Log</h1>
+        <div class="subtitle">Classified Records of Completed Missions & Projects</div>
+        
+        <div class="ops-grid">
+            <!-- Proyek 1 -->
+            <div class="op-card">
+                <div class="op-header">
+                    <div class="op-title">Project: Frost & Hog HQ</div>
+                    <div class="op-status status-success">COMPLETED</div>
+                </div>
+                <div class="op-desc">
+                    Pembangunan markas digital utama (Landing Page) untuk Frost & Hog Cyber Team. Mengintegrasikan desain UI/UX bertema agen rahasia, animasi dinamis, serta sistem keamanan anti-copy.
+                </div>
+                <div class="op-tech">
+                    <span class="tech-tag">HTML5</span>
+                    <span class="tech-tag">CSS3</span>
+                    <span class="tech-tag">JavaScript</span>
+                </div>
+            </div>
+
+            <!-- Proyek 2 -->
+            <div class="op-card" style="border-left-color: var(--pink);">
+                <div class="op-header">
+                    <div class="op-title">Client Portal & Discord Integration</div>
+                    <div class="op-status status-success">COMPLETED</div>
+                </div>
+                <div class="op-desc">
+                    Sistem pendaftaran klien otomatis. Klien dapat memilih layanan dan mengisi formulir, yang datanya langsung dikirim secara real-time ke server Discord (Webhook) tanpa database server.
+                </div>
+                <div class="op-tech">
+                    <span class="tech-tag">JS Fetch API</span>
+                    <span class="tech-tag">Discord Webhook</span>
+                    <span class="tech-tag">Backend-less</span>
+                </div>
+            </div>
+
+            <!-- Proyek 3 (Fiktif / Segera Hadir) -->
+            <div class="op-card">
+                <div class="op-header">
+                    <div class="op-title">Vulnerability Scanner (Internal Tool)</div>
+                    <div class="op-status status-dev">IN DEVELOPMENT</div>
+                </div>
+                <div class="op-desc">
+                    Pengembangan alat pemindai celah keamanan web (Web Vulnerability Scanner) berbasis Python dan Bash yang akan dijalankan melalui terminal. Ditujukan untuk audit keamanan internal klien.
+                </div>
+                <div class="op-tech">
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">Bash Script</span>
+                    <span class="tech-tag">Cyber Security</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="back-container">
+            <a href="index.html" class="back-btn">← Kembali ke Beranda</a>
+        </div>
+    </div>
+
+    <script>
+        function toggleMenu() {
+            document.getElementById('sidebar').classList.toggle('active');
+            document.getElementById('overlay').classList.toggle('active');
+        }
+    </script>
+</body>
+</html>
