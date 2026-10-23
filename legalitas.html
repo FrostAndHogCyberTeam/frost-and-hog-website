@@ -10,6 +10,7 @@
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { font-family: 'Inter', sans-serif; background-color: var(--bg-dark); color: var(--text-light); padding: 80px 20px 60px; line-height: 1.8; overflow-x: hidden; }
         
+        /* --- NAVBAR & SIDEBAR --- */
         .navbar { position: fixed; top: 0; left: 0; width: 100%; display: flex; justify-content: flex-end; padding: 20px 30px; z-index: 1000; background: linear-gradient(to bottom, rgba(5,8,15,0.9) 0%, transparent 100%); }
         .menu-btn { font-size: 35px; color: var(--cyan); cursor: pointer; text-shadow: 0 0 10px rgba(0, 243, 255, 0.5); transition: 0.3s; }
         .menu-btn:hover { transform: scale(1.1); }
@@ -21,13 +22,17 @@
         .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 1000; display: none; }
         .overlay.active { display: block; }
 
+        /* --- KONTEN LEGAL --- */
         .container { max-width: 800px; margin: 0 auto; background: rgba(255,255,255,0.02); border: 1px solid rgba(0,243,255,0.2); padding: 50px; border-radius: 15px; backdrop-filter: blur(10px); }
         h1 { font-family: 'Orbitron', sans-serif; color: var(--cyan); text-align: center; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 2px; }
         .subtitle { text-align: center; color: #8892b0; margin-bottom: 40px; font-size: 0.9rem; font-weight: bold; }
+        
         h2 { font-family: 'Orbitron', sans-serif; color: var(--pink); font-size: 1.2rem; margin-top: 35px; margin-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 5px;}
+        
         p { margin-bottom: 15px; color: #a8b2c1; text-align: justify; }
         ul { margin-left: 20px; margin-bottom: 15px; color: #a8b2c1; }
         li { margin-bottom: 8px; }
+        
         .back-btn { display: inline-block; margin-top: 50px; padding: 12px 25px; background: transparent; color: var(--cyan); border: 1px solid var(--cyan); border-radius: 5px; text-decoration: none; font-weight: bold; transition: 0.3s; }
         .back-btn:hover { background: var(--cyan); color: #000; box-shadow: 0 0 15px rgba(0,243,255,0.4); }
         
@@ -36,15 +41,19 @@
 </head>
 <body>
 
+    <!-- NAVBAR & SIDEBAR -->
     <div class="navbar"><div class="menu-btn" onclick="toggleMenu()">☰</div></div>
     <div class="sidebar" id="sidebar">
         <div class="close-btn" onclick="toggleMenu()">×</div>
         <a href="index.html">Home</a>
+        <!-- Menu Our Services sudah dihapus -->
+        <a href="operations.html">Operations Log</a>
         <a href="legalitas.html">Legal & Copyright</a>
         <a href="founders.html">Founder Biodata</a>
     </div>
     <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
 
+    <!-- KONTEN -->
     <div class="container">
         <h1>Legal & Copyright</h1>
         <div class="subtitle">Frost & Hog Cyber Team</div>
@@ -72,6 +81,7 @@
         <a href="index.html" class="back-btn">← Kembali ke Beranda</a>
     </div>
 
+    <!-- SCRIPT MENU -->
     <script>
         function toggleMenu() {
             document.getElementById('sidebar').classList.toggle('active');
