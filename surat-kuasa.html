@@ -53,19 +53,27 @@
             font-size: 1.2rem; letter-spacing: 2px; opacity: 0.8;
         }
 
-        /* Tombol Cetak */
-        .print-btn {
-            display: block; margin: 30px auto 0; padding: 15px 30px;
-            background: var(--cyan); color: #000; font-weight: bold; font-family: 'Orbitron';
-            border: none; border-radius: 5px; cursor: pointer; transition: 0.3s; text-align: center; text-decoration: none;
+        /* Tombol Navigasi Bawah */
+        .action-buttons {
+            text-align: center; margin-top: 30px; display: flex; flex-wrap: wrap; justify-content: center; gap: 15px;
         }
+
+        .print-btn, .btn-back {
+            padding: 15px 30px; font-weight: bold; font-family: 'Orbitron'; font-size: 1rem;
+            border-radius: 5px; cursor: pointer; transition: 0.3s; text-decoration: none; display: inline-block;
+        }
+
+        .print-btn { background: var(--cyan); color: #000; border: none; }
         .print-btn:hover { background: #00c4cc; transform: scale(1.05); }
+
+        .btn-back { background: transparent; color: #fff; border: 1px solid #fff; }
+        .btn-back:hover { background: #fff; color: #000; transform: scale(1.05); }
 
         /* Pengaturan saat dicetak/di-save PDF */
         @media print {
             body { background: #fff; padding: 0; }
             .document { box-shadow: none; padding: 0; }
-            .print-btn { display: none; }
+            .action-buttons { display: none; }
         }
     </style>
 </head>
@@ -129,8 +137,11 @@
         </div>
     </div>
 
-    <!-- Tombol untuk Cetak / Simpan PDF -->
-    <button class="print-btn" onclick="window.print()">Cetak / Simpan sebagai PDF</button>
+    <!-- Tombol Navigasi -->
+    <div class="action-buttons">
+        <button class="print-btn" onclick="window.print()">Cetak / Simpan PDF</button>
+        <a href="index.html" class="btn-back">← Kembali ke Beranda</a>
+    </div>
 
     <script>
         // Mengambil data dari URL (dikirim dari form.html)

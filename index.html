@@ -14,42 +14,41 @@
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { font-family: 'Inter', sans-serif; background-color: var(--bg-dark); color: var(--text-light); overflow-x: hidden; }
 
-        /* --- LOADING SCREEN --- */
-        #loading-screen {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: #000; z-index: 99999; display: flex; flex-direction: column;
-            justify-content: center; align-items: center; font-family: 'Orbitron', sans-serif;
-            transition: opacity 0.5s ease;
+        /* --- EFEK GLITCH --- */
+        .glitch-active { animation: screenGlitch 0.5s; }
+        @keyframes screenGlitch {
+            0% { transform: translate(0); filter: hue-rotate(0deg); }
+            20% { transform: translate(-5px, 5px); filter: hue-rotate(90deg) contrast(200%); }
+            40% { transform: translate(5px, -5px); filter: hue-rotate(180deg) invert(1); }
+            60% { transform: translate(-5px, -5px); filter: hue-rotate(270deg); }
+            80% { transform: translate(5px, 5px); filter: hue-rotate(360deg) contrast(150%); }
+            100% { transform: translate(0); filter: hue-rotate(0deg); }
         }
+
+        /* --- LOADING SCREEN --- */
+        #loading-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 99999; display: flex; flex-direction: column; justify-content: center; align-items: center; font-family: 'Orbitron', sans-serif; transition: opacity 0.5s ease; }
         .loader-text { color: var(--cyan); margin-bottom: 20px; letter-spacing: 3px; font-size: 1.2rem; }
         .loader-bar { width: 200px; height: 4px; background: #333; border-radius: 2px; overflow: hidden; }
         .loader-progress { width: 0%; height: 100%; background: var(--cyan); animation: loadAnim 2s forwards; }
         @keyframes loadAnim { 0% { width: 0%; } 100% { width: 100%; } }
 
         /* --- LIVE STATUS --- */
-        .live-status {
-            position: fixed; bottom: 20px; left: 20px; display: flex; align-items: center; gap: 8px;
-            background: rgba(0,0,0,0.8); padding: 8px 15px; border-radius: 20px;
-            border: 1px solid #333; z-index: 999; font-size: 0.8rem; font-family: 'Courier New', monospace;
-        }
+        .live-status { position: fixed; bottom: 20px; left: 20px; display: flex; align-items: center; gap: 8px; background: rgba(0,0,0,0.8); padding: 8px 15px; border-radius: 20px; border: 1px solid #333; z-index: 999; font-size: 0.8rem; font-family: 'Courier New', monospace; }
         .status-dot { width: 8px; height: 8px; background: #27c93f; border-radius: 50%; box-shadow: 0 0 10px #27c93f; animation: pulseGreen 1.5s infinite; }
         @keyframes pulseGreen { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
 
         /* --- BACK TO TOP --- */
-        #backToTop {
-            position: fixed; bottom: 20px; right: 20px; width: 50px; height: 50px;
-            background: rgba(0, 243, 255, 0.1); border: 1px solid var(--cyan); color: var(--cyan);
-            border-radius: 50%; display: flex; justify-content: center; align-items: center;
-            font-size: 24px; cursor: pointer; z-index: 999; opacity: 0; pointer-events: none;
-            transition: all 0.3s; box-shadow: 0 0 10px rgba(0,243,255,0.2);
-        }
+        #backToTop { position: fixed; bottom: 20px; right: 20px; width: 50px; height: 50px; background: rgba(0, 243, 255, 0.1); border: 1px solid var(--cyan); color: var(--cyan); border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 24px; cursor: pointer; z-index: 999; opacity: 0; pointer-events: none; transition: all 0.3s; box-shadow: 0 0 10px rgba(0,243,255,0.2); }
         #backToTop.show { opacity: 1; pointer-events: auto; }
         #backToTop:hover { background: var(--cyan); color: #000; transform: translateY(-5px); }
 
         /* --- NAVBAR & SIDEBAR --- */
-        .navbar { position: fixed; top: 0; left: 0; width: 100%; display: flex; justify-content: flex-end; padding: 20px 30px; z-index: 1000; background: linear-gradient(to bottom, rgba(5,8,15,0.9) 0%, transparent 100%); }
+        .navbar { position: fixed; top: 0; left: 0; width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 20px 30px; z-index: 1000; background: linear-gradient(to bottom, rgba(5,8,15,0.9) 0%, transparent 100%); }
         .menu-btn { font-size: 35px; color: var(--cyan); cursor: pointer; text-shadow: 0 0 10px rgba(0, 243, 255, 0.5); transition: 0.3s; }
         .menu-btn:hover { transform: scale(1.1); }
+        .lang-toggle { font-family: 'Orbitron'; font-weight: bold; color: #fff; border: 1px solid #fff; padding: 5px 15px; border-radius: 5px; cursor: pointer; background: transparent; transition: 0.3s; }
+        .lang-toggle:hover { background: #fff; color: #000; }
+
         .sidebar { position: fixed; top: 0; right: -300px; width: 250px; height: 100vh; background: rgba(10, 15, 22, 0.95); backdrop-filter: blur(15px); border-left: 1px solid rgba(0, 243, 255, 0.2); z-index: 1001; transition: 0.4s ease; padding: 80px 20px; display: flex; flex-direction: column; gap: 20px; }
         .sidebar.active { right: 0; }
         .close-btn { position: absolute; top: 20px; right: 25px; font-size: 30px; color: var(--pink); cursor: pointer; }
@@ -99,7 +98,7 @@
 
         /* --- SECTION 4 & 5 --- */
         .hire-section { text-align: center; padding: 60px 20px; background-color: #05080f; position: relative; z-index: 10; }
-        .btn-hire { display: inline-block; padding: 18px 45px; background: transparent; color: var(--cyan); border: 2px solid var(--cyan); font-family: 'Orbitron', sans-serif; font-weight: 900; font-size: 1.2rem; text-decoration: none; border-radius: 8px; transition: 0.3s; letter-spacing: 2px; box-shadow: 0 0 15px rgba(0,243,255,0.2); }
+        .btn-hire { display: inline-block; padding: 18px 45px; background: transparent; color: var(--cyan); border: 2px solid var(--cyan); font-family: 'Orbitron', sans-serif; font-weight: 900; font-size: 1.2rem; text-decoration: none; border-radius: 8px; transition: 0.3s; letter-spacing: 2px; box-shadow: 0 0 15px rgba(0,243,255,0.2); cursor: pointer; }
         .btn-hire:hover { background: var(--cyan); color: #000; box-shadow: 0 0 30px var(--cyan); transform: translateY(-3px); }
         .footer-section { background-color: #020408; padding: 40px 20px; text-align: center; border-top: 1px solid rgba(0, 243, 255, 0.2); position: relative; z-index: 10; }
         .contact-title { font-family: 'Orbitron', sans-serif; color: var(--cyan); font-size: 1.2rem; letter-spacing: 2px; margin-bottom: 10px; text-transform: uppercase; }
@@ -155,13 +154,17 @@
     </div>
 
     <!-- NAVBAR & SIDEBAR -->
-    <div class="navbar"><div class="menu-btn" onclick="toggleMenu()">☰</div></div>
+    <div class="navbar">
+        <button class="lang-toggle" onclick="toggleLanguage()" id="langBtn">ID / EN</button>
+        <div class="menu-btn" onclick="toggleMenu()">☰</div>
+    </div>
+    
     <div class="sidebar" id="sidebar">
         <div class="close-btn" onclick="toggleMenu()">×</div>
-        <a href="index.html">Home</a>
-        <a href="operations.html">Operations Log</a>
-        <a href="legalitas.html">Legal & Copyright</a>
-        <a href="founders.html">Founder Biodata</a>
+        <a href="index.html" data-id="Home" data-en="Home">Home</a>
+        <a href="operations.html" data-id="Operations Log" data-en="Operations Log">Operations Log</a>
+        <a href="legalitas.html" data-id="Legal & Copyright" data-en="Legal & Copyright">Legal & Copyright</a>
+        <a href="founders.html" data-id="Founder Biodata" data-en="Founder Biodata">Founder Biodata</a>
     </div>
     <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
 
@@ -176,7 +179,7 @@
     <section class="hero-section">
         <div class="hero-content">
             <img src="img/logo.jpg" alt="FH2 Logo" class="top-logo">
-            <div class="welcome-text">Welcome to <span>Frost & Hog</span></div>
+            <div class="welcome-text" data-id="Selamat Datang di" data-en="Welcome to">Welcome to <span>Frost & Hog</span></div>
             <div class="title-container">
                 <h1 class="main-title">FROST AND HOG</h1>
                 <div class="subtitle">BORN TO RULE THE WORLD</div>
@@ -188,13 +191,10 @@
     <!-- SECTION 2: LORE -->
     <section class="lore-section">
         <div class="lore-container">
-            <h2 class="lore-title">Our Genesis</h2>
-            <p class="lore-text">
-                Didirikan dari sebuah refleksi kritis terhadap batasan kemampuan personal, <span class="highlight">Frost & Hog Cyber Team</span> lahir sebagai sebuah entitas independen yang berfokus pada pengembangan web dan keamanan siber. Berawal dari keterbatasan perangkat dan akses, tim ini dibangun murni di atas landasan tekad serta visi strategis yang kuat.<br><br>
-                Di tengah eskalasi ancaman siber yang semakin masif, Frost & Hog hadir untuk membuktikan bahwa inovasi tidak selalu menuntut fasilitas yang mewah. Dengan memaksimalkan sumber daya yang ada, tim ini berkomitmen untuk terus bereksplorasi, membangun infrastruktur digital yang aman, dan menargetkan posisi sebagai entitas keamanan siber yang kompetitif di tingkat global.
-            </p>
+            <h2 class="lore-title" data-id="Awal Mula Kami" data-en="Our Genesis">Our Genesis</h2>
+            <p class="lore-text" data-id="Didirikan dari sebuah refleksi kritis terhadap batasan kemampuan personal, <span class='highlight'>Frost & Hog Cyber Team</span> lahir sebagai sebuah entitas independen yang berfokus pada pengembangan web dan keamanan siber. Berawal dari keterbatasan perangkat dan akses, tim ini dibangun murni di atas landasan tekad serta visi strategis yang kuat.<br><br>Di tengah eskalasi ancaman siber yang semakin masif, Frost & Hog hadir untuk membuktikan bahwa inovasi tidak selalu menuntut fasilitas yang mewah. Dengan memaksimalkan sumber daya yang ada, tim ini berkomitmen untuk terus bereksplorasi, membangun infrastruktur digital yang aman, dan menargetkan posisi sebagai entitas keamanan siber yang kompetitif di tingkat global." data-en="Founded from a critical reflection on personal limitations, <span class='highlight'>Frost & Hog Cyber Team</span> was born as an independent entity focusing on web development and cyber security. Starting from limited devices and access, this team was built purely on determination and a strong strategic vision.<br><br>Amidst the escalating cyber threats, Frost & Hog is here to prove that innovation does not always demand luxurious facilities. By maximizing existing resources, this team is committed to continuously exploring, building secure digital infrastructure, and targeting its position as a competitive cyber security entity at the global level.">Didirikan dari sebuah refleksi kritis terhadap batasan kemampuan personal, <span class="highlight">Frost & Hog Cyber Team</span> lahir sebagai sebuah entitas independen yang berfokus pada pengembangan web dan keamanan siber. Berawal dari keterbatasan perangkat dan akses, tim ini dibangun murni di atas landasan tekad serta visi strategis yang kuat.<br><br>Di tengah eskalasi ancaman siber yang semakin masif, Frost & Hog hadir untuk membuktikan bahwa inovasi tidak selalu menuntut fasilitas yang mewah. Dengan memaksimalkan sumber daya yang ada, tim ini berkomitmen untuk terus bereksplorasi, membangun infrastruktur digital yang aman, dan menargetkan posisi sebagai entitas keamanan siber yang kompetitif di tingkat global.</p>
             <div class="founders-box">
-                <div class="founders-title">Founded By</div>
+                <div class="founders-title" data-id="Didirikan Oleh" data-en="Founded By">Founded By</div>
                 <div class="founders-name">Acidd & Alexis White</div>
             </div>
         </div>
@@ -209,25 +209,25 @@
         <div class="snow" style="left: 85%; width: 9px; height: 9px; animation-duration: 4.5s;"></div>
         <div class="snow" style="left: 95%; width: 7px; height: 7px; animation-duration: 7s;"></div>
         <div class="ski-content">
-            <h2 class="ski-title">Arctic Ops</h2>
-            <p class="ski-subtitle">SOME MISSIONS REQUIRE A DIFFERENT KIND OF CHILL.</p>
+            <h2 class="ski-title" data-id="Operasi Arktik" data-en="Arctic Ops">Arctic Ops</h2>
+            <p class="ski-subtitle" data-id="BEBERAPA MISI MEMERLUKAN JENIS DINGIN YANG BERBEDA." data-en="SOME MISSIONS REQUIRE A DIFFERENT KIND OF CHILL.">SOME MISSIONS REQUIRE A DIFFERENT KIND OF CHILL.</p>
         </div>
         <img src="img/ski.png" alt="Frost & Hog Skiing" class="ski-img">
     </section>
 
     <!-- SECTION 4: HIRE -->
     <section class="hire-section">
-        <a href="layanan.html" class="btn-hire">HIRE OUR TEAM</a>
+        <a href="layanan.html" class="btn-hire" id="hireBtn" data-id="REKRUT TIM KAMI" data-en="HIRE OUR TEAM">HIRE OUR TEAM</a>
     </section>
 
     <!-- SECTION 5: FOOTER -->
     <footer class="footer-section">
-        <h3 class="contact-title">Sponsorship & Partnership</h3>
-        <p class="contact-subtitle">Tertarik untuk bekerja sama, berkolaborasi, atau menjadi sponsor kami? Hubungi kami di bawah ini.</p>
+        <h3 class="contact-title" data-id="Sponsor & Kemitraan" data-en="Sponsorship & Partnership">Sponsorship & Partnership</h3>
+        <p class="contact-subtitle" data-id="Tertarik bekerja sama? Hubungi kami di bawah ini." data-en="Interested in working together? Contact us below.">Tertarik untuk bekerja sama, berkolaborasi, atau menjadi sponsor kami? Hubungi kami di bawah ini.</p>
         <div class="contact-links">
             <a href="mailto:frostandhogcyberteam@gmail.com" class="contact-btn">
                 <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-                Email for Partnership
+                <span data-id="Email untuk Kemitraan" data-en="Email for Partnership">Email for Partnership</span>
             </a>
         </div>
         <div class="copyright">
@@ -238,17 +238,37 @@
     <!-- AUDIO -->
     <audio id="clickSound" src="https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3" preload="auto"></audio>
     <audio id="alarmSound" src="https://assets.mixkit.co/active_storage/sfx/995/995-preview.mp3" preload="auto"></audio>
-  <script>
+ <script>
         // 1. LOADING SCREEN
         window.addEventListener('load', function() {
             const loader = document.getElementById('loading-screen');
             setTimeout(() => {
                 loader.style.opacity = '0';
                 setTimeout(() => { loader.style.display = 'none'; }, 500);
-            }, 2000); // Loading 2 detik
+            }, 2000);
         });
 
-        // 2. BACK TO TOP
+        // 2. VISITOR LOGGER (KIRIM NOTIFIKASI KE DISCORD SAAT WEB DIBUKA)
+        function logVisitor() {
+            // ⚠️ GANTI LINK DI BAWAH INI DENGAN WEBHOOK DISCORD KHUSUS VISITOR
+            const visitorWebhook = "https://discord.com/api/webhooks/1563008763575664690/aWWw8v1DMbCMdNvB_3TNKFUo4eaZGU5b5fEy3HatJ46eR28xUzg8K_6Mw3l_Dy1NOUGh";
+            
+            if(visitorWebhook === "https://discord.com/api/webhooks/1563008763575664690/aWWw8v1DMbCMdNvB_3TNKFUo4eaZGU5b5fEy3HatJ46eR28xUzg8K_6Mw3l_Dy1NOUGh") return; 
+
+            const browserInfo = navigator.userAgent;
+            const timestamp = new Date().toLocaleString('id-ID');
+            
+            fetch(visitorWebhook, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    content: `👀 **Ada pengunjung baru di Web!**\n**Waktu:** ${timestamp}\n**Device:** ${browserInfo}`
+                })
+            }).catch(e => console.log("Gagal log visitor"));
+        }
+        logVisitor();
+
+        // 3. BACK TO TOP
         window.onscroll = function() {
             const btn = document.getElementById('backToTop');
             if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
@@ -263,7 +283,7 @@
             playClickSound();
         }
 
-        // 3. LOGIKA MENU & SUARA KLIK
+        // 4. LOGIKA MENU & SUARA KLIK
         function toggleMenu() {
             document.getElementById('sidebar').classList.toggle('active');
             document.getElementById('overlay').classList.toggle('active');
@@ -281,7 +301,41 @@
             item.addEventListener('click', playClickSound);
         });
 
-        // 4. SISTEM KEAMANAN (2x Klik Kanan Baru Alarm)
+        // 5. EFEK GLITCH SAAT KLIK TOMBOL HIRE
+        document.getElementById('hireBtn').addEventListener('click', function(e) {
+            e.preventDefault(); 
+            playClickSound();
+            
+            document.body.classList.add('glitch-active');
+            
+            setTimeout(() => {
+                window.location.href = this.href;
+            }, 500);
+        });
+
+        // 6. FUNGSI TRANSLATE (ID/EN)
+        let isEnglish = true; 
+        const langBtn = document.getElementById('langBtn');
+
+        function toggleLanguage() {
+            playClickSound();
+            isEnglish = !isEnglish;
+            langBtn.innerText = isEnglish ? "ID / EN" : "EN / ID";
+            
+            const elements = document.querySelectorAll('[data-id][data-en]');
+            
+            elements.forEach(el => {
+                if (!isEnglish) {
+                    if(el.tagName === 'A') { el.innerText = el.getAttribute('data-id'); } 
+                    else { el.innerHTML = el.getAttribute('data-id'); }
+                } else {
+                    if(el.tagName === 'A') { el.innerText = el.getAttribute('data-en'); } 
+                    else { el.innerHTML = el.getAttribute('data-en'); }
+                }
+            });
+        }
+
+        // 7. SISTEM KEAMANAN (2x Klik Kanan Baru Alarm)
         let rightClickCount = 0;
         let rightClickTimer;
 
