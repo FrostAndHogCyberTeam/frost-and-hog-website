@@ -9,7 +9,7 @@
     <style>
         :root {
             --bg-dark: #05080f; --cyan: #00f3ff; --pink: #ff7eb3;
-            --gold: #f1c40f; --text-light: #e2e8f0; --term-green: #4af626;
+            --gold: #f1c40f; --text-light: #e2e8f0; --danger: #ff3333;
         }
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { font-family: 'Inter', sans-serif; background-color: var(--bg-dark); color: var(--text-light); overflow-x: hidden; }
@@ -54,19 +54,7 @@
         .founders-title { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 3px; color: var(--pink); margin-bottom: 10px; font-weight: 600; }
         .founders-name { font-family: 'Orbitron', sans-serif; font-size: 1.6rem; font-weight: 900; color: #fff; text-shadow: 0 0 15px var(--pink); }
 
-        /* --- SECTION 3: TERMINAL --- */
-        .terminal-section { background-color: #020408; padding: 80px 20px; display: flex; justify-content: center; align-items: center; }
-        .terminal-window { width: 100%; max-width: 800px; background-color: #0d1117; border: 1px solid #30363d; border-radius: 10px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.8), inset 0 0 20px rgba(0,0,0,0.5); }
-        .term-header { background-color: #161b22; padding: 10px 15px; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid #30363d; }
-        .term-dot { width: 12px; height: 12px; border-radius: 50%; }
-        .dot-red { background-color: #ff5f56; } .dot-yellow { background-color: #ffbd2e; } .dot-green { background-color: #27c93f; }
-        .term-title { color: #8b949e; font-family: monospace; font-size: 0.9rem; margin-left: auto; }
-        .term-body { padding: 20px; height: 250px; overflow-y: auto; font-family: 'Courier New', Courier, monospace; color: var(--term-green); font-size: 0.95rem; line-height: 1.5; }
-        .term-input-line { display: flex; align-items: center; margin-top: 10px; }
-        .term-prompt { color: var(--cyan); margin-right: 10px; font-weight: bold; }
-        .term-input { background: transparent; border: none; outline: none; color: var(--term-green); font-family: 'Courier New', Courier, monospace; font-size: 0.95rem; width: 100%; caret-color: var(--term-green); }
-
-        /* --- SECTION 4: SKI --- */
+        /* --- SECTION 3: SKI --- */
         .ski-section { position: relative; width: 100%; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; overflow: hidden; background-image: url('img/kutub.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat; background-attachment: fixed; }
         .ski-section::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(5, 8, 15, 0.3); z-index: 1; }
         .ski-content { position: relative; z-index: 2; text-align: center; margin-top: -100px; }
@@ -77,7 +65,7 @@
         .snow { position: absolute; top: -10px; background: #fff; border-radius: 50%; opacity: 0.8; z-index: 2; animation: fall linear infinite; }
         @keyframes fall { to { transform: translateY(105vh); } }
 
-        /* --- SECTION 5 & 6 --- */
+        /* --- SECTION 4 & 5 --- */
         .hire-section { text-align: center; padding: 60px 20px; background-color: #05080f; position: relative; z-index: 10; }
         .btn-hire { display: inline-block; padding: 18px 45px; background: transparent; color: var(--cyan); border: 2px solid var(--cyan); font-family: 'Orbitron', sans-serif; font-weight: 900; font-size: 1.2rem; text-decoration: none; border-radius: 8px; transition: 0.3s; letter-spacing: 2px; box-shadow: 0 0 15px rgba(0,243,255,0.2); }
         .btn-hire:hover { background: var(--cyan); color: #000; box-shadow: 0 0 30px var(--cyan); transform: translateY(-3px); }
@@ -88,6 +76,28 @@
         .contact-btn { display: flex; align-items: center; gap: 10px; padding: 12px 25px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 8px; color: #fff; text-decoration: none; font-weight: 600; font-family: 'Inter', sans-serif; transition: all 0.3s ease; }
         .contact-btn:hover { background: rgba(0, 243, 255, 0.1); border-color: var(--cyan); box-shadow: 0 0 15px rgba(0, 243, 255, 0.3); transform: translateY(-3px); }
         .copyright { color: #666; font-size: 0.8rem; margin-top: 30px; letter-spacing: 1px; }
+
+        /* --- LAYAR PERINGATAN KLIK KANAN --- */
+        #security-warning {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(255, 0, 0, 0.9); z-index: 9999;
+            display: none; justify-content: center; align-items: center;
+            text-align: center; color: #fff; font-family: 'Orbitron', sans-serif;
+            padding: 20px; backdrop-filter: blur(10px);
+        }
+        .warning-box {
+            background: #000; border: 4px solid #fff; padding: 40px; border-radius: 10px;
+            max-width: 600px; box-shadow: 0 0 50px #fff; animation: pulse 1s infinite alternate;
+        }
+        .warning-box h1 { font-size: 2.5rem; margin-bottom: 20px; color: var(--danger); }
+        .warning-box p { font-family: 'Inter', sans-serif; font-size: 1.1rem; margin-bottom: 20px; line-height: 1.6; }
+        .warning-box button {
+            padding: 15px 30px; background: var(--danger); color: #fff; border: none;
+            font-family: 'Orbitron', sans-serif; font-weight: bold; font-size: 1rem;
+            cursor: pointer; border-radius: 5px; transition: 0.3s;
+        }
+        .warning-box button:hover { background: #fff; color: var(--danger); }
+        @keyframes pulse { from { box-shadow: 0 0 20px #fff; } to { box-shadow: 0 0 60px var(--danger); } }
 
         /* --- RESPONSIF HP --- */
         @media (max-width: 768px) {
@@ -109,6 +119,15 @@
     </style>
 </head>
 <body>
+
+    <!-- LAYAR PERINGATAN KLIK KANAN -->
+    <div id="security-warning">
+        <div class="warning-box">
+            <h1>⚠️ SECURITY BREACH</h1>
+            <p><b>UNAUTHORIZED ACCESS DETECTED.</b><br><br>Proses pengambilan aset visual tanpa izin telah terdeteksi. Aktivitas ini dilindungi dan dipantau oleh sistem keamanan Frost & Hog.</p>
+            <button onclick="closeWarning()">SAYA MENGERTI</button>
+        </div>
+    </div>
 
     <!-- NAVBAR & SIDEBAR -->
     <div class="navbar"><div class="menu-btn" onclick="toggleMenu()">☰</div></div>
@@ -150,28 +169,7 @@
         </div>
     </section>
 
-    <!-- SECTION 3: TERMINAL INTERAKTIF -->
-    <section class="terminal-section">
-        <div class="terminal-window">
-            <div class="term-header">
-                <div class="term-dot dot-red"></div>
-                <div class="term-dot dot-yellow"></div>
-                <div class="term-dot dot-green"></div>
-                <div class="term-title">FH2_TERMINAL.exe</div>
-            </div>
-            <div class="term-body" id="terminalBody">
-                <div>Welcome to Frost & Hog Secure Terminal.</div>
-                <div>Type <span style="color:var(--cyan)">'help'</span> to see available commands.</div>
-                <br>
-                <div class="term-input-line">
-                    <span class="term-prompt">root@fh2:~#</span>
-                    <input type="text" class="term-input" id="terminalInput" autocomplete="off" autofocus>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- SECTION 4: SKI -->
+    <!-- SECTION 3: SKI -->
     <section class="ski-section">
         <div class="snow" style="left: 10%; width: 8px; height: 8px; animation-duration: 4s;"></div>
         <div class="snow" style="left: 30%; width: 6px; height: 6px; animation-duration: 6s;"></div>
@@ -186,17 +184,17 @@
         <img src="img/ski.png" alt="Frost & Hog Skiing" class="ski-img">
     </section>
 
-    <!-- SECTION 5: HIRE -->
+    <!-- SECTION 4: HIRE -->
     <section class="hire-section">
-        <a href="layanan.html" class="btn-hire" onclick="playClickSound()">HIRE OUR TEAM</a>
+        <a href="layanan.html" class="btn-hire">HIRE OUR TEAM</a>
     </section>
 
-    <!-- SECTION 6: FOOTER -->
+    <!-- SECTION 5: FOOTER -->
     <footer class="footer-section">
         <h3 class="contact-title">Sponsorship & Partnership</h3>
         <p class="contact-subtitle">Tertarik untuk bekerja sama, berkolaborasi, atau menjadi sponsor kami? Hubungi kami di bawah ini.</p>
         <div class="contact-links">
-            <a href="mailto:frostandhogcyberteam@gmail.com" class="contact-btn" onclick="playClickSound()">
+            <a href="mailto:frostandhogcyberteam@gmail.com" class="contact-btn">
                 <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
                 Email for Partnership
             </a>
@@ -206,17 +204,18 @@
         </div>
     </footer>
 
-    <!-- AUDIO EFEK (Di atas tag script) -->
+    <!-- AUDIO (Klik & Alarm) -->
     <audio id="clickSound" src="https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3" preload="auto"></audio>
-    <audio id="sysActivatedSound" src="https://assets.mixkit.co/active_storage/sfx/2869/2869-preview.mp3" preload="auto"></audio>
-<script>
-        // 1. LOGIKA MENU
+    <audio id="alarmSound" src="https://assets.mixkit.co/active_storage/sfx/995/995-preview.mp3" preload="auto"></audio>
+
+    <script>
+        // 1. LOGIKA MENU & SUARA KLIK
         function toggleMenu() {
             document.getElementById('sidebar').classList.toggle('active');
             document.getElementById('overlay').classList.toggle('active');
+            playClickSound();
         }
 
-        // 2. FUNGSI SUARA KLIK UNIVERSAL
         function playClickSound() {
             const audio = document.getElementById('clickSound');
             audio.currentTime = 0; 
@@ -224,60 +223,46 @@
             audio.play().catch(e => console.log("Audio diblokir browser."));
         }
 
-        // 3. LOGIKA ANTI KLIK KANAN (ANTI COPY GAMBAR)
-        document.addEventListener('contextmenu', event => event.preventDefault());
-        document.addEventListener('dragstart', event => {
-            if (event.target.nodeName === 'IMG') event.preventDefault();
+        // Pasang suara klik ke semua link dan tombol
+        document.querySelectorAll('a, button, .menu-btn, .close-btn').forEach(item => {
+            item.addEventListener('click', playClickSound);
         });
 
-        // 4. LOGIKA TERMINAL INTERAKTIF
-        const termInput = document.getElementById('terminalInput');
-        const termBody = document.getElementById('terminalBody'); 
-
-        termInput.addEventListener('keypress', function (e) {
-            if (e.key === 'Enter') {
-                const command = termInput.value.trim().toLowerCase();
-                termInput.value = ''; 
-                playClickSound(); 
-
-                termBody.innerHTML += `<div><span class="term-prompt">root@fh2:~#</span> ${command}</div>`;
-
-                let response = "";
-                if (command === 'help') { response = "Available commands: help, about, services, contact, clear, date"; }
-                else if (command === 'about') { response = "Frost & Hog Cyber Team. Founded by Acidd & Alexis White."; }
-                else if (command === 'services') { response = "Cyber Security, UI/UX Design, Web Development."; }
-                else if (command === 'contact') { response = "Gmail: frostandhogcyberteam@gmail.com"; }
-                else if (command === 'date') { response = new Date().toString(); }
-                else if (command === 'clear') { termBody.innerHTML = ""; response = "Terminal cleared."; }
-                else if (command !== '') { response = `Command not found: ${command}. Type 'help'.`; }
-
-                if (response) { termBody.innerHTML += `<div>${response}</div>`; }
-                termBody.scrollTop = termBody.scrollHeight;
-                termInput.focus();
-            }
-        });
-
-        // 5. SUARA KLIK TOMBOL & SISTEM AKTIF
-        let hasInteracted = false;
-
-        document.addEventListener('click', function(e) {
-            if (!hasInteracted) {
-                hasInteracted = true;
-                setTimeout(() => {
-                    const sysAudio = document.getElementById('sysActivatedSound');
-                    if (sysAudio) {
-                        sysAudio.currentTime = 0;
-                        sysAudio.volume = 0.6;
-                        sysAudio.play().catch(e => console.log("Gagal putar suara sistem"));
-                    }
-                }, 3500); 
-            }
+        // 2. SISTEM KEAMANAN (KLIK KANAN & DRAG GAMBAR)
+        document.addEventListener('contextmenu', function(event) {
+            event.preventDefault(); // Blokir menu klik kanan
             
-            if (e.target.closest('a') || e.target.tagName === 'BUTTON' || e.target.classList.contains('menu-btn') || e.target.classList.contains('close-btn')) {
-                playClickSound();
+            // Nyalakan Alarm
+            const alarm = document.getElementById('alarmSound');
+            alarm.currentTime = 0;
+            alarm.volume = 0.6;
+            alarm.play().catch(e => console.log("Audio diblokir"));
+
+            // Tampilkan Layar Peringatan
+            document.getElementById('security-warning').style.display = 'flex';
+        });
+
+        // Blokir drag gambar (untuk mencegah gambar diseret ke tab baru)
+        document.addEventListener('dragstart', function(event) {
+            if (event.target.nodeName === 'IMG') {
+                event.preventDefault();
             }
         });
+
+        // 3. FUNGSI MENUTUP PERINGATAN
+        function closeWarning() {
+            const alarm = document.getElementById('alarmSound');
+            alarm.pause(); // Hentikan alarm
+            alarm.currentTime = 0;
+            
+            document.getElementById('security-warning').style.display = 'none'; // Sembunyikan layar
+            playClickSound(); // Bunyikan suara klik saat ditutup
+        }
+
+        // 4. PASTIKAN MULAI DARI ATAS
+        window.onload = function() {
+            window.scrollTo(0, 0);
+        };
     </script>
 </body>
 </html>
-
