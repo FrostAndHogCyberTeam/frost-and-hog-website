@@ -10,31 +10,18 @@
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { font-family: 'Inter', sans-serif; background-color: var(--bg-dark); color: var(--text-light); min-height: 100vh; display: flex; justify-content: center; align-items: center; padding: 20px; }
         
-        .form-container {
-            background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(0, 243, 255, 0.3);
-            border-radius: 20px; padding: 40px; width: 100%; max-width: 500px; backdrop-filter: blur(15px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(0, 243, 255, 0.1);
-            position: relative; overflow: hidden;
-        }
+        .form-container { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(0, 243, 255, 0.3); border-radius: 20px; padding: 40px; width: 100%; max-width: 500px; backdrop-filter: blur(15px); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(0, 243, 255, 0.1); position: relative; overflow: hidden; }
         .form-container::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px; background: linear-gradient(90deg, var(--cyan), var(--pink)); }
         
         h2 { font-family: 'Orbitron', sans-serif; color: var(--cyan); text-align: center; margin-bottom: 30px; text-transform: uppercase; letter-spacing: 2px; }
         
         label { display: block; margin-top: 20px; font-weight: 600; color: #a8b2c1; font-size: 0.9rem; }
-        input, textarea {
-            width: 100%; padding: 15px; margin-top: 8px; background: rgba(0,0,0,0.6);
-            border: 1px solid rgba(255,255,255,0.1); color: #fff; border-radius: 8px;
-            font-family: 'Inter', sans-serif; transition: 0.3s;
-        }
+        input, textarea { width: 100%; padding: 15px; margin-top: 8px; background: rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.1); color: #fff; border-radius: 8px; font-family: 'Inter', sans-serif; transition: 0.3s; }
         input:focus, textarea:focus { outline: none; border-color: var(--cyan); box-shadow: 0 0 10px rgba(0, 243, 255, 0.3); }
         
         .readonly-input { background: rgba(0, 243, 255, 0.1); color: var(--cyan); font-weight: 800; cursor: not-allowed; border-color: rgba(0, 243, 255, 0.3); }
         
-        button {
-            width: 100%; margin-top: 30px; padding: 16px; background: var(--cyan); color: #000;
-            border: none; border-radius: 8px; font-weight: 900; font-size: 1rem; cursor: pointer;
-            transition: all 0.3s ease; font-family: 'Orbitron', sans-serif; letter-spacing: 1px;
-        }
+        button { width: 100%; margin-top: 30px; padding: 16px; background: var(--cyan); color: #000; border: none; border-radius: 8px; font-weight: 900; font-size: 1rem; cursor: pointer; transition: all 0.3s ease; font-family: 'Orbitron', sans-serif; letter-spacing: 1px; }
         button:hover { background: var(--pink); color: #fff; box-shadow: 0 0 20px var(--pink); transform: translateY(-2px); }
         button:disabled { background: #333; color: #888; cursor: not-allowed; transform: none; box-shadow: none; }
         
@@ -60,33 +47,35 @@
             <label>Detail Kebutuhan</label>
             <textarea id="pesan" rows="4" placeholder="Jelaskan secara singkat proyek atau masalah yang ingin diselesaikan..." required></textarea>
 
-            <button type="submit" id="submitBtn">Kirim Formulir</button>
+            <button type="submit" id="submitBtn">Kirim Formulir Pengajuan</button>
         </form>
         <a href="layanan.html" class="back-btn">← Kembali ke Pilihan Layanan</a>
     </div>
-
-    <script>
+  <script>
+        // 1. Ambil jenis layanan dari URL
         const urlParams = new URLSearchParams(window.location.search);
         const layananDipilih = urlParams.get('layanan') || "Konsultasi Umum";
         document.getElementById('layanan').value = layananDipilih;
 
+        // 2. Logika Pengiriman ke Discord
         document.getElementById('clientForm').addEventListener('submit', function(e) {
-            e.preventDefault();
+            e.preventDefault(); // Mencegah reload halaman
 
             const btn = document.getElementById('submitBtn');
-            btn.innerText = "Mengirim Data...";
+            btn.innerText = "Memproses Data...";
             btn.disabled = true;
 
             const nama = document.getElementById('nama').value;
             const kontak = document.getElementById('kontak').value;
             const pesan = document.getElementById('pesan').value;
 
+            // Desain Pesan yang akan muncul di Discord
             const webhookData = {
                 username: "FH2 Registration System",
                 avatar_url: "https://cdn-icons-png.flaticon.com/512/2913/2913465.png",
                 embeds: [{
-                    title: "🚨 PENDAFTARAN KLIEN BARU 🚨",
-                    color: 65312,
+                    title: "🚨 PENGAJUAN KERJA SAMA BARU 🚨",
+                    color: 65312, // Warna Biru/Cyan
                     fields: [
                         { name: "Layanan", value: layananDipilih, inline: true },
                         { name: "Nama", value: nama, inline: true },
@@ -99,7 +88,7 @@
             };
 
             // ==========================================
-            // PASTE LINK WEBHOOK DISCORD KAMU DI BAWAH INI
+            // ⚠️ GANTI LINK DI BAWAH INI DENGAN WEBHOOK DISCORD KAMU
             // ==========================================
             const webhookURL = "https://discord.com/api/webhooks/1562930745431826474/vO1UYMEEa3VpfgObIzqjlRF4CrlN8yjNmWBfNQuYPDRFdv-t71K_BStOe24KSiDX4Iw_";
 
@@ -110,8 +99,9 @@
             })
             .then(response => {
                 if(response.ok) {
-                    alert("✅ Pendaftaran Berhasil!\n\nTim kami akan segera menghubungi Anda melalui kontak yang dicantumkan.");
-                    window.location.href = "index.html";
+                    alert("✅ Pengajuan Diterima!\n\nAnda akan diarahkan ke halaman Surat Kuasa Kerja Sama.");
+                    // REDIRECT KE HALAMAN SURAT KUASA DENGAN MEMBAWA DATA NAMA & LAYANAN
+                    window.location.href = `surat-kuasa.html?nama=${encodeURIComponent(nama)}&layanan=${encodeURIComponent(layananDipilih)}`;
                 } else {
                     throw new Error('Gagal');
                 }

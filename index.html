@@ -14,6 +14,38 @@
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { font-family: 'Inter', sans-serif; background-color: var(--bg-dark); color: var(--text-light); overflow-x: hidden; }
 
+        /* --- LOADING SCREEN --- */
+        #loading-screen {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: #000; z-index: 99999; display: flex; flex-direction: column;
+            justify-content: center; align-items: center; font-family: 'Orbitron', sans-serif;
+            transition: opacity 0.5s ease;
+        }
+        .loader-text { color: var(--cyan); margin-bottom: 20px; letter-spacing: 3px; font-size: 1.2rem; }
+        .loader-bar { width: 200px; height: 4px; background: #333; border-radius: 2px; overflow: hidden; }
+        .loader-progress { width: 0%; height: 100%; background: var(--cyan); animation: loadAnim 2s forwards; }
+        @keyframes loadAnim { 0% { width: 0%; } 100% { width: 100%; } }
+
+        /* --- LIVE STATUS --- */
+        .live-status {
+            position: fixed; bottom: 20px; left: 20px; display: flex; align-items: center; gap: 8px;
+            background: rgba(0,0,0,0.8); padding: 8px 15px; border-radius: 20px;
+            border: 1px solid #333; z-index: 999; font-size: 0.8rem; font-family: 'Courier New', monospace;
+        }
+        .status-dot { width: 8px; height: 8px; background: #27c93f; border-radius: 50%; box-shadow: 0 0 10px #27c93f; animation: pulseGreen 1.5s infinite; }
+        @keyframes pulseGreen { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+        /* --- BACK TO TOP --- */
+        #backToTop {
+            position: fixed; bottom: 20px; right: 20px; width: 50px; height: 50px;
+            background: rgba(0, 243, 255, 0.1); border: 1px solid var(--cyan); color: var(--cyan);
+            border-radius: 50%; display: flex; justify-content: center; align-items: center;
+            font-size: 24px; cursor: pointer; z-index: 999; opacity: 0; pointer-events: none;
+            transition: all 0.3s; box-shadow: 0 0 10px rgba(0,243,255,0.2);
+        }
+        #backToTop.show { opacity: 1; pointer-events: auto; }
+        #backToTop:hover { background: var(--cyan); color: #000; transform: translateY(-5px); }
+
         /* --- NAVBAR & SIDEBAR --- */
         .navbar { position: fixed; top: 0; left: 0; width: 100%; display: flex; justify-content: flex-end; padding: 20px 30px; z-index: 1000; background: linear-gradient(to bottom, rgba(5,8,15,0.9) 0%, transparent 100%); }
         .menu-btn { font-size: 35px; color: var(--cyan); cursor: pointer; text-shadow: 0 0 10px rgba(0, 243, 255, 0.5); transition: 0.3s; }
@@ -78,24 +110,11 @@
         .copyright { color: #666; font-size: 0.8rem; margin-top: 30px; letter-spacing: 1px; }
 
         /* --- LAYAR PERINGATAN KLIK KANAN --- */
-        #security-warning {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(255, 0, 0, 0.9); z-index: 9999;
-            display: none; justify-content: center; align-items: center;
-            text-align: center; color: #fff; font-family: 'Orbitron', sans-serif;
-            padding: 20px; backdrop-filter: blur(10px);
-        }
-        .warning-box {
-            background: #000; border: 4px solid #fff; padding: 40px; border-radius: 10px;
-            max-width: 600px; box-shadow: 0 0 50px #fff; animation: pulse 1s infinite alternate;
-        }
+        #security-warning { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255, 0, 0, 0.9); z-index: 9999; display: none; justify-content: center; align-items: center; text-align: center; color: #fff; font-family: 'Orbitron', sans-serif; padding: 20px; backdrop-filter: blur(10px); }
+        .warning-box { background: #000; border: 4px solid #fff; padding: 40px; border-radius: 10px; max-width: 600px; box-shadow: 0 0 50px #fff; animation: pulse 1s infinite alternate; }
         .warning-box h1 { font-size: 2.5rem; margin-bottom: 20px; color: var(--danger); }
         .warning-box p { font-family: 'Inter', sans-serif; font-size: 1.1rem; margin-bottom: 20px; line-height: 1.6; }
-        .warning-box button {
-            padding: 15px 30px; background: var(--danger); color: #fff; border: none;
-            font-family: 'Orbitron', sans-serif; font-weight: bold; font-size: 1rem;
-            cursor: pointer; border-radius: 5px; transition: 0.3s;
-        }
+        .warning-box button { padding: 15px 30px; background: var(--danger); color: #fff; border: none; font-family: 'Orbitron', sans-serif; font-weight: bold; font-size: 1rem; cursor: pointer; border-radius: 5px; transition: 0.3s; }
         .warning-box button:hover { background: #fff; color: var(--danger); }
         @keyframes pulse { from { box-shadow: 0 0 20px #fff; } to { box-shadow: 0 0 60px var(--danger); } }
 
@@ -120,6 +139,12 @@
 </head>
 <body>
 
+    <!-- LOADING SCREEN -->
+    <div id="loading-screen">
+        <div class="loader-text">INITIALIZING SYSTEM...</div>
+        <div class="loader-bar"><div class="loader-progress"></div></div>
+    </div>
+
     <!-- LAYAR PERINGATAN KLIK KANAN -->
     <div id="security-warning">
         <div class="warning-box">
@@ -140,6 +165,13 @@
         <a href="founders.html">Founder Biodata</a>
     </div>
     <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
+
+    <!-- LIVE STATUS & BACK TO TOP -->
+    <div class="live-status">
+        <div class="status-dot"></div>
+        System Online
+    </div>
+    <div id="backToTop" onclick="scrollToTop()">↑</div>
 
     <!-- SECTION 1: HERO -->
     <section class="hero-section">
@@ -204,12 +236,35 @@
         </div>
     </footer>
 
-    <!-- AUDIO (Klik & Alarm) -->
+    <!-- AUDIO -->
     <audio id="clickSound" src="https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3" preload="auto"></audio>
     <audio id="alarmSound" src="https://assets.mixkit.co/active_storage/sfx/995/995-preview.mp3" preload="auto"></audio>
+  <script>
+        // 1. LOADING SCREEN
+        window.addEventListener('load', function() {
+            const loader = document.getElementById('loading-screen');
+            setTimeout(() => {
+                loader.style.opacity = '0';
+                setTimeout(() => { loader.style.display = 'none'; }, 500);
+            }, 2000); // Loading 2 detik
+        });
 
-    <script>
-        // 1. LOGIKA MENU & SUARA KLIK
+        // 2. BACK TO TOP
+        window.onscroll = function() {
+            const btn = document.getElementById('backToTop');
+            if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+                btn.classList.add('show');
+            } else {
+                btn.classList.remove('show');
+            }
+        };
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            playClickSound();
+        }
+
+        // 3. LOGIKA MENU & SUARA KLIK
         function toggleMenu() {
             document.getElementById('sidebar').classList.toggle('active');
             document.getElementById('overlay').classList.toggle('active');
@@ -223,46 +278,47 @@
             audio.play().catch(e => console.log("Audio diblokir browser."));
         }
 
-        // Pasang suara klik ke semua link dan tombol
-        document.querySelectorAll('a, button, .menu-btn, .close-btn').forEach(item => {
+        document.querySelectorAll('a, button, .menu-btn, .close-btn, #backToTop').forEach(item => {
             item.addEventListener('click', playClickSound);
         });
 
-        // 2. SISTEM KEAMANAN (KLIK KANAN & DRAG GAMBAR)
+        // 4. SISTEM KEAMANAN (2x Klik Kanan Baru Alarm)
+        let rightClickCount = 0;
+        let rightClickTimer;
+
         document.addEventListener('contextmenu', function(event) {
-            event.preventDefault(); // Blokir menu klik kanan
-            
-            // Nyalakan Alarm
-            const alarm = document.getElementById('alarmSound');
-            alarm.currentTime = 0;
-            alarm.volume = 0.6;
-            alarm.play().catch(e => console.log("Audio diblokir"));
+            event.preventDefault(); 
+            rightClickCount++;
 
-            // Tampilkan Layar Peringatan
-            document.getElementById('security-warning').style.display = 'flex';
-        });
+            if (rightClickCount === 1) {
+                rightClickTimer = setTimeout(() => { rightClickCount = 0; }, 3000);
+            } else if (rightClickCount >= 2) {
+                clearTimeout(rightClickTimer);
+                rightClickCount = 0;
 
-        // Blokir drag gambar (untuk mencegah gambar diseret ke tab baru)
-        document.addEventListener('dragstart', function(event) {
-            if (event.target.nodeName === 'IMG') {
-                event.preventDefault();
+                const alarm = document.getElementById('alarmSound');
+                alarm.currentTime = 0;
+                alarm.volume = 0.6;
+                alarm.play().catch(e => console.log("Audio diblokir"));
+
+                document.getElementById('security-warning').style.display = 'flex';
             }
         });
 
-        // 3. FUNGSI MENUTUP PERINGATAN
+        document.addEventListener('dragstart', function(event) {
+            if (event.target.nodeName === 'IMG') event.preventDefault();
+        });
+
         function closeWarning() {
             const alarm = document.getElementById('alarmSound');
-            alarm.pause(); // Hentikan alarm
+            alarm.pause();
             alarm.currentTime = 0;
-            
-            document.getElementById('security-warning').style.display = 'none'; // Sembunyikan layar
-            playClickSound(); // Bunyikan suara klik saat ditutup
+            document.getElementById('security-warning').style.display = 'none';
+            playClickSound();
         }
 
-        // 4. PASTIKAN MULAI DARI ATAS
-        window.onload = function() {
-            window.scrollTo(0, 0);
-        };
+        // Mulai dari atas
+        window.onload = function() { window.scrollTo(0, 0); };
     </script>
 </body>
 </html>
