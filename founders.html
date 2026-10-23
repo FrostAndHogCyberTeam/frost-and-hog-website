@@ -6,7 +6,7 @@
     <title>Founder Biodata | Frost & Hog</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
-        :root { --bg-dark: #05080f; --cyan: #00f3ff; --pink: #ff7eb3; --text-light: #e2e8f0; }
+        :root { --bg-dark: #05080f; --cyan: #00f3ff; --pink: #ff7eb3; --gold: #f1c40f; --text-light: #e2e8f0; }
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { font-family: 'Inter', sans-serif; background-color: var(--bg-dark); color: var(--text-light); padding: 80px 20px 60px; overflow-x: hidden; }
         
@@ -28,27 +28,60 @@
         .subtitle { text-align: center; color: #8892b0; margin-bottom: 50px; font-size: 0.9rem; font-weight: bold; }
         
         .founders-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; }
+        
         .founder-card { 
             background: rgba(255,255,255,0.03); border: 1px solid rgba(0,243,255,0.2); 
-            border-radius: 15px; padding: 30px; width: 350px; text-align: center; 
+            border-radius: 15px; padding: 35px 30px; width: 100%; max-width: 400px; text-align: center; 
             transition: 0.3s; backdrop-filter: blur(10px); position: relative; overflow: hidden; 
+            display: flex; flex-direction: column;
         }
+        
+        /* Warna khusus untuk kartu Alexis */
+        .founder-card.alexis { border-color: rgba(255, 126, 179, 0.3); }
+        
         .founder-card:hover { transform: translateY(-10px); box-shadow: 0 10px 30px rgba(0,243,255,0.2); border-color: var(--cyan); }
+        .founder-card.alexis:hover { box-shadow: 0 10px 30px rgba(255,126,179,0.2); border-color: var(--pink); }
+        
         .founder-card::before { 
-            content: 'CLASSIFIED'; position: absolute; top: 20px; right: -30px; 
-            background: var(--pink); color: #000; font-weight: 900; font-size: 0.7rem; 
-            padding: 5px 40px; transform: rotate(45deg); letter-spacing: 2px; 
+            content: 'CLASSIFIED'; position: absolute; top: 20px; right: -35px; 
+            background: var(--cyan); color: #000; font-weight: 900; font-size: 0.7rem; 
+            padding: 5px 45px; transform: rotate(45deg); letter-spacing: 2px; 
         }
+        .founder-card.alexis::before { background: var(--pink); }
 
         .avatar-box { 
             width: 120px; height: 120px; margin: 0 auto 20px; 
-            background: #111; border-radius: 50%; border: 2px solid #333; 
+            background: #111; border-radius: 50%; border: 2px solid var(--cyan); 
             display: flex; justify-content: center; align-items: center; 
-            color: #555; font-size: 3rem; font-family: 'Orbitron'; 
+            color: #555; font-size: 3.5rem; font-family: 'Orbitron'; 
         }
-        .founder-name { font-family: 'Orbitron', sans-serif; color: var(--cyan); font-size: 1.5rem; margin-bottom: 5px; }
-        .founder-role { color: var(--pink); font-weight: 800; font-size: 0.9rem; margin-bottom: 20px; letter-spacing: 1px; text-transform: uppercase; }
-        .bio-data { text-align: left; font-size: 0.9rem; color: #a8b2c1; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; }
+        .founder-card.alexis .avatar-box { border-color: var(--pink); }
+
+        .founder-name { font-family: 'Orbitron', sans-serif; color: var(--cyan); font-size: 1.6rem; margin-bottom: 5px; }
+        .founder-card.alexis .founder-name { color: var(--pink); }
+
+        .founder-role { color: var(--text-light); font-weight: 800; font-size: 0.85rem; margin-bottom: 25px; letter-spacing: 1px; text-transform: uppercase; }
+        
+        /* --- GAYA UNTUK QUOTE --- */
+        .founder-quote {
+            font-size: 0.95rem;
+            font-style: italic;
+            color: #fff;
+            background: rgba(0, 243, 255, 0.05);
+            border-left: 3px solid var(--cyan);
+            padding: 15px;
+            margin-bottom: 25px;
+            border-radius: 0 8px 8px 0;
+            text-align: left;
+            line-height: 1.5;
+            min-height: 80px;
+        }
+        .founder-card.alexis .founder-quote {
+            background: rgba(255, 126, 179, 0.05);
+            border-left: 3px solid var(--pink);
+        }
+
+        .bio-data { text-align: left; font-size: 0.9rem; color: #a8b2c1; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; flex-grow: 1; }
         .bio-data p { margin-bottom: 10px; }
         .bio-data strong { color: #fff; }
         
@@ -56,15 +89,12 @@
         .back-btn:hover { background: var(--cyan); color: #000; box-shadow: 0 0 15px rgba(0,243,255,0.4); }
         .back-container { text-align: center; }
 
-        @media (max-width: 768px) { .founder-card { width: 100%; } }
+        @media (max-width: 768px) { .founder-card { padding: 30px 20px; } }
     </style>
 </head>
 <body>
 
-    <!-- NAVBAR -->
     <div class="navbar"><div class="menu-btn" onclick="toggleMenu()">☰</div></div>
-    
-    <!-- SIDEBAR -->
     <div class="sidebar" id="sidebar">
         <div class="close-btn" onclick="toggleMenu()">×</div>
         <a href="index.html">Home</a>
@@ -73,37 +103,46 @@
     </div>
     <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
 
-    <!-- KONTEN FOUNDER -->
     <div class="container">
         <h1>Founder Biodata</h1>
         <div class="subtitle">Top Secret Personnel Files - Frost & Hog Cyber Team</div>
         
         <div class="founders-grid">
-            <!-- Profil Acidd -->
+            
+            <!-- KARTU 1: ACIDD -->
             <div class="founder-card">
                 <div class="avatar-box">?</div>
                 <div class="founder-name">ACIDD</div>
-                <div class="founder-role">Co-Founder / Lead Web Dev</div>
+                <div class="founder-role">Founder / Lead Web Dev</div>
+                
+                <div class="founder-quote">
+                    "Kode adalah fondasi. Saya tidak hanya membangun web, saya merancang strukturnya agar tidak mudah runtuh."
+                </div>
+
                 <div class="bio-data">
                     <p><strong>Status:</strong> Active</p>
-                    <p><strong>Lokasi:</strong> [CLASSIFIED]</p>
                     <p><strong>Spesialisasi:</strong> Web Architecture, System Logic</p>
-                    <p><strong>Latar Belakang:</strong> Seorang otodidak yang memulai perjalanan dari Terminal, mengubah rasa putus asa menjadi sebuah visi digital. Fokus pada pengembangan struktur web dan eksplorasi sistem.</p>
+                    <p><strong>Latar Belakang:</strong> Seorang otodidak yang memulai perjalanan dari Terminal. Berfokus pada penulisan logika sistem, membangun infrastruktur web dari nol, dan menerjemahkan ide abstrak menjadi antarmuka digital yang nyata.</p>
                 </div>
             </div>
 
-            <!-- Profil Alexis White -->
-            <div class="founder-card">
+            <!-- KARTU 2: ALEXIS WHITE -->
+            <div class="founder-card alexis">
                 <div class="avatar-box">?</div>
                 <div class="founder-name">ALEXIS WHITE</div>
-                <div class="founder-role">Co-Founder / Cyber Security Analyst</div>
+                <div class="founder-role">Founder / Cyber Security Analyst</div>
+                
+                <div class="founder-quote">
+                    "Membangun itu mudah. Tapi menjaga kestabilan sistem agar tetap aman dari ancaman adalah seni yang sebenarnya."
+                </div>
+
                 <div class="bio-data">
                     <p><strong>Status:</strong> Active</p>
-                    <p><strong>Lokasi:</strong> [CLASSIFIED]</p>
-                    <p><strong>Spesialisasi:</strong> UI/UX Design, Threat Analysis</p>
-                    <p><strong>Latar Belakang:</strong> Menggabungkan kreativitas visual dengan ketajaman analisis keamanan. Berperan dalam merancang identitas tim (Frost & Hog) serta memastikan setiap sistem yang dibangun aman dari celah dasar.</p>
+                    <p><strong>Spesialisasi:</strong> Threat Analysis, UI/UX Design</p>
+                    <p><strong>Latar Belakang:</strong> Berperan sebagai perisai di balik layar. Menggabungkan estetika desain dengan ketajaman analisis keamanan. Memastikan setiap sistem yang diluncurkan memiliki pertahanan berlapis dan pengalaman pengguna yang mulus.</p>
                 </div>
             </div>
+
         </div>
 
         <div class="back-container">
@@ -111,7 +150,6 @@
         </div>
     </div>
 
-    <!-- SCRIPT MENU -->
     <script>
         function toggleMenu() {
             document.getElementById('sidebar').classList.toggle('active');
