@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cyber Threat Scanner | Frost & Hog</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Inter:wght@400;600;800&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --bg-dark: #05080f; --cyan: #00f3ff; --pink: #ff7eb3; --term-green: #4af626; --text-light: #e2e8f0; --danger: #ff3333; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Inter', sans-serif; background-color: var(--bg-dark); color: var(--text-light); padding: 80px 20px 60px; overflow-x: hidden; min-height: 100vh; display: flex; flex-direction: column; align-items: center; }
+        
+        /* NAVBAR & SIDEBAR */
+        .navbar { position: fixed; top: 0; left: 0; width: 100%; display: flex; justify-content: flex-end; padding: 20px 30px; z-index: 1000; background: linear-gradient(to bottom, rgba(5,8,15,0.9) 0%, transparent 100%); }
+        .menu-btn { font-size: 35px; color: var(--cyan); cursor: pointer; text-shadow: 0 0 10px rgba(0, 243, 255, 0.5); transition: 0.3s; }
+        .menu-btn:hover { transform: scale(1.1); }
+        .sidebar { position: fixed; top: 0; right: -300px; width: 250px; height: 100vh; background: rgba(10, 15, 22, 0.95); backdrop-filter: blur(15px); border-left: 1px solid rgba(0, 243, 255, 0.2); z-index: 1001; transition: 0.4s ease; padding: 80px 20px; display: flex; flex-direction: column; gap: 20px; }
+        .sidebar.active { right: 0; }
+        .close-btn { position: absolute; top: 20px; right: 25px; font-size: 30px; color: var(--pink); cursor: pointer; }
+        .sidebar a { color: var(--text-light); text-decoration: none; font-family: 'Orbitron', sans-serif; font-weight: 700; font-size: 1.1rem; padding: 10px; border-bottom: 1px solid rgba(255,255,255,0.05); transition: 0.3s; }
+        .sidebar a:hover { color: var(--cyan); padding-left: 15px; border-left: 3px solid var(--cyan); }
+        .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 1000; display: none; }
+        .overlay.active { display: block; }
+
+        /* KONTEN SCANNER */
+        .container { max-width: 800px; width: 100%; text-align: center; }
+        h1 { font-family: 'Orbitron', sans-serif; color: var(--cyan); font-size: 2.5rem; margin-bottom: 10px; text-transform: uppercase; text-shadow: 0 0 15px rgba(0, 243, 255, 0.5); }
+        .subtitle { color: #8892b0; margin-bottom: 40px; font-size: 1rem; }
+        
+        /* INPUT BOX */
+        .scan-box { display: flex; gap: 10px; margin-bottom: 30px; justify-content: center; }
+        .scan-box input { flex: 1; max-width: 500px; padding: 15px 20px; background: rgba(0,0,0,0.6); border: 2px solid #333; color: #fff; border-radius: 8px; font-family: 'Courier Prime', monospace; font-size: 1rem; transition: 0.3s; }
+        .scan-box input:focus { outline: none; border-color: var(--cyan); box-shadow: 0 0 15px rgba(0, 243, 255, 0.2); }
+        .scan-box button { padding: 15px 30px; background: var(--cyan); color: #000; border: none; border-radius: 8px; font-weight: 900; font-family: 'Orbitron'; cursor: pointer; transition: 0.3s; }
+        .scan-box button:hover { background: #00c4cc; box-shadow: 0 0 20px var(--cyan); transform: translateY(-2px); }
+        .scan-box button:disabled { background: #555; color: #888; cursor: not-allowed; transform: none; box-shadow: none; }
+
+        /* TERMINAL AREA */
+        .terminal { background: #0d1117; border: 1px solid #30363d; border-radius: 10px; text-align: left; display: none; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.8); }
+        .term-header { background: #161b22; padding: 10px 15px; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid #30363d; }
+        .term-dot { width: 12px; height: 12px; border-radius: 50%; }
+        .dot-red { background: #ff5f56; } .dot-yellow { background: #ffbd2e; } .dot-green { background: #27c93f; }
+        .term-title { color: #8b949e; font-family: monospace; font-size: 0.9rem; margin-left: auto; }
+        
+        .term-body { padding: 20px; height: 300px; overflow-y: auto; font-family: 'Courier Prime', monospace; color: var(--term-green); font-size: 0.95rem; line-height: 1.6; }
+        .term-body p { margin-bottom: 8px; }
+        
+        /* HASIL SCAN */
+        .result-box { display: none; background: rgba(255, 51, 51, 0.1); border: 1px solid var(--danger); border-radius: 10px; padding: 30px; margin-top: 20px; text-align: left; }
+        .result-box h3 { color: var(--danger); font-family: 'Orbitron'; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
+        .result-box ul { margin-left: 20px; margin-bottom: 20px; color: #a8b2c1; font-family: 'Courier Prime', monospace; font-size: 0.9rem;}
+        .result-box li { margin-bottom: 10px; }
+        .result-box .cta { display: block; text-align: center; padding: 15px; background: var(--danger); color: #fff; text-decoration: none; font-family: 'Orbitron'; font-weight: bold; border-radius: 5px; transition: 0.3s; margin-top: 20px;}
+        .result-box .cta:hover { background: #fff; color: var(--danger); box-shadow: 0 0 20px var(--danger); }
+
+        /* LOADING BAR */
+        .progress-bar { width: 100%; height: 5px; background: #333; border-radius: 5px; margin-top: 15px; overflow: hidden; display: none; }
+        .progress-fill { height: 100%; width: 0%; background: var(--term-green); transition: width 0.1s linear; }
+    </style>
+</head>
+<body>
+
+    <div class="navbar"><div class="menu-btn" onclick="toggleMenu()">☰</div></div>
+    <div class="sidebar" id="sidebar">
+        <div class="close-btn" onclick="toggleMenu()">×</div>
+        <a href="index.html">Home</a>
+        <a href="operations.html">Operations Log</a>
+        <a href="scanner.html" style="color: var(--cyan);">Threat Scanner</a> <!-- Menu Baru -->
+        <a href="legalitas.html">Legal & Copyright</a>
+        <a href="founders.html">Founder Biodata</a>
+    </div>
+    <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
+
+    <div class="container">
+        <h1>Cyber Threat Scanner</h1>
+        <p class="subtitle">Masukkan URL Website Anda untuk simulasi Audit Keamanan Dasar.</p>
+
+        <div class="scan-box">
+            <input type="url" id="urlInput" placeholder="https://website-anda.com" required>
+            <button id="scanBtn" onclick="startScan()">SCAN NOW</button>
+        </div>
+
+        <!-- TERMINAL -->
+        <div class="terminal" id="terminal">
+            <div class="term-header">
+                <div class="term-dot dot-red"></div>
+                <div class="term-dot dot-yellow"></div>
+                <div class="term-dot dot-green"></div>
+                <div class="term-title">fh2_scanner_v1.0.sh</div>
+            </div>
+            <div class="term-body" id="termBody">
+                <!-- Teks akan muncul di sini -->
+            </div>
+        </div>
+        
+        <div class="progress-bar" id="progressBar">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+
+        <!-- HASIL (Tersembunyi sampai scan selesai) -->
+        <div class="result-box" id="resultBox">
+            <h3>⚠️ VULNERABILITIES DETECTED</h3>
+            <p style="font-family: 'Courier Prime'; color: #a8b2c1;">Sistem kami mendeteksi beberapa celah keamanan potensial pada target:</p>
+            <ul>
+                <li>[HIGH] Missing Security Headers (X-Frame-Options, CSP)</li>
+                <li>[MEDIUM] SSL/TLS Configuration Weakness</li>
+                <li>[LOW] Information Disclosure via Server Headers</li>
+            </ul>
+            <p style="color: #fff; font-weight: bold; font-size: 0.9rem;">*Catatan: Ini adalah simulasi. Hasil sebenarnya memerlukan persetujuan tertulis (Surat Kuasa) dan audit mendalam oleh tim kami.</p>
+            <a href="form.html?layanan=Cyber Security" class="cta">AMANKAN WEB SAYA SEKARANG</a>
+        </div>
+    </div>
+
+    <script>
+        // 1. LOGIKA MENU
+        function toggleMenu() {
+            document.getElementById('sidebar').classList.toggle('active');
+            document.getElementById('overlay').classList.toggle('active');
+        }
+
+        // 2. LOGIKA SIMULASI SCANNER
+        function startScan() {
+            const urlInput = document.getElementById('urlInput').value;
+            const btn = document.getElementById('scanBtn');
+            const terminal = document.getElementById('terminal');
+            const termBody = document.getElementById('termBody');
+            const progressBar = document.getElementById('progressBar');
+            const progressFill = document.getElementById('progressFill');
+            const resultBox = document.getElementById('resultBox');
+
+            // Validasi Input
+            if (!urlInput) {
+                alert("Silakan masukkan URL website terlebih dahulu!");
+                return;
+            }
+
+            // Reset Tampilan
+            btn.disabled = true;
+            btn.innerText = "SCANNING...";
+            terminal.style.display = 'block';
+            resultBox.style.display = 'none';
+            termBody.innerHTML = "";
+            progressBar.style.display = 'block';
+            progressFill.style.width = '0%';
+
+            // Daftar teks palsu ala hacker
+            const logs = [
+                `[+] Target acquired: ${urlInput}`,
+                `[+] Initializing connection...`,
+                `[+] Checking HTTP/HTTPS redirection...`,
+                `[+] Analyzing response headers...`,
+                `[+] Testing for common directories (robots.txt, .env)...`,
+                `[+] Checking SSL/TLS certificates...`,
+                `[+] Scanning for Cross-Site Scripting (XSS) vulnerabilities...`,
+                `[+] Checking SQL Injection points...`,
+                `[+] Analyzing server banner information...`,
+                `[!] WARNING: Potential vulnerabilities found.`,
+                `[+] Generating final report...`
+            ];
+
+            let currentLog = 0;
+            let progress = 0;
+
+            // Animasi Progress Bar & Log
+            const interval = setInterval(() => {
+                // Update Progress Bar
+                progress += Math.floor(Math.random() * 15) + 5; // Naik 5-20% tiap detik
+                if (progress > 100) progress = 100;
+                progressFill.style.width = progress + '%';
+
+                // Tampilkan Log
+                if (currentLog < logs.length) {
+                    const p = document.createElement('p');
+                    p.innerText = logs[currentLog];
+                    termBody.appendChild(p);
+                    termBody.scrollTop = termBody.scrollHeight; // Auto scroll ke bawah
+                    currentLog++;
+                }
+
+                // Jika Selesai
+                if (progress === 100 && currentLog >= logs.length) {
+                    clearInterval(interval);
+                    setTimeout(() => {
+                        terminal.style.display = 'none';
+                        progressBar.style.display = 'none';
+                        resultBox.style.display = 'block';
+                        btn.disabled = false;
+                        btn.innerText = "SCAN NOW";
+                    }, 800);
+                }
+            }, 400); // Kecepatan log (400ms)
+        }
+    </script>
+</body>
+</html>
