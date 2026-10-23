@@ -8,33 +8,75 @@
     <style>
         :root { --bg-dark: #05080f; --cyan: #00f3ff; --pink: #ff7eb3; --text-light: #e2e8f0; }
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Inter', sans-serif; background-color: var(--bg-dark); color: var(--text-light); padding: 60px 20px; line-height: 1.8; }
+        body { font-family: 'Inter', sans-serif; background-color: var(--bg-dark); color: var(--text-light); padding: 80px 20px 60px; line-height: 1.8; overflow-x: hidden; }
         
-        .container { max-width: 800px; margin: 0 auto; background: rgba(255,255,255,0.03); border: 1px solid rgba(0,243,255,0.2); padding: 40px; border-radius: 15px; backdrop-filter: blur(10px); }
+        .navbar { position: fixed; top: 0; left: 0; width: 100%; display: flex; justify-content: flex-end; padding: 20px 30px; z-index: 1000; background: linear-gradient(to bottom, rgba(5,8,15,0.9) 0%, transparent 100%); }
+        .menu-btn { font-size: 35px; color: var(--cyan); cursor: pointer; text-shadow: 0 0 10px rgba(0, 243, 255, 0.5); transition: 0.3s; }
+        .menu-btn:hover { transform: scale(1.1); }
+        .sidebar { position: fixed; top: 0; right: -300px; width: 250px; height: 100vh; background: rgba(10, 15, 22, 0.95); backdrop-filter: blur(15px); border-left: 1px solid rgba(0, 243, 255, 0.2); z-index: 1001; transition: 0.4s ease; padding: 80px 20px; display: flex; flex-direction: column; gap: 20px; }
+        .sidebar.active { right: 0; }
+        .close-btn { position: absolute; top: 20px; right: 25px; font-size: 30px; color: var(--pink); cursor: pointer; }
+        .sidebar a { color: var(--text-light); text-decoration: none; font-family: 'Orbitron', sans-serif; font-weight: 700; font-size: 1.1rem; padding: 10px; border-bottom: 1px solid rgba(255,255,255,0.05); transition: 0.3s; }
+        .sidebar a:hover { color: var(--cyan); padding-left: 15px; border-left: 3px solid var(--cyan); }
+        .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 1000; display: none; }
+        .overlay.active { display: block; }
+
+        .container { max-width: 800px; margin: 0 auto; background: rgba(255,255,255,0.02); border: 1px solid rgba(0,243,255,0.2); padding: 50px; border-radius: 15px; backdrop-filter: blur(10px); }
+        h1 { font-family: 'Orbitron', sans-serif; color: var(--cyan); text-align: center; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 2px; }
+        .subtitle { text-align: center; color: #8892b0; margin-bottom: 40px; font-size: 0.9rem; font-weight: bold; }
+        h2 { font-family: 'Orbitron', sans-serif; color: var(--pink); font-size: 1.2rem; margin-top: 35px; margin-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 5px;}
+        p { margin-bottom: 15px; color: #a8b2c1; text-align: justify; }
+        ul { margin-left: 20px; margin-bottom: 15px; color: #a8b2c1; }
+        li { margin-bottom: 8px; }
+        .back-btn { display: inline-block; margin-top: 50px; padding: 12px 25px; background: transparent; color: var(--cyan); border: 1px solid var(--cyan); border-radius: 5px; text-decoration: none; font-weight: bold; transition: 0.3s; }
+        .back-btn:hover { background: var(--cyan); color: #000; box-shadow: 0 0 15px rgba(0,243,255,0.4); }
         
-        h1 { font-family: 'Orbitron', sans-serif; color: var(--cyan); text-align: center; margin-bottom: 30px; text-transform: uppercase; }
-        h2 { font-family: 'Orbitron', sans-serif; color: var(--pink); font-size: 1.3rem; margin-top: 30px; margin-bottom: 10px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 5px;}
-        p { margin-bottom: 15px; color: #a8b2c1; text-align: justify;}
-        
-        .back-btn { display: inline-block; margin-top: 40px; padding: 10px 20px; background: transparent; color: var(--cyan); border: 1px solid var(--cyan); border-radius: 5px; text-decoration: none; font-weight: bold; transition: 0.3s;}
-        .back-btn:hover { background: var(--cyan); color: #000; }
+        @media (max-width: 768px) { .container { padding: 30px 20px; } }
     </style>
 </head>
 <body>
+
+    <div class="navbar"><div class="menu-btn" onclick="toggleMenu()">☰</div></div>
+    <div class="sidebar" id="sidebar">
+        <div class="close-btn" onclick="toggleMenu()">×</div>
+        <a href="index.html">Home</a>
+        <a href="legalitas.html">Legal & Copyright</a>
+        <a href="founders.html">Founder Biodata</a>
+    </div>
+    <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
+
     <div class="container">
         <h1>Legal & Copyright</h1>
+        <div class="subtitle">Frost & Hog Cyber Team</div>
         
-        <h2>Hak Cipta (Copyright)</h2>
-        <p>Seluruh aset visual, termasuk namun tidak terbatas pada desain maskot (Frost & Hog), logo FH2, tata letak web, dan konten tulisan di dalam situs ini dilindungi oleh Hak Cipta otomatis sesuai dengan Undang-Undang Hak Cipta. Hak cipta melekat secara eksklusif pada pendiri <b>Frost & Hog Cyber Team (Acidd & Alexis White)</b> sejak karya tersebut diwujudkan.</p>
-        <p>Dilarang menggunakan, menyalin, atau mendistribusikan aset visual dan identitas merek Frost & Hog untuk kepentingan komersial tanpa izin tertulis dari pemilik hak cipta.</p>
+        <h2>1. Pernyataan Hak Cipta (Copyright Notice)</h2>
+        <p>Berdasarkan Undang-Undang Hak Cipta yang berlaku, seluruh karya orisinal yang terdapat dalam situs ini—termasuk namun tidak terbatas pada desain maskot (Frost & Hog), logo FH2, sketsa asli (blueprint), tata letak antarmuka (UI/UX), dan konten tulisan—adalah hak milik eksklusif dari <strong>Acidd & Alexis White</strong> selaku pendiri Frost & Hog Cyber Team.</p>
+        <p>Hak cipta melekat secara otomatis sejak karya tersebut diwujudkan dalam bentuk nyata (berdasarkan prinsip deklaratif), tanpa mengurangi kewajiban pendaftaran formal apabila diperlukan di kemudian hari.</p>
 
-        <h2>Lisensi Kode Sumber (MIT License)</h2>
-        <p>Kode sumber (HTML, CSS, JavaScript) yang digunakan untuk membangun situs web ini bersifat <i>open-source</i> dan dilisensikan di bawah <b>MIT License</b>. Anda diizinkan untuk melihat, memodifikasi, dan menggunakan kode tersebut untuk proyek pribadi maupun komersial, dengan syarat Anda tetap mencantumkan atribusi (nama) pembuat asli.</p>
+        <h2>2. Larangan Penggunaan</h2>
+        <p>Tanpa izin tertulis dari pemilik hak cipta, pihak ketiga dilarang:</p>
+        <ul>
+            <li>Menggunakan aset visual (maskot dan logo) untuk kepentingan komersial atau mengklaimnya sebagai karya sendiri.</li>
+            <li>Memodifikasi, memperbanyak, atau mendistribusikan elemen desain utama yang menjadi identitas Frost & Hog Cyber Team.</li>
+        </ul>
 
-        <h2>Batas Tanggung Jawab</h2>
-        <p>Frost & Hog Cyber Team menyediakan layanan pengembangan web dan audit keamanan siber. Segala bentuk pengujian keamanan (penetration testing) hanya dilakukan atas izin dan persetujuan tertulis dari pemilik sistem/klien. Kami tidak bertanggung jawab atas penyalahgunaan alat atau informasi yang disediakan di situs ini untuk tindakan ilegal.</p>
+        <h2>3. Lisensi Kode Sumber (MIT License)</h2>
+        <p>Berbeda dengan aset visual, kode sumber (HTML, CSS, JavaScript) yang membangun situs web ini dirilis secara terbuka di bawah <strong>MIT License</strong>. Pengunjung dan pengembang lain diizinkan untuk menyalin, memodifikasi, dan menggunakan kode tersebut untuk keperluan pribadi maupun komersial, dengan syarat wajib menyertakan atribusi (nama) pembuat asli dan tidak menghapus pemberitahuan hak cipta di dalam kode.</p>
+
+        <h2>4. Etika Layanan Keamanan Siber</h2>
+        <p>Frost & Hog Cyber Team menjunjung tinggi etika profesional. Segala bentuk pengujian keamanan (penetration testing) atau audit sistem hanya dilakukan berdasarkan persetujuan dan izin tertulis (Written Consent) dari pemilik sistem yang sah. Kami tidak bertanggung jawab atas penyalahgunaan informasi atau alat (tools) yang dipelajari dari situs ini untuk tindakan yang melanggar hukum (Cybercrime).</p>
+
+        <h2>5. Batas Tanggung Jawab</h2>
+        <p>Situs dan materi di dalamnya disediakan "sebagaimana adanya" (as is). Frost & Hog Cyber Team tidak memberikan jaminan mutlak atas keandalan atau keamanan sistem pihak ketiga yang menggunakan jasa kami, mengingat sifat teknologi dan ancaman siber yang terus berkembang secara dinamis.</p>
 
         <a href="index.html" class="back-btn">← Kembali ke Beranda</a>
     </div>
+
+    <script>
+        function toggleMenu() {
+            document.getElementById('sidebar').classList.toggle('active');
+            document.getElementById('overlay').classList.toggle('active');
+        }
+    </script>
 </body>
 </html>

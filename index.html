@@ -24,187 +24,59 @@
             overflow-x: hidden;
         }
 
-        /* --- NAVBAR (MENU GARIS TIGA) --- */
-        .navbar {
-            position: fixed;
-            top: 0; left: 0; width: 100%;
-            display: flex; justify-content: flex-end;
-            padding: 20px 30px; z-index: 1000;
-            background: linear-gradient(to bottom, rgba(5,8,15,0.9) 0%, transparent 100%);
-        }
-
-        .menu-btn {
-            font-size: 35px;
-            color: var(--cyan);
-            cursor: pointer;
-            text-shadow: 0 0 10px rgba(0, 243, 255, 0.5);
-            transition: 0.3s;
-        }
-
+        /* --- NAVBAR & SIDEBAR --- */
+        .navbar { position: fixed; top: 0; left: 0; width: 100%; display: flex; justify-content: flex-end; padding: 20px 30px; z-index: 1000; background: linear-gradient(to bottom, rgba(5,8,15,0.9) 0%, transparent 100%); }
+        .menu-btn { font-size: 35px; color: var(--cyan); cursor: pointer; text-shadow: 0 0 10px rgba(0, 243, 255, 0.5); transition: 0.3s; }
         .menu-btn:hover { transform: scale(1.1); }
-
-        /* Sidebar Menu */
-        .sidebar {
-            position: fixed;
-            top: 0; right: -300px; /* Sembunyi di kanan */
-            width: 250px;
-            height: 100vh;
-            background: rgba(10, 15, 22, 0.95);
-            backdrop-filter: blur(15px);
-            border-left: 1px solid rgba(0, 243, 255, 0.2);
-            z-index: 1001;
-            transition: 0.4s ease;
-            padding: 80px 20px;
-            display: flex; flex-direction: column; gap: 20px;
-        }
-
+        .sidebar { position: fixed; top: 0; right: -300px; width: 250px; height: 100vh; background: rgba(10, 15, 22, 0.95); backdrop-filter: blur(15px); border-left: 1px solid rgba(0, 243, 255, 0.2); z-index: 1001; transition: 0.4s ease; padding: 80px 20px; display: flex; flex-direction: column; gap: 20px; }
         .sidebar.active { right: 0; }
-
-        .close-btn {
-            position: absolute;
-            top: 20px; right: 25px;
-            font-size: 30px; color: var(--pink);
-            cursor: pointer;
-        }
-
-        .sidebar a {
-            color: var(--text-light);
-            text-decoration: none;
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 700; font-size: 1.1rem;
-            padding: 10px;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-            transition: 0.3s;
-        }
-
+        .close-btn { position: absolute; top: 20px; right: 25px; font-size: 30px; color: var(--pink); cursor: pointer; }
+        .sidebar a { color: var(--text-light); text-decoration: none; font-family: 'Orbitron', sans-serif; font-weight: 700; font-size: 1.1rem; padding: 10px; border-bottom: 1px solid rgba(255,255,255,0.05); transition: 0.3s; }
         .sidebar a:hover { color: var(--cyan); padding-left: 15px; border-left: 3px solid var(--cyan); }
-
-        /* Overlay (Latar gelap saat menu terbuka) */
-        .overlay {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.7);
-            z-index: 1000;
-            display: none;
-        }
-
+        .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 1000; display: none; }
         .overlay.active { display: block; }
 
         /* --- SECTION 1: HERO --- */
         .hero-section {
-            position: relative;
-            width: 100%; min-height: 100vh;
-            display: flex; flex-direction: column;
-            justify-content: center; align-items: center;
-            padding: 60px 20px;
-            background-image: url('img/ruang_server.jpg');
-            background-size: cover; background-position: center;
-            background-repeat: no-repeat; background-attachment: fixed; 
+            position: relative; width: 100%; min-height: 100vh;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            padding: 60px 20px; background-image: url('img/ruang_server.jpg');
+            background-size: cover; background-position: center; background-repeat: no-repeat; background-attachment: fixed; 
         }
-
-        .hero-section::before {
-            content: '';
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(to bottom, rgba(5,8,15,0.6) 0%, rgba(5,8,15,0.95) 100%);
-            z-index: 1;
-        }
-
-        .hero-content {
-            position: relative; z-index: 2;
-            display: flex; flex-direction: column; align-items: center; text-align: center;
-        }
-
-        .top-logo {
-            width: 150px; height: 150px; border-radius: 50%;
-            border: 3px solid var(--cyan); box-shadow: 0 0 30px rgba(0, 243, 255, 0.6);
-            margin-bottom: 20px; object-fit: cover; transition: transform 0.3s ease;
-        }
-
+        .hero-section::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to bottom, rgba(5,8,15,0.6) 0%, rgba(5,8,15,0.95) 100%); z-index: 1; }
+        .hero-content { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; text-align: center; }
+        .top-logo { width: 150px; height: 150px; border-radius: 50%; border: 3px solid var(--cyan); box-shadow: 0 0 30px rgba(0, 243, 255, 0.6); margin-bottom: 20px; object-fit: cover; transition: transform 0.3s ease; }
         .top-logo:hover { transform: scale(1.1); }
-
         .welcome-text { font-weight: 800; letter-spacing: 3px; color: #8892b0; margin-bottom: 20px; font-size: 0.9rem; text-transform: uppercase; }
         .welcome-text span { color: var(--cyan); }
-
         .title-container { margin-bottom: 30px; min-height: 120px; }
-
-        .main-title {
-            font-family: 'Orbitron', sans-serif; font-size: clamp(2rem, 6vw, 4.5rem);
-            font-weight: 900; text-transform: uppercase; letter-spacing: 4px;
-            color: #fff; text-shadow: 0 0 15px rgba(0, 243, 255, 0.8);
-            overflow: hidden; white-space: nowrap; border-right: 4px solid var(--cyan);
-            animation: typing 3s steps(30, end), blink-caret .8s step-end infinite; margin: 0 auto;
-        }
-
-        .subtitle {
-            font-family: 'Orbitron', sans-serif; font-size: clamp(1rem, 3vw, 1.4rem);
-            color: var(--gold); letter-spacing: 6px; margin-top: 15px;
-            opacity: 0; animation: fadeIn 2s ease-in 3.5s forwards;
-            font-weight: 700; text-shadow: 0 0 15px rgba(241, 196, 15, 0.4);
-        }
-
+        .main-title { font-family: 'Orbitron', sans-serif; font-size: clamp(2rem, 6vw, 4.5rem); font-weight: 900; text-transform: uppercase; letter-spacing: 4px; color: #fff; text-shadow: 0 0 15px rgba(0, 243, 255, 0.8); overflow: hidden; white-space: nowrap; border-right: 4px solid var(--cyan); animation: typing 3s steps(30, end), blink-caret .8s step-end infinite; margin: 0 auto; }
+        .subtitle { font-family: 'Orbitron', sans-serif; font-size: clamp(1rem, 3vw, 1.4rem); color: var(--gold); letter-spacing: 6px; margin-top: 15px; opacity: 0; animation: fadeIn 2s ease-in 3.5s forwards; font-weight: 700; text-shadow: 0 0 15px rgba(241, 196, 15, 0.4); }
         @keyframes typing { from { width: 0 } to { width: 100% } }
         @keyframes blink-caret { from, to { border-color: transparent } 50% { border-color: var(--cyan) } }
         @keyframes fadeIn { to { opacity: 1; } }
-
-        .agents-img {
-            height: 300px; z-index: 2; animation: floatAgent 4s ease-in-out infinite;
-            filter: drop-shadow(0px 20px 30px rgba(0, 243, 255, 0.4)); margin-top: 20px;
-        }
-
-        @keyframes floatAgent {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-            100% { transform: translateY(0px); }
-        }
+        .agents-img { height: 300px; z-index: 2; animation: floatAgent 4s ease-in-out infinite; filter: drop-shadow(0px 20px 30px rgba(0, 243, 255, 0.4)); margin-top: 20px; }
+        @keyframes floatAgent { 0% { transform: translateY(0px); } 50% { transform: translateY(-20px); } 100% { transform: translateY(0px); } }
 
         /* --- SECTION 2: LORE --- */
-        .lore-section {
-            position: relative; background-color: var(--bg-dark);
-            background-image: linear-gradient(rgba(0, 243, 255, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 243, 255, 0.03) 1px, transparent 1px);
-            background-size: 30px 30px; padding: 100px 20px; display: flex; justify-content: center;
-        }
-
+        .lore-section { position: relative; background-color: var(--bg-dark); background-image: linear-gradient(rgba(0, 243, 255, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 243, 255, 0.03) 1px, transparent 1px); background-size: 30px 30px; padding: 100px 20px; display: flex; justify-content: center; }
         .lore-section::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: linear-gradient(90deg, transparent, var(--cyan), transparent); }
-
-        .lore-container {
-            max-width: 800px; text-align: center; background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.1); padding: 50px 40px;
-            border-radius: 20px; box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
-        }
-
+        .lore-container { max-width: 800px; text-align: center; background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.1); padding: 50px 40px; border-radius: 20px; box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5); }
         .lore-title { font-family: 'Orbitron', sans-serif; font-size: 2.5rem; color: var(--cyan); margin-bottom: 30px; text-transform: uppercase; letter-spacing: 3px; text-shadow: 0 0 20px rgba(0, 243, 255, 0.3); }
-
         .lore-text { font-size: 1.1rem; font-weight: 400; color: #a8b2c1; line-height: 1.9; margin-bottom: 40px; text-align: justify; }
-
         .highlight { color: #fff; font-weight: 800; background: linear-gradient(90deg, var(--cyan), var(--pink)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-
         .founders-box { display: inline-block; background: rgba(255, 126, 179, 0.05); border: 1px solid rgba(255, 126, 179, 0.4); padding: 20px 40px; border-radius: 15px; box-shadow: 0 0 30px rgba(255, 126, 179, 0.1); }
         .founders-title { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 3px; color: var(--pink); margin-bottom: 10px; font-weight: 600; }
         .founders-name { font-family: 'Orbitron', sans-serif; font-size: 1.6rem; font-weight: 900; color: #fff; text-shadow: 0 0 15px var(--pink); }
 
         /* --- SECTION 3: SKI --- */
-        .ski-section {
-            position: relative; width: 100%; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center;
-            overflow: hidden; background-image: url('img/kutub.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat; background-attachment: fixed;
-        }
-
+        .ski-section { position: relative; width: 100%; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; overflow: hidden; background-image: url('img/kutub.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat; background-attachment: fixed; }
         .ski-section::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(5, 8, 15, 0.3); z-index: 1; }
-
         .ski-content { position: relative; z-index: 2; text-align: center; margin-top: -100px; }
         .ski-title { font-family: 'Orbitron', sans-serif; font-size: 3.5rem; color: #fff; text-transform: uppercase; text-shadow: 0 0 20px var(--cyan), 0 0 40px var(--cyan); }
         .ski-subtitle { color: #fff; font-size: 1.2rem; letter-spacing: 3px; margin-top: 15px; font-weight: 600; text-shadow: 2px 2px 5px rgba(0,0,0,0.8); }
-
         .ski-img { position: absolute; bottom: 10%; left: -500px; height: 250px; z-index: 3; animation: skiing 8s linear infinite; filter: drop-shadow(0px 20px 25px rgba(0,0,0,0.9)); }
-
-        @keyframes skiing {
-            0% { transform: translateX(0px) translateY(0px) rotate(0deg); }
-            25% { transform: translateX(30vw) translateY(-15px) rotate(-6deg); }
-            50% { transform: translateX(60vw) translateY(0px) rotate(0deg); }
-            75% { transform: translateX(90vw) translateY(-15px) rotate(6deg); }
-            100% { transform: translateX(130vw) translateY(0px) rotate(0deg); }
-        }
-
+        @keyframes skiing { 0% { transform: translateX(0px) translateY(0px) rotate(0deg); } 25% { transform: translateX(30vw) translateY(-15px) rotate(-6deg); } 50% { transform: translateX(60vw) translateY(0px) rotate(0deg); } 75% { transform: translateX(90vw) translateY(-15px) rotate(6deg); } 100% { transform: translateX(130vw) translateY(0px) rotate(0deg); } }
         .snow { position: absolute; top: -10px; background: #fff; border-radius: 50%; opacity: 0.8; z-index: 2; animation: fall linear infinite; }
         @keyframes fall { to { transform: translateY(105vh); } }
 
@@ -241,23 +113,15 @@
 </head>
 <body>
 
-    <!-- NAVBAR MENU -->
-    <div class="navbar">
-        <div class="menu-btn" onclick="toggleMenu()">☰</div>
-    </div>
-
-    <!-- SIDEBAR MENU -->
+    <div class="navbar"><div class="menu-btn" onclick="toggleMenu()">☰</div></div>
     <div class="sidebar" id="sidebar">
         <div class="close-btn" onclick="toggleMenu()">×</div>
         <a href="index.html">Home</a>
-        <a href="layanan.html">Our Services</a>
         <a href="legalitas.html">Legal & Copyright</a>
-        <a href="#sponsor">Sponsorship</a>
+        <a href="founders.html">Founder Biodata</a>
     </div>
-
     <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
 
-    <!-- SECTION 1: HERO -->
     <section class="hero-section">
         <div class="hero-content">
             <img src="img/logo.jpg" alt="FH2 Logo" class="top-logo">
@@ -270,7 +134,6 @@
         </div>
     </section>
 
-    <!-- SECTION 2: LORE -->
     <section class="lore-section">
         <div class="lore-container">
             <h2 class="lore-title">Our Genesis</h2>
@@ -285,7 +148,6 @@
         </div>
     </section>
 
-    <!-- SECTION 3: SKI -->
     <section class="ski-section">
         <div class="snow" style="left: 10%; width: 8px; height: 8px; animation-duration: 4s;"></div>
         <div class="snow" style="left: 30%; width: 6px; height: 6px; animation-duration: 6s;"></div>
@@ -293,7 +155,6 @@
         <div class="snow" style="left: 70%; width: 5px; height: 5px; animation-duration: 3s;"></div>
         <div class="snow" style="left: 85%; width: 9px; height: 9px; animation-duration: 4.5s;"></div>
         <div class="snow" style="left: 95%; width: 7px; height: 7px; animation-duration: 7s;"></div>
-
         <div class="ski-content">
             <h2 class="ski-title">Arctic Ops</h2>
             <p class="ski-subtitle">SOME MISSIONS REQUIRE A DIFFERENT KIND OF CHILL.</p>
@@ -301,13 +162,11 @@
         <img src="img/ski.png" alt="Frost & Hog Skiing" class="ski-img">
     </section>
 
-    <!-- SECTION 4: HIRE -->
     <section class="hire-section">
         <a href="layanan.html" class="btn-hire">HIRE OUR TEAM</a>
     </section>
 
-    <!-- SECTION 5: FOOTER -->
-    <footer class="footer-section" id="sponsor">
+    <footer class="footer-section">
         <h3 class="contact-title">Sponsorship & Partnership</h3>
         <p class="contact-subtitle">Tertarik untuk bekerja sama, berkolaborasi, atau menjadi sponsor kami? Hubungi kami di bawah ini.</p>
         <div class="contact-links">
@@ -321,15 +180,11 @@
         </div>
     </footer>
 
-    <!-- SCRIPT UNTUK MENU GARIS TIGA -->
     <script>
         function toggleMenu() {
-            const sidebar = document.getElementById('sidebar');
-            const overlay = document.getElementById('overlay');
-            sidebar.classList.toggle('active');
-            overlay.classList.toggle('active');
+            document.getElementById('sidebar').classList.toggle('active');
+            document.getElementById('overlay').classList.toggle('active');
         }
     </script>
-
 </body>
 </html>
