@@ -14,10 +14,10 @@
         .navbar { position: fixed; top: 0; left: 0; width: 100%; display: flex; justify-content: flex-end; padding: 20px 30px; z-index: 1000; background: linear-gradient(to bottom, rgba(5,8,15,0.9) 0%, transparent 100%); }
         .menu-btn { font-size: 35px; color: var(--cyan); cursor: pointer; text-shadow: 0 0 10px rgba(0, 243, 255, 0.5); transition: 0.3s; }
         .menu-btn:hover { transform: scale(1.1); }
-        .sidebar { position: fixed; top: 0; right: -300px; width: 250px; height: 100vh; background: rgba(10, 15, 22, 0.95); backdrop-filter: blur(15px); border-left: 1px solid rgba(0, 243, 255, 0.2); z-index: 1001; transition: 0.4s ease; padding: 80px 20px; display: flex; flex-direction: column; gap: 20px; }
+        .sidebar { position: fixed; top: 0; right: -320px; width: 280px; height: 100vh; background: rgba(10, 15, 22, 0.95); backdrop-filter: blur(15px); border-left: 1px solid rgba(0, 243, 255, 0.2); z-index: 1001; transition: 0.4s ease; padding: 80px 20px; display: flex; flex-direction: column; gap: 15px; }
         .sidebar.active { right: 0; }
         .close-btn { position: absolute; top: 20px; right: 25px; font-size: 30px; color: var(--pink); cursor: pointer; }
-        .sidebar a { color: var(--text-light); text-decoration: none; font-family: 'Orbitron', sans-serif; font-weight: 700; font-size: 1.1rem; padding: 10px; border-bottom: 1px solid rgba(255,255,255,0.05); transition: 0.3s; }
+        .sidebar a { color: var(--text-light); text-decoration: none; font-family: 'Orbitron', sans-serif; font-weight: 700; font-size: 1rem; padding: 12px 10px; border-bottom: 1px solid rgba(255,255,255,0.05); transition: 0.3s; }
         .sidebar a:hover { color: var(--cyan); padding-left: 15px; border-left: 3px solid var(--cyan); }
         .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 1000; display: none; }
         .overlay.active { display: block; }
@@ -27,122 +27,172 @@
         h1 { font-family: 'Orbitron', sans-serif; color: var(--cyan); text-align: center; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 2px; }
         .subtitle { text-align: center; color: #8892b0; margin-bottom: 50px; font-size: 0.9rem; font-weight: bold; }
         
-        .founders-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; }
+        .founders-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 40px; }
         
-        .founder-card { 
-            background: rgba(255,255,255,0.03); border: 1px solid rgba(0,243,255,0.2); 
-            border-radius: 15px; padding: 35px 30px; width: 100%; max-width: 400px; text-align: center; 
-            transition: 0.3s; backdrop-filter: blur(10px); position: relative; overflow: hidden; 
-            display: flex; flex-direction: column;
+        /* --- DESAIN ID CARD --- */
+        .id-card {
+            width: 100%; max-width: 380px;
+            background: linear-gradient(135deg, rgba(20, 25, 35, 0.9), rgba(10, 12, 18, 0.95));
+            border: 2px solid rgba(0, 243, 255, 0.3);
+            border-radius: 15px; padding: 25px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.6), inset 0 0 20px rgba(0, 243, 255, 0.05);
+            position: relative; overflow: hidden;
+            transition: transform 0.3s ease;
         }
+        .id-card:hover { transform: translateY(-5px); border-color: var(--cyan); box-shadow: 0 20px 40px rgba(0,243,255,0.15); }
         
-        /* Warna khusus untuk kartu Alexis */
-        .founder-card.alexis { border-color: rgba(255, 126, 179, 0.3); }
-        
-        .founder-card:hover { transform: translateY(-10px); box-shadow: 0 10px 30px rgba(0,243,255,0.2); border-color: var(--cyan); }
-        .founder-card.alexis:hover { box-shadow: 0 10px 30px rgba(255,126,179,0.2); border-color: var(--pink); }
-        
-        .founder-card::before { 
-            content: 'CLASSIFIED'; position: absolute; top: 20px; right: -35px; 
-            background: var(--cyan); color: #000; font-weight: 900; font-size: 0.7rem; 
-            padding: 5px 45px; transform: rotate(45deg); letter-spacing: 2px; 
-        }
-        .founder-card.alexis::before { background: var(--pink); }
+        /* Garis hologram di atas kartu */
+        .id-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px; background: linear-gradient(90deg, var(--cyan), var(--pink)); }
 
-        .avatar-box { 
-            width: 120px; height: 120px; margin: 0 auto 20px; 
-            background: #111; border-radius: 50%; border: 2px solid var(--cyan); 
-            display: flex; justify-content: center; align-items: center; 
-            color: #555; font-size: 3.5rem; font-family: 'Orbitron'; 
-        }
-        .founder-card.alexis .avatar-box { border-color: var(--pink); }
+        /* Header ID Card (Logo & Title) */
+        .id-header { display: flex; align-items: center; gap: 15px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 15px; margin-bottom: 20px; }
+        .id-logo { width: 45px; height: 45px; border-radius: 50%; border: 2px solid var(--cyan); object-fit: cover; box-shadow: 0 0 10px rgba(0,243,255,0.4); }
+        .id-agency { font-family: 'Orbitron', sans-serif; font-size: 0.9rem; color: var(--cyan); line-height: 1.2; }
+        .id-agency span { display: block; font-size: 0.65rem; color: #8892b0; letter-spacing: 1px; }
 
-        .founder-name { font-family: 'Orbitron', sans-serif; color: var(--cyan); font-size: 1.6rem; margin-bottom: 5px; }
-        .founder-card.alexis .founder-name { color: var(--pink); }
-
-        .founder-role { color: var(--text-light); font-weight: 800; font-size: 0.85rem; margin-bottom: 25px; letter-spacing: 1px; text-transform: uppercase; }
+        /* Body ID Card (Foto Anonim & Data) */
+        .id-body { display: flex; gap: 20px; }
         
-        /* --- GAYA UNTUK QUOTE --- */
-        .founder-quote {
-            font-size: 0.95rem;
-            font-style: italic;
-            color: #fff;
-            background: rgba(0, 243, 255, 0.05);
-            border-left: 3px solid var(--cyan);
-            padding: 15px;
-            margin-bottom: 25px;
-            border-radius: 0 8px 8px 0;
-            text-align: left;
-            line-height: 1.5;
-            min-height: 80px;
+        .photo-box {
+            width: 100px; height: 130px; background: #000;
+            border: 1px solid rgba(255,255,255,0.2); border-radius: 8px;
+            display: flex; justify-content: center; align-items: center;
+            font-family: 'Orbitron'; font-size: 3rem; color: rgba(255,255,255,0.1);
+            position: relative; overflow: hidden;
         }
-        .founder-card.alexis .founder-quote {
-            background: rgba(255, 126, 179, 0.05);
-            border-left: 3px solid var(--pink);
-        }
+        /* Efek garis scan pada foto */
+        .photo-box::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: var(--cyan); animation: scan 2s linear infinite; opacity: 0.5; }
+        @keyframes scan { 0% { top: 0; } 100% { top: 100%; } }
 
-        .bio-data { text-align: left; font-size: 0.9rem; color: #a8b2c1; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; flex-grow: 1; }
-        .bio-data p { margin-bottom: 10px; }
-        .bio-data strong { color: #fff; }
+        .data-box { flex-grow: 1; display: flex; flex-direction: column; justify-content: center; gap: 8px; }
+        .data-row { display: flex; flex-direction: column; }
+        .data-label { font-size: 0.65rem; color: #8892b0; text-transform: uppercase; letter-spacing: 1px; }
+        .data-value { font-family: 'Orbitron', sans-serif; font-size: 1rem; color: #fff; font-weight: 700; text-shadow: 0 0 5px rgba(255,255,255,0.2); }
         
+        /* Warna khusus untuk peran (Role) */
+        .role-alexis { color: var(--pink); }
+        .role-pigman { color: var(--cyan); }
+
+        /* Footer ID Card (Barcode / Strip) */
+        .id-footer { margin-top: 20px; padding-top: 15px; border-top: 1px dashed rgba(255,255,255,0.1); display: flex; justify-content: space-between; align-items: flex-end; }
+        .barcode { display: flex; gap: 2px; height: 25px; align-items: center; }
+        .barcode span { width: 3px; height: 100%; background: #8892b0; display: block; }
+        .barcode span:nth-child(2n) { height: 70%; }
+        .barcode span:nth-child(3n) { height: 85%; width: 5px; }
+        .clearance { font-family: 'Courier New', monospace; font-size: 0.7rem; color: var(--pink); border: 1px solid var(--pink); padding: 2px 6px; border-radius: 3px; }
+
+        /* Quote di bawah ID Card */
+        .card-quote { margin-top: 25px; font-size: 0.85rem; font-style: italic; color: #a8b2c1; text-align: center; border-left: 2px solid rgba(255,255,255,0.1); padding-left: 10px; }
+
         .back-btn { display: inline-block; margin-top: 50px; padding: 12px 25px; background: transparent; color: var(--cyan); border: 1px solid var(--cyan); border-radius: 5px; text-decoration: none; font-weight: bold; transition: 0.3s; text-align: center; }
         .back-btn:hover { background: var(--cyan); color: #000; box-shadow: 0 0 15px rgba(0,243,255,0.4); }
         .back-container { text-align: center; }
 
-        @media (max-width: 768px) { .founder-card { padding: 30px 20px; } }
+        @media (max-width: 768px) { 
+            .id-card { max-width: 100%; }
+            .id-body { flex-direction: column; align-items: center; text-align: center; }
+            .data-box { align-items: center; }
+        }
     </style>
 </head>
 <body>
 
+    <!-- NAVBAR & SIDEBAR -->
     <div class="navbar"><div class="menu-btn" onclick="toggleMenu()">☰</div></div>
     <div class="sidebar" id="sidebar">
         <div class="close-btn" onclick="toggleMenu()">×</div>
         <a href="index.html">Home</a>
-        <a href="operations.html" data-id="Operations Log" data-en="Operations Log">Operations Log</a>
+        <a href="https://frostandhogcyberteam.github.io/frost-and-hog-portofolio/" target="_blank" style="color: var(--cyan);">Our Portfolio ↗</a>
+        <a href="operations.html">Operations Log</a>
         <a href="legalitas.html">Legal & Copyright</a>
         <a href="founders.html">Founder Biodata</a>
-        <a href="checklist.html" style="color: var(--cyan);">Security Checklist</a>
-        <a href="https://frostandhogcyberteam.github.io/frost-and-hog-portofolio/" target="_blank" style="color: var(--cyan);">Our Portfolio ↗</a>
     </div>
     <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
 
+    <!-- KONTEN -->
     <div class="container">
         <h1>Founder Biodata</h1>
         <div class="subtitle">Top Secret Personnel Files - Frost & Hog Cyber Team</div>
         
         <div class="founders-grid">
             
-            <!-- KARTU 1: ALEXIS WHITE -->
-            <div class="founder-card">
-                <div class="avatar-box">?</div>
-                <div class="founder-name">ALEXIS WHITE</div>
-                <div class="founder-role">Founder / Lead Web Dev</div>
-                
-                <div class="founder-quote">
-                    "Kode adalah fondasi. Saya tidak hanya membangun web, saya merancang strukturnya agar tidak mudah runtuh."
+            <!-- ID CARD 1: ALEXIS WHITE -->
+            <div class="id-card">
+                <div class="id-header">
+                    <img src="img/logo.jpg" alt="FH2 Logo" class="id-logo" onerror="this.style.display='none'">
+                    <div class="id-agency">
+                        FROST & HOG
+                        <span>CYBER TEAM DIVISION</span>
+                    </div>
                 </div>
 
-                <div class="bio-data">
-                    <p><strong>Status:</strong> Active</p>
-                    <p><strong>Spesialisasi:</strong> Web Architecture, System Logic</p>
-                    <p><strong>Latar Belakang:</strong> Seorang otodidak yang memulai perjalanan dari Terminal. Berfokus pada penulisan logika sistem, membangun infrastruktur web dari nol, dan menerjemahkan ide abstrak menjadi antarmuka digital yang nyata.</p>
+                <div class="id-body">
+                    <div class="photo-box">?</div>
+                    <div class="data-box">
+                        <div class="data-row">
+                            <span class="data-label">Codenam</span>
+                            <span class="data-value role-alexis">ALEXIS WHITE</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Role</span>
+                            <span class="data-value" style="font-size: 0.85rem;">Cyber Security Analyst</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Status</span>
+                            <span class="data-value" style="font-size: 0.85rem; color: #27c93f;">ACTIVE</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="id-footer">
+                    <div class="barcode">
+                        <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+                    </div>
+                    <div class="clearance">LEVEL 2</div>
+                </div>
+                
+                <div class="card-quote">
+                    "Membangun itu mudah, tapi menjaga kestabilan adalah seni. Saya memastikan benteng ini tetap berdiri."
                 </div>
             </div>
 
-            <!-- KARTU 2: PIG MAN -->
-            <div class="founder-card alexis">
-                <div class="avatar-box">?</div>
-                <div class="founder-name">PIG MAN</div>
-                <div class="founder-role">Founder / Cyber Security Analyst</div>
-                
-                <div class="founder-quote">
-                    "Membangun itu mudah. Tapi menjaga kestabilan sistem agar tetap aman dari ancaman adalah seni yang sebenarnya."
+            <!-- ID CARD 2: PIG MAN -->
+            <div class="id-card">
+                <div class="id-header">
+                    <img src="img/logo.jpg" alt="FH2 Logo" class="id-logo" onerror="this.style.display='none'">
+                    <div class="id-agency">
+                        FROST & HOG
+                        <span>CYBER TEAM DIVISION</span>
+                    </div>
                 </div>
 
-                <div class="bio-data">
-                    <p><strong>Status:</strong> Active</p>
-                    <p><strong>Spesialisasi:</strong> Threat Analysis, UI/UX Design</p>
-                    <p><strong>Latar Belakang:</strong> Berperan sebagai perisai di balik layar. Menggabungkan estetika desain dengan ketajaman analisis keamanan. Memastikan setiap sistem yang diluncurkan memiliki pertahanan berlapis dan pengalaman pengguna yang mulus.</p>
+                <div class="id-body">
+                    <div class="photo-box">?</div>
+                    <div class="data-box">
+                        <div class="data-row">
+                            <span class="data-label">Codenam</span>
+                            <span class="data-value role-pigman">PIG MAN</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Role</span>
+                            <span class="data-value" style="font-size: 0.85rem;">Lead Web Dev</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Status</span>
+                            <span class="data-value" style="font-size: 0.85rem; color: #27c93f;">ACTIVE</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="id-footer">
+                    <div class="barcode">
+                        <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+                    </div>
+                    <div class="clearance">LEVEL 1</div>
+                </div>
+                
+                <div class="card-quote">
+                    "Membangun dengan logika. Kode adalah fondasi, dan saya membangunnya untuk bertahan."
                 </div>
             </div>
 
