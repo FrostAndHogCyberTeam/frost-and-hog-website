@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Founder Biodata | Frost & Hog</title>
+    <title>Co-Founders Biodata | Frost & Hog</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
         :root { --bg-dark: #05080f; --cyan: #00f3ff; --pink: #ff7eb3; --gold: #f1c40f; --text-light: #e2e8f0; --danger: #ff3333; }
@@ -62,6 +62,7 @@
         }
         .photo-box h4 { font-family: 'Orbitron'; font-size: 1.5rem; color: var(--danger); margin-bottom: 5px; text-shadow: 0 0 10px rgba(255,51,51,0.5); }
         .photo-box p { font-family: 'Courier New', monospace; font-size: 0.6rem; color: var(--danger); text-align: center; padding: 0 5px; line-height: 1.2; }
+        
         /* Efek garis scan pada foto */
         .photo-box::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: var(--danger); animation: scan 2s linear infinite; opacity: 0.5; box-shadow: 0 0 10px var(--danger); }
         @keyframes scan { 0% { top: 0; } 100% { top: 100%; } }
@@ -71,11 +72,11 @@
         .data-label { font-size: 0.65rem; color: #8892b0; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 2px; }
         .data-value { font-family: 'Orbitron', sans-serif; font-size: 1rem; color: #fff; font-weight: 700; text-shadow: 0 0 5px rgba(255,255,255,0.2); }
         
-        /* Warna khusus untuk peran (Role) */
-        .role-alexis { color: var(--pink); }
-        .role-pigman { color: var(--cyan); }
+        /* Warna khusus: Alexis = Cyan, PigMan = Pink */
+        .role-alexis { color: var(--cyan); }
+        .role-pigman { color: var(--pink); }
 
-        /* Footer ID Card (Barcode saja, tanpa level) */
+        /* Footer ID Card (Barcode saja) */
         .id-footer { margin-top: 25px; padding-top: 15px; border-top: 1px dashed rgba(255,255,255,0.1); display: flex; justify-content: center; align-items: center; }
         .barcode { display: flex; gap: 2px; height: 25px; align-items: center; opacity: 0.6; }
         .barcode span { width: 4px; height: 100%; background: #8892b0; display: block; }
@@ -106,13 +107,13 @@
         <a href="https://frostandhogcyberteam.github.io/frost-and-hog-portofolio/" target="_blank" style="color: var(--cyan);">Our Portfolio ↗</a>
         <a href="operations.html">Operations Log</a>
         <a href="legalitas.html">Legal & Copyright</a>
-        <a href="founders.html">Founder Biodata</a>
+        <a href="founders.html">Co-Founders Biodata</a>
     </div>
     <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
 
     <!-- KONTEN -->
     <div class="container">
-        <h1>Founder Biodata</h1>
+        <h1>Co-Founders Biodata</h1>
         <div class="subtitle">Top Secret Personnel Files - Frost & Hog Cyber Team</div>
         
         <div class="founders-grid">
@@ -128,7 +129,6 @@
                 </div>
 
                 <div class="id-body">
-                    <!-- FOTO 404 NOT FOUND -->
                     <div class="photo-box">
                         <h4>404</h4>
                         <p>IDENTITY<br>NOT FOUND</p>
@@ -140,50 +140,7 @@
                         </div>
                         <div class="data-row">
                             <span class="data-label">Jabatan / Divisi</span>
-                            <span class="data-value" style="font-size: 0.85rem;">Cyber Security Analyst</span>
-                        </div>
-                        <div class="data-row">
-                            <span class="data-label">Status Keanggotaan</span>
-                            <span class="data-value" style="font-size: 0.85rem; color: #27c93f;">ACTIVE</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="id-footer">
-                    <div class="barcode">
-                        <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
-                    </div>
-                </div>
-                
-                <div class="card-quote">
-                    "Membangun itu mudah, tapi menjaga kestabilan adalah seni. Saya memastikan benteng ini tetap berdiri."
-                </div>
-            </div>
-
-            <!-- ID CARD 2: PIG MAN -->
-            <div class="id-card">
-                <div class="id-header">
-                    <img src="img/logo.jpg" alt="FH2 Logo" class="id-logo" onerror="this.style.display='none'">
-                    <div class="id-agency">
-                        FROST & HOG
-                        <span>CYBER TEAM DIVISION</span>
-                    </div>
-                </div>
-
-                <div class="id-body">
-                    <!-- FOTO 404 NOT FOUND -->
-                    <div class="photo-box">
-                        <h4>404</h4>
-                        <p>IDENTITY<br>NOT FOUND</p>
-                    </div>
-                    <div class="data-box">
-                        <div class="data-row">
-                            <span class="data-label">Nama Operasional</span>
-                            <span class="data-value role-pigman">PIG MAN</span>
-                        </div>
-                        <div class="data-row">
-                            <span class="data-label">Jabatan / Divisi</span>
-                            <span class="data-value" style="font-size: 0.85rem;">Lead Web Developer</span>
+                            <span class="data-value" style="font-size: 0.85rem;">Co-Founder & Lead Web Dev</span>
                         </div>
                         <div class="data-row">
                             <span class="data-label">Status Keanggotaan</span>
@@ -200,6 +157,48 @@
                 
                 <div class="card-quote">
                     "Membangun dengan logika. Kode adalah fondasi, dan saya membangunnya untuk bertahan."
+                </div>
+            </div>
+
+            <!-- ID CARD 2: PIG MAN -->
+            <div class="id-card">
+                <div class="id-header">
+                    <img src="img/logo.jpg" alt="FH2 Logo" class="id-logo" onerror="this.style.display='none'">
+                    <div class="id-agency">
+                        FROST & HOG
+                        <span>CYBER TEAM DIVISION</span>
+                    </div>
+                </div>
+
+                <div class="id-body">
+                    <div class="photo-box">
+                        <h4>404</h4>
+                        <p>IDENTITY<br>NOT FOUND</p>
+                    </div>
+                    <div class="data-box">
+                        <div class="data-row">
+                            <span class="data-label">Nama Operasional</span>
+                            <span class="data-value role-pigman">PIG MAN</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Jabatan / Divisi</span>
+                            <span class="data-value" style="font-size: 0.85rem;">Co-Founder & Cyber Security</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Status Keanggotaan</span>
+                            <span class="data-value" style="font-size: 0.85rem; color: #27c93f;">ACTIVE</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="id-footer">
+                    <div class="barcode">
+                        <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+                    </div>
+                </div>
+                
+                <div class="card-quote">
+                    "Membangun itu mudah, tapi menjaga kestabilan adalah seni. Saya memastikan benteng ini tetap berdiri."
                 </div>
             </div>
 
