@@ -58,9 +58,9 @@
         .overlay.active { display: block; }
 
         /* --- SECTION 1: HERO --- */
-        .hero-section { position: relative; width: 100%; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 60px 20px; background-image: url('img/ruang_server.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat; background-attachment: fixed; }
+        .hero-section { position: relative; width: 100%; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 100px 20px 60px; background-image: url('img/ruang_server.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat; background-attachment: fixed; }
         .hero-section::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to bottom, rgba(5,8,15,0.6) 0%, rgba(5,8,15,0.95) 100%); z-index: 1; }
-        .hero-content { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; text-align: center; }
+        .hero-content { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; text-align: center; width: 100%; }
         .top-logo { width: 150px; height: 150px; border-radius: 50%; border: 3px solid var(--cyan); box-shadow: 0 0 30px rgba(0, 243, 255, 0.6); margin-bottom: 20px; object-fit: cover; transition: transform 0.3s ease; }
         .top-logo:hover { transform: scale(1.1); }
         .welcome-text { font-weight: 800; letter-spacing: 3px; color: #8892b0; margin-bottom: 20px; font-size: 0.9rem; text-transform: uppercase; }
@@ -71,8 +71,23 @@
         @keyframes typing { from { width: 0 } to { width: 100% } }
         @keyframes blink-caret { from, to { border-color: transparent } 50% { border-color: var(--cyan) } }
         @keyframes fadeIn { to { opacity: 1; } }
-        .agents-img { height: 300px; z-index: 2; animation: floatAgent 4s ease-in-out infinite; filter: drop-shadow(0px 20px 30px rgba(0, 243, 255, 0.4)); margin-top: 20px; }
+
+        /* --- MASKOT & QUOTE DI BAWAH --- */
+        .maskot-container { position: relative; display: flex; flex-direction: column; align-items: center; margin-top: 20px; width: 100%; max-width: 900px; }
+        .agents-img { height: 300px; animation: floatAgent 4s ease-in-out infinite; filter: drop-shadow(0px 20px 30px rgba(0, 243, 255, 0.4)); z-index: 2; margin-bottom: 30px; }
         @keyframes floatAgent { 0% { transform: translateY(0px); } 50% { transform: translateY(-20px); } 100% { transform: translateY(0px); } }
+        
+        .quotes-wrapper { display: flex; gap: 20px; justify-content: center; width: 100%; z-index: 3; }
+        .quote-box {
+            flex: 1; max-width: 400px; background: rgba(5, 8, 15, 0.7); 
+            backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1);
+            padding: 20px; border-radius: 12px; font-size: 0.9rem; 
+            font-style: italic; color: #e2e8f0; box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            transition: 0.3s; text-align: left;
+        }
+        .quote-box:hover { background: rgba(5, 8, 15, 0.9); transform: translateY(-5px); box-shadow: 0 15px 35px rgba(0,0,0,0.7); }
+        .quote-frost { border-top: 3px solid var(--cyan); }
+        .quote-hog { border-top: 3px solid var(--pink); }
 
         /* --- SECTION 2: LORE --- */
         .lore-section { position: relative; background-color: var(--bg-dark); background-image: linear-gradient(rgba(0, 243, 255, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 243, 255, 0.03) 1px, transparent 1px); background-size: 30px 30px; padding: 100px 20px; display: flex; justify-content: center; }
@@ -122,7 +137,7 @@
             .hero-section { background-attachment: scroll; min-height: 100svh; }
             .ski-section { background-attachment: scroll; height: 100svh; min-height: 100svh; }
             .hero-section, .ski-section { background-size: cover; background-position: center center; }
-            .agents-img { height: 200px; }
+            .agents-img { height: 200px; margin-bottom: 20px;}
             .ski-img { height: 150px; bottom: 5%; }
             .main-title { border-right: none; white-space: normal; animation: none; width: 100%; font-size: 2.5rem; }
             .title-container { min-height: auto; margin-bottom: 20px; }
@@ -133,6 +148,10 @@
             .ski-title { font-size: 2rem; }
             .ski-subtitle { font-size: 1rem; }
             .contact-btn { width: 80%; justify-content: center; }
+            
+            /* Quote Responsif */
+            .quotes-wrapper { flex-direction: column; align-items: center; }
+            .quote-box { width: 100%; max-width: 100%; }
         }
     </style>
 </head>
@@ -162,11 +181,11 @@
     <div class="sidebar" id="sidebar">
         <div class="close-btn" onclick="toggleMenu()">×</div>
         <a href="index.html" data-id="Home" data-en="Home">Home</a>
-        <!-- MENU PORTFOLIO BARU -->
+        <!-- MENU PORTFOLIO -->
+        <a href="https://frostandhogcyberteam.github.io/frost-and-hog-portofolio/" target="_blank" style="color: var(--cyan);">Our Portfolio ↗</a>
         <a href="operations.html" data-id="Operations Log" data-en="Operations Log">Operations Log</a>
         <a href="legalitas.html" data-id="Legal & Copyright" data-en="Legal & Copyright">Legal & Copyright</a>
-        <a href="founders.html" data-id="Founder Biodata" data-en="Founder Biodata">Founder Biodata</a>
-        <a href="https://frostandhogcyberteam.github.io/frost-and-hog-portofolio/" target="_blank" style="color: var(--cyan);">Our Portfolio ↗</a>
+        <a href="founders.html" data-id="Co-Founders Biodata" data-en="Co-Founders Biodata">Co-Founders Biodata</a>
     </div>
     <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
 
@@ -186,7 +205,24 @@
                 <h1 class="main-title">FROST AND HOG</h1>
                 <div class="subtitle">BORN TO RULE THE WORLD</div>
             </div>
-            <img src="img/agents.png" alt="Frost & Hog Agents" class="agents-img">
+            
+            <!-- MASKOT & QUOTE DI BAWAH -->
+            <div class="maskot-container">
+                <img src="img/agents.png" alt="Frost & Hog Agents" class="agents-img">
+                
+                <div class="quotes-wrapper">
+                    <div class="quote-box quote-frost">
+                        <strong style="color: var(--cyan); font-family: 'Orbitron'; display: block; margin-bottom: 5px;">FROST</strong>
+                        "Manusia jauh lebih berbahaya daripada sistem yang paling rumit. Di titik terendah mereka, mereka akan melakukan apa saja untuk bertahan hidup."
+                    </div>
+                    
+                    <div class="quote-box quote-hog">
+                        <strong style="color: var(--pink); font-family: 'Orbitron'; display: block; margin-bottom: 5px;">HOG</strong>
+                        "Ketika teknologi gagal, insting primitif mengambil alih. Bertahan hidup bukan soal kode, tapi soal keberanian untuk terus melangkah."
+                    </div>
+                </div>
+            </div>
+
         </div>
     </section>
 
@@ -197,7 +233,7 @@
             <p class="lore-text" data-id="Didirikan dari sebuah refleksi kritis terhadap batasan kemampuan personal, <span class='highlight'>Frost & Hog Cyber Team</span> lahir sebagai sebuah entitas independen yang berfokus pada pengembangan web dan keamanan siber. Berawal dari keterbatasan perangkat dan akses, tim ini dibangun murni di atas landasan tekad serta visi strategis yang kuat.<br><br>Di tengah eskalasi ancaman siber yang semakin masif, Frost & Hog hadir untuk membuktikan bahwa inovasi tidak selalu menuntut fasilitas yang mewah. Dengan memaksimalkan sumber daya yang ada, tim ini berkomitmen untuk terus bereksplorasi, membangun infrastruktur digital yang aman, dan menargetkan posisi sebagai entitas keamanan siber yang kompetitif di tingkat global." data-en="Founded from a critical reflection on personal limitations, <span class='highlight'>Frost & Hog Cyber Team</span> was born as an independent entity focusing on web development and cyber security. Starting from limited devices and access, this team was built purely on determination and a strong strategic vision.<br><br>Amidst the escalating cyber threats, Frost & Hog is here to prove that innovation does not always demand luxurious facilities. By maximizing existing resources, this team is committed to continuously exploring, building secure digital infrastructure, and targeting its position as a competitive cyber security entity at the global level.">Didirikan dari sebuah refleksi kritis terhadap batasan kemampuan personal, <span class="highlight">Frost & Hog Cyber Team</span> lahir sebagai sebuah entitas independen yang berfokus pada pengembangan web dan keamanan siber. Berawal dari keterbatasan perangkat dan akses, tim ini dibangun murni di atas landasan tekad serta visi strategis yang kuat.<br><br>Di tengah eskalasi ancaman siber yang semakin masif, Frost & Hog hadir untuk membuktikan bahwa inovasi tidak selalu menuntut fasilitas yang mewah. Dengan memaksimalkan sumber daya yang ada, tim ini berkomitmen untuk terus bereksplorasi, membangun infrastruktur digital yang aman, dan menargetkan posisi sebagai entitas keamanan siber yang kompetitif di tingkat global.</p>
             <div class="founders-box">
                 <div class="founders-title" data-id="Didirikan Oleh" data-en="Founded By">Founded By</div>
-                <div class="founders-name">Alexis White & Pig Man</div>
+                <div class="founders-name">Pig Man & Alexis White</div>
             </div>
         </div>
     </section>
