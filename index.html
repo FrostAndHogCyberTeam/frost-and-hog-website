@@ -163,7 +163,7 @@
         <div class="close-btn" onclick="toggleMenu()">×</div>
         <a href="index.html" data-id="Home" data-en="Home">Home</a>
         <!-- MENU PORTFOLIO BARU -->
-        <a href="https://frostandhogcyberteam.github.io/frost-hog-world/" target="_blank" style="color: var(--cyan); border-left: 3px solid var(--cyan);">Our Portfolio ↗</a>
+        <a href="https://frostandhogcyberteam.github.io/frost-and-hog-portofolio/" target="_blank" style="color: var(--cyan); border-left: 3px solid var(--cyan);">Our Portfolio ↗</a>
         <a href="operations.html" data-id="Operations Log" data-en="Operations Log">Operations Log</a>
         <a href="legalitas.html" data-id="Legal & Copyright" data-en="Legal & Copyright">Legal & Copyright</a>
         <a href="founders.html" data-id="Founder Biodata" data-en="Founder Biodata">Founder Biodata</a>
@@ -251,20 +251,16 @@
             }, 2000);
         });
 
-        // 2. VISITOR LOGGER (KIRIM NOTIFIKASI KE DISCORD SAAT WEB DIBUKA)
+        // 2. VISITOR LOGGER
         function logVisitor() {
             const visitorWebhook = "https://discord.com/api/webhooks/ISI_WEBHOOK_VISITOR_DISINI";
             if(visitorWebhook === "https://discord.com/api/webhooks/ISI_WEBHOOK_VISITOR_DISINI") return; 
-
             const browserInfo = navigator.userAgent;
             const timestamp = new Date().toLocaleString('id-ID');
-            
             fetch(visitorWebhook, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    content: `👀 **Ada pengunjung baru di Web!**\n**Waktu:** ${timestamp}\n**Device:** ${browserInfo}`
-                })
+                body: JSON.stringify({ content: `👀 **Ada pengunjung baru di Web!**\n**Waktu:** ${timestamp}\n**Device:** ${browserInfo}` })
             }).catch(e => console.log("Gagal log visitor"));
         }
         logVisitor();
@@ -306,12 +302,8 @@
         document.getElementById('hireBtn').addEventListener('click', function(e) {
             e.preventDefault(); 
             playClickSound();
-            
             document.body.classList.add('glitch-active');
-            
-            setTimeout(() => {
-                window.location.href = this.href;
-            }, 500);
+            setTimeout(() => { window.location.href = this.href; }, 500);
         });
 
         // 6. FUNGSI TRANSLATE (ID/EN)
@@ -322,9 +314,7 @@
             playClickSound();
             isEnglish = !isEnglish;
             langBtn.innerText = isEnglish ? "ID / EN" : "EN / ID";
-            
             const elements = document.querySelectorAll('[data-id][data-en]');
-            
             elements.forEach(el => {
                 if (!isEnglish) {
                     if(el.tagName === 'A') { el.innerText = el.getAttribute('data-id'); } 
