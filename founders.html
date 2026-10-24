@@ -6,7 +6,7 @@
     <title>Founder Biodata | Frost & Hog</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
-        :root { --bg-dark: #05080f; --cyan: #00f3ff; --pink: #ff7eb3; --gold: #f1c40f; --text-light: #e2e8f0; }
+        :root { --bg-dark: #05080f; --cyan: #00f3ff; --pink: #ff7eb3; --gold: #f1c40f; --text-light: #e2e8f0; --danger: #ff3333; }
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { font-family: 'Inter', sans-serif; background-color: var(--bg-dark); color: var(--text-light); padding: 80px 20px 60px; overflow-x: hidden; }
         
@@ -31,7 +31,7 @@
         
         /* --- DESAIN ID CARD --- */
         .id-card {
-            width: 100%; max-width: 380px;
+            width: 100%; max-width: 400px;
             background: linear-gradient(135deg, rgba(20, 25, 35, 0.9), rgba(10, 12, 18, 0.95));
             border: 2px solid rgba(0, 243, 255, 0.3);
             border-radius: 15px; padding: 25px;
@@ -53,33 +53,34 @@
         /* Body ID Card (Foto Anonim & Data) */
         .id-body { display: flex; gap: 20px; }
         
+        /* DESAIN FOTO 404 NOT FOUND */
         .photo-box {
-            width: 100px; height: 130px; background: #000;
-            border: 1px solid rgba(255,255,255,0.2); border-radius: 8px;
-            display: flex; justify-content: center; align-items: center;
-            font-family: 'Orbitron'; font-size: 3rem; color: rgba(255,255,255,0.1);
-            position: relative; overflow: hidden;
+            width: 110px; height: 140px; background: #05080f;
+            border: 1px solid rgba(255, 51, 51, 0.4); border-radius: 8px;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            position: relative; overflow: hidden; box-shadow: inset 0 0 15px rgba(255, 51, 51, 0.1);
         }
+        .photo-box h4 { font-family: 'Orbitron'; font-size: 1.5rem; color: var(--danger); margin-bottom: 5px; text-shadow: 0 0 10px rgba(255,51,51,0.5); }
+        .photo-box p { font-family: 'Courier New', monospace; font-size: 0.6rem; color: var(--danger); text-align: center; padding: 0 5px; line-height: 1.2; }
         /* Efek garis scan pada foto */
-        .photo-box::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: var(--cyan); animation: scan 2s linear infinite; opacity: 0.5; }
+        .photo-box::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: var(--danger); animation: scan 2s linear infinite; opacity: 0.5; box-shadow: 0 0 10px var(--danger); }
         @keyframes scan { 0% { top: 0; } 100% { top: 100%; } }
 
-        .data-box { flex-grow: 1; display: flex; flex-direction: column; justify-content: center; gap: 8px; }
+        .data-box { flex-grow: 1; display: flex; flex-direction: column; justify-content: center; gap: 10px; }
         .data-row { display: flex; flex-direction: column; }
-        .data-label { font-size: 0.65rem; color: #8892b0; text-transform: uppercase; letter-spacing: 1px; }
+        .data-label { font-size: 0.65rem; color: #8892b0; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 2px; }
         .data-value { font-family: 'Orbitron', sans-serif; font-size: 1rem; color: #fff; font-weight: 700; text-shadow: 0 0 5px rgba(255,255,255,0.2); }
         
         /* Warna khusus untuk peran (Role) */
         .role-alexis { color: var(--pink); }
         .role-pigman { color: var(--cyan); }
 
-        /* Footer ID Card (Barcode / Strip) */
-        .id-footer { margin-top: 20px; padding-top: 15px; border-top: 1px dashed rgba(255,255,255,0.1); display: flex; justify-content: space-between; align-items: flex-end; }
-        .barcode { display: flex; gap: 2px; height: 25px; align-items: center; }
-        .barcode span { width: 3px; height: 100%; background: #8892b0; display: block; }
+        /* Footer ID Card (Barcode saja, tanpa level) */
+        .id-footer { margin-top: 25px; padding-top: 15px; border-top: 1px dashed rgba(255,255,255,0.1); display: flex; justify-content: center; align-items: center; }
+        .barcode { display: flex; gap: 2px; height: 25px; align-items: center; opacity: 0.6; }
+        .barcode span { width: 4px; height: 100%; background: #8892b0; display: block; }
         .barcode span:nth-child(2n) { height: 70%; }
-        .barcode span:nth-child(3n) { height: 85%; width: 5px; }
-        .clearance { font-family: 'Courier New', monospace; font-size: 0.7rem; color: var(--pink); border: 1px solid var(--pink); padding: 2px 6px; border-radius: 3px; }
+        .barcode span:nth-child(3n) { height: 85%; width: 6px; }
 
         /* Quote di bawah ID Card */
         .card-quote { margin-top: 25px; font-size: 0.85rem; font-style: italic; color: #a8b2c1; text-align: center; border-left: 2px solid rgba(255,255,255,0.1); padding-left: 10px; }
@@ -127,18 +128,22 @@
                 </div>
 
                 <div class="id-body">
-                    <div class="photo-box">?</div>
+                    <!-- FOTO 404 NOT FOUND -->
+                    <div class="photo-box">
+                        <h4>404</h4>
+                        <p>IDENTITY<br>NOT FOUND</p>
+                    </div>
                     <div class="data-box">
                         <div class="data-row">
-                            <span class="data-label">Codenam</span>
+                            <span class="data-label">Nama Operasional</span>
                             <span class="data-value role-alexis">ALEXIS WHITE</span>
                         </div>
                         <div class="data-row">
-                            <span class="data-label">Role</span>
+                            <span class="data-label">Jabatan / Divisi</span>
                             <span class="data-value" style="font-size: 0.85rem;">Cyber Security Analyst</span>
                         </div>
                         <div class="data-row">
-                            <span class="data-label">Status</span>
+                            <span class="data-label">Status Keanggotaan</span>
                             <span class="data-value" style="font-size: 0.85rem; color: #27c93f;">ACTIVE</span>
                         </div>
                     </div>
@@ -148,7 +153,6 @@
                     <div class="barcode">
                         <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
                     </div>
-                    <div class="clearance">LEVEL 2</div>
                 </div>
                 
                 <div class="card-quote">
@@ -167,18 +171,22 @@
                 </div>
 
                 <div class="id-body">
-                    <div class="photo-box">?</div>
+                    <!-- FOTO 404 NOT FOUND -->
+                    <div class="photo-box">
+                        <h4>404</h4>
+                        <p>IDENTITY<br>NOT FOUND</p>
+                    </div>
                     <div class="data-box">
                         <div class="data-row">
-                            <span class="data-label">Codenam</span>
+                            <span class="data-label">Nama Operasional</span>
                             <span class="data-value role-pigman">PIG MAN</span>
                         </div>
                         <div class="data-row">
-                            <span class="data-label">Role</span>
-                            <span class="data-value" style="font-size: 0.85rem;">Lead Web Dev</span>
+                            <span class="data-label">Jabatan / Divisi</span>
+                            <span class="data-value" style="font-size: 0.85rem;">Lead Web Developer</span>
                         </div>
                         <div class="data-row">
-                            <span class="data-label">Status</span>
+                            <span class="data-label">Status Keanggotaan</span>
                             <span class="data-value" style="font-size: 0.85rem; color: #27c93f;">ACTIVE</span>
                         </div>
                     </div>
@@ -188,7 +196,6 @@
                     <div class="barcode">
                         <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
                     </div>
-                    <div class="clearance">LEVEL 1</div>
                 </div>
                 
                 <div class="card-quote">
