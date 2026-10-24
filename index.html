@@ -100,14 +100,32 @@
         .founders-title { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 3px; color: var(--pink); margin-bottom: 10px; font-weight: 600; }
         .founders-name { font-family: 'Orbitron', sans-serif; font-size: 1.6rem; font-weight: 900; color: #fff; text-shadow: 0 0 15px var(--pink); }
 
-        /* --- SECTION 3: SKI --- */
+        /* --- SECTION 3: SKI (ANIMASI START & FINISH) --- */
         .ski-section { position: relative; width: 100%; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; overflow: hidden; background-image: url('img/kutub.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat; background-attachment: fixed; }
         .ski-section::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(5, 8, 15, 0.3); z-index: 1; }
         .ski-content { position: relative; z-index: 2; text-align: center; margin-top: -100px; }
         .ski-title { font-family: 'Orbitron', sans-serif; font-size: 3.5rem; color: #fff; text-transform: uppercase; text-shadow: 0 0 20px var(--cyan), 0 0 40px var(--cyan); }
         .ski-subtitle { color: #fff; font-size: 1.2rem; letter-spacing: 3px; margin-top: 15px; font-weight: 600; text-shadow: 2px 2px 5px rgba(0,0,0,0.8); }
-        .ski-img { position: absolute; bottom: 10%; left: -500px; height: 250px; z-index: 3; animation: skiing 8s linear infinite; filter: drop-shadow(0px 20px 25px rgba(0,0,0,0.9)); }
-        @keyframes skiing { 0% { transform: translateX(0px) translateY(0px) rotate(0deg); } 25% { transform: translateX(30vw) translateY(-15px) rotate(-6deg); } 50% { transform: translateX(60vw) translateY(0px) rotate(0deg); } 75% { transform: translateX(90vw) translateY(-15px) rotate(6deg); } 100% { transform: translateX(130vw) translateY(0px) rotate(0deg); } }
+        
+        .ski-img { 
+            position: absolute; 
+            bottom: 15%; 
+            left: 0; 
+            height: 250px; 
+            z-index: 3; 
+            animation: skiing 10s linear infinite; 
+            filter: drop-shadow(0px 20px 25px rgba(0,0,0,0.9)); 
+            transform: translateX(-100vw); 
+        }
+
+        @keyframes skiing { 
+            0% { transform: translateX(-100vw); opacity: 1; }
+            80% { transform: translateX(100vw); opacity: 1; }
+            80.1% { transform: translateX(100vw); opacity: 0; }
+            99.9% { transform: translateX(100vw); opacity: 0; }
+            100% { transform: translateX(-100vw); opacity: 0; }
+        }
+
         .snow { position: absolute; top: -10px; background: #fff; border-radius: 50%; opacity: 0.8; z-index: 2; animation: fall linear infinite; }
         @keyframes fall { to { transform: translateY(105vh); } }
 
@@ -181,7 +199,6 @@
     <div class="sidebar" id="sidebar">
         <div class="close-btn" onclick="toggleMenu()">×</div>
         <a href="index.html" data-id="Home" data-en="Home">Home</a>
-        <!-- MENU PORTFOLIO -->
         <a href="https://frostandhogcyberteam.github.io/frost-and-hog-portofolio/" target="_blank" style="color: var(--cyan);">Our Portfolio ↗</a>
         <a href="operations.html" data-id="Operations Log" data-en="Operations Log">Operations Log</a>
         <a href="legalitas.html" data-id="Legal & Copyright" data-en="Legal & Copyright">Legal & Copyright</a>
