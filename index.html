@@ -49,10 +49,10 @@
         .lang-toggle { font-family: 'Orbitron'; font-weight: bold; color: #fff; border: 1px solid #fff; padding: 5px 15px; border-radius: 5px; cursor: pointer; background: transparent; transition: 0.3s; }
         .lang-toggle:hover { background: #fff; color: #000; }
 
-        .sidebar { position: fixed; top: 0; right: -300px; width: 250px; height: 100vh; background: rgba(10, 15, 22, 0.95); backdrop-filter: blur(15px); border-left: 1px solid rgba(0, 243, 255, 0.2); z-index: 1001; transition: 0.4s ease; padding: 80px 20px; display: flex; flex-direction: column; gap: 20px; }
+        .sidebar { position: fixed; top: 0; right: -300px; width: 280px; height: 100vh; background: rgba(10, 15, 22, 0.95); backdrop-filter: blur(15px); border-left: 1px solid rgba(0, 243, 255, 0.2); z-index: 1001; transition: 0.4s ease; padding: 80px 20px; display: flex; flex-direction: column; gap: 15px; }
         .sidebar.active { right: 0; }
         .close-btn { position: absolute; top: 20px; right: 25px; font-size: 30px; color: var(--pink); cursor: pointer; }
-        .sidebar a { color: var(--text-light); text-decoration: none; font-family: 'Orbitron', sans-serif; font-weight: 700; font-size: 1.1rem; padding: 10px; border-bottom: 1px solid rgba(255,255,255,0.05); transition: 0.3s; }
+        .sidebar a { color: var(--text-light); text-decoration: none; font-family: 'Orbitron', sans-serif; font-weight: 700; font-size: 1rem; padding: 12px 10px; border-bottom: 1px solid rgba(255,255,255,0.05); transition: 0.3s; }
         .sidebar a:hover { color: var(--cyan); padding-left: 15px; border-left: 3px solid var(--cyan); }
         .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 1000; display: none; }
         .overlay.active { display: block; }
@@ -162,10 +162,11 @@
     <div class="sidebar" id="sidebar">
         <div class="close-btn" onclick="toggleMenu()">×</div>
         <a href="index.html" data-id="Home" data-en="Home">Home</a>
+        <!-- MENU PORTFOLIO BARU -->
+        <a href="https://frostandhogcyberteam.github.io/frost-hog-world/" target="_blank" style="color: var(--cyan); border-left: 3px solid var(--cyan);">Our Portfolio ↗</a>
         <a href="operations.html" data-id="Operations Log" data-en="Operations Log">Operations Log</a>
         <a href="legalitas.html" data-id="Legal & Copyright" data-en="Legal & Copyright">Legal & Copyright</a>
         <a href="founders.html" data-id="Founder Biodata" data-en="Founder Biodata">Founder Biodata</a>
-        <a href="checklist.html" style="color: var(--cyan);">Security Checklist</a>
     </div>
     <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
 
@@ -196,7 +197,7 @@
             <p class="lore-text" data-id="Didirikan dari sebuah refleksi kritis terhadap batasan kemampuan personal, <span class='highlight'>Frost & Hog Cyber Team</span> lahir sebagai sebuah entitas independen yang berfokus pada pengembangan web dan keamanan siber. Berawal dari keterbatasan perangkat dan akses, tim ini dibangun murni di atas landasan tekad serta visi strategis yang kuat.<br><br>Di tengah eskalasi ancaman siber yang semakin masif, Frost & Hog hadir untuk membuktikan bahwa inovasi tidak selalu menuntut fasilitas yang mewah. Dengan memaksimalkan sumber daya yang ada, tim ini berkomitmen untuk terus bereksplorasi, membangun infrastruktur digital yang aman, dan menargetkan posisi sebagai entitas keamanan siber yang kompetitif di tingkat global." data-en="Founded from a critical reflection on personal limitations, <span class='highlight'>Frost & Hog Cyber Team</span> was born as an independent entity focusing on web development and cyber security. Starting from limited devices and access, this team was built purely on determination and a strong strategic vision.<br><br>Amidst the escalating cyber threats, Frost & Hog is here to prove that innovation does not always demand luxurious facilities. By maximizing existing resources, this team is committed to continuously exploring, building secure digital infrastructure, and targeting its position as a competitive cyber security entity at the global level.">Didirikan dari sebuah refleksi kritis terhadap batasan kemampuan personal, <span class="highlight">Frost & Hog Cyber Team</span> lahir sebagai sebuah entitas independen yang berfokus pada pengembangan web dan keamanan siber. Berawal dari keterbatasan perangkat dan akses, tim ini dibangun murni di atas landasan tekad serta visi strategis yang kuat.<br><br>Di tengah eskalasi ancaman siber yang semakin masif, Frost & Hog hadir untuk membuktikan bahwa inovasi tidak selalu menuntut fasilitas yang mewah. Dengan memaksimalkan sumber daya yang ada, tim ini berkomitmen untuk terus bereksplorasi, membangun infrastruktur digital yang aman, dan menargetkan posisi sebagai entitas keamanan siber yang kompetitif di tingkat global.</p>
             <div class="founders-box">
                 <div class="founders-title" data-id="Didirikan Oleh" data-en="Founded By">Founded By</div>
-                <div class="founders-name">Alexis White & Pig Man</div>
+                <div class="founders-name">Pig Man & Alexis White</div>
             </div>
         </div>
     </section>
@@ -239,7 +240,8 @@
     <!-- AUDIO -->
     <audio id="clickSound" src="https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3" preload="auto"></audio>
     <audio id="alarmSound" src="https://assets.mixkit.co/active_storage/sfx/995/995-preview.mp3" preload="auto"></audio>
- <script>
+
+    <script>
         // 1. LOADING SCREEN
         window.addEventListener('load', function() {
             const loader = document.getElementById('loading-screen');
@@ -251,10 +253,8 @@
 
         // 2. VISITOR LOGGER (KIRIM NOTIFIKASI KE DISCORD SAAT WEB DIBUKA)
         function logVisitor() {
-            // ⚠️ GANTI LINK DI BAWAH INI DENGAN WEBHOOK DISCORD KHUSUS VISITOR
-            const visitorWebhook = "https://discord.com/api/webhooks/1563008763575664690/aWWw8v1DMbCMdNvB_3TNKFUo4eaZGU5b5fEy3HatJ46eR28xUzg8K_6Mw3l_Dy1NOUGh";
-            
-            if(visitorWebhook === "https://discord.com/api/webhooks/1563008763575664690/aWWw8v1DMbCMdNvB_3TNKFUo4eaZGU5b5fEy3HatJ46eR28xUzg8K_6Mw3l_Dy1NOUGh") return; 
+            const visitorWebhook = "https://discord.com/api/webhooks/ISI_WEBHOOK_VISITOR_DISINI";
+            if(visitorWebhook === "https://discord.com/api/webhooks/ISI_WEBHOOK_VISITOR_DISINI") return; 
 
             const browserInfo = navigator.userAgent;
             const timestamp = new Date().toLocaleString('id-ID');
