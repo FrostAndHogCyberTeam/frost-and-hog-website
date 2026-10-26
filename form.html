@@ -8,9 +8,14 @@
     <style>
         :root { --bg: #F2F0E9; --ink: #111; --cyan: #00A3FF; --pink: #FF5C8A; --border: #D0CDC5; --font-serif: 'Instrument Serif', serif; --font-sans: 'Space Grotesk', sans-serif; }
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { background: var(--bg); color: var(--ink); font-family: var(--font-sans); line-height: 1.6; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+        body { background: var(--bg); color: var(--ink); font-family: var(--font-sans); line-height: 1.6; display: flex; flex-direction: column; min-height: 100vh; }
         
-        .form-container { width: 100%; max-width: 600px; padding: 40px; background: #fff; border: 1px solid var(--border); box-shadow: 10px 10px 0px rgba(0,0,0,0.05); margin: 20px;}
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        .animate-in { animation: fadeUp 0.8s ease-out forwards; }
+
+        .form-wrapper { flex: 1; display: flex; justify-content: center; align-items: center; padding: 40px 20px; }
+        .form-container { width: 100%; max-width: 600px; padding: 40px; background: #fff; border: 1px solid var(--border); box-shadow: 10px 10px 0px rgba(0,0,0,0.05); }
+        
         .header h1 { font-family: var(--font-serif); font-size: 3rem; line-height: 1; margin-bottom: 10px; }
         .header p { font-size: 1rem; color: #666; margin-bottom: 40px; }
 
@@ -21,42 +26,70 @@
         textarea { resize: vertical; min-height: 100px; }
         
         button { width: 100%; padding: 15px; background: var(--ink); color: var(--bg); border: none; font-family: var(--font-sans); font-weight: 700; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; transition: 0.3s; margin-top: 20px; }
-        button:hover { background: var(--pink); color: #fff; }
+        button:hover { background: var(--pink); color: #fff; transform: translateY(-3px); box-shadow: 0 10px 15px rgba(255, 92, 138, 0.2); }
 
         .back-link { display: inline-block; margin-top: 20px; font-size: 0.9rem; text-decoration: underline; color: #666; }
+        .back-link:hover { color: var(--ink); }
+
+        /* FOOTER GLOBAL */
+        footer { background-color: #111111; color: #F2F0E9; padding: 30px 5vw; border-top: 1px solid #333; margin-top: auto; width: 100%; }
+        .footer-content { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; font-family: 'Space Grotesk', sans-serif; }
+        .footer-left { display: flex; align-items: center; gap: 12px; font-size: 0.85rem; }
+        .footer-logo { font-family: 'Instrument Serif', serif; font-size: 1.5rem; border: 1px solid #F2F0E9; border-radius: 50%; width: 35px; height: 35px; display: flex; justify-content: center; align-items: center; }
+        .footer-right a { color: #F2F0E9; text-decoration: none; font-weight: 700; font-size: 0.8rem; text-transform: uppercase; border: 1px solid #F2F0E9; padding: 10px 20px; transition: 0.3s; display: inline-block; }
+        .footer-right a:hover { background: #F2F0E9; color: #111111; transform: translateY(-3px); }
+
+        @media (max-width: 768px) {
+            .form-container { padding: 30px 20px; }
+            .footer-content { flex-direction: column; text-align: center; }
+        }
     </style>
 </head>
 <body>
-    <div class="form-container">
-        <div class="header">
-            <h1>Let's talk.</h1>
-            <p>Ceritakan kebutuhan Anda. Kami akan merespons dalam 1x24 jam.</p>
+    <div class="form-wrapper animate-in">
+        <div class="form-container">
+            <div class="header">
+                <h1>Let's talk.</h1>
+                <p>Ceritakan kebutuhan Anda. Kami akan merespons dalam 1x24 jam.</p>
+            </div>
+            
+            <form id="clientForm">
+                <div class="form-group">
+                    <label>Service Needed</label>
+                    <input type="text" id="serviceInput" readonly value="General Inquiry" style="border-bottom: 1px dashed var(--pink);">
+                </div>
+                <div class="form-group">
+                    <label>Your Name</label>
+                    <input type="text" id="nameInput" required placeholder="Nama Anda">
+                </div>
+                <div class="form-group">
+                    <label>Contact (WA / Discord)</label>
+                    <input type="text" id="contactInput" required placeholder="0812xxxx / user#1234">
+                </div>
+                <div class="form-group">
+                    <label>Project Details</label>
+                    <textarea id="detailInput" required placeholder="Jelaskan secara singkat apa yang ingin dibangun atau diamankan."></textarea>
+                </div>
+                <button type="submit" id="submitBtn">Send Request</button>
+            </form>
+            <a href="index.html" class="back-link">← Back to Home</a>
         </div>
-        
-        <form id="clientForm">
-            <div class="form-group">
-                <label>Service Needed</label>
-                <input type="text" id="serviceInput" readonly value="General Inquiry" style="border-bottom: 1px dashed var(--pink);">
-            </div>
-            <div class="form-group">
-                <label>Your Name</label>
-                <input type="text" id="nameInput" required placeholder="Nama Anda">
-            </div>
-            <div class="form-group">
-                <label>Contact (WA / Discord)</label>
-                <input type="text" id="contactInput" required placeholder="0812xxxx / user#1234">
-            </div>
-            <div class="form-group">
-                <label>Project Details</label>
-                <textarea id="detailInput" required placeholder="Jelaskan secara singkat apa yang ingin dibangun atau diamankan."></textarea>
-            </div>
-            <button type="submit" id="submitBtn">Send Request</button>
-        </form>
-        <a href="index.html" class="back-link">← Back to Home</a>
     </div>
 
+    <!-- FOOTER GLOBAL -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-left">
+                <div class="footer-logo">C</div>
+                <span>2026 Frost & Hog Cyber Team. All rights reserved.</span>
+            </div>
+            <div class="footer-right">
+                <a href="https://frostandhogcyberteam.github.io/frost-and-hog-website/">Back to Main Portal ↗</a>
+            </div>
+        </div>
+    </footer>
+
     <script>
-        // Mengambil parameter URL (misal form.html?service=Cyber Security)
         const urlParams = new URLSearchParams(window.location.search);
         const serviceParam = urlParams.get('service');
         if(serviceParam) {
@@ -69,22 +102,32 @@
             btn.innerText = "Sending...";
             btn.disabled = true;
 
+            const name = document.getElementById('nameInput').value;
+            const contact = document.getElementById('contactInput').value;
+            const detail = document.getElementById('detailInput').value;
+            const service = document.getElementById('serviceInput').value;
+
+            // FORMAT SIRINE DARURAT KE DISCORD
             const data = {
-                username: "FH2 Client Portal",
+                username: "🚨 FH2 EMERGENCY SYSTEM 🚨",
                 embeds: [{
-                    title: "New Project Inquiry",
-                    color: 3924470, // Pink/Cyan hex
+                    title: "🚨 ATTENTION: NEW CLIENT REQUEST 🚨",
+                    description: "**ACTION REQUIRED IMMEDIATELY**\n\nAda klien baru yang membutuhkan bantuan Anda. Segera hubungi mereka!",
+                    color: 16711680, // Warna Merah Menyala (Hex: FF0000)
                     fields: [
-                        { name: "Service", value: document.getElementById('serviceInput').value },
-                        { name: "Name", value: document.getElementById('nameInput').value },
-                        { name: "Contact", value: document.getElementById('contactInput').value },
-                        { name: "Details", value: document.getElementById('detailInput').value }
+                        { name: "🛠️ Service", value: `\`${service}\``, inline: true },
+                        { name: "👤 Name", value: name, inline: true },
+                        { name: "📞 Contact", value: contact, inline: false },
+                        { name: "📝 Details", value: detail, inline: false }
                     ],
+                    footer: { text: "Frost & Hog Cyber Team - Secure Portal" },
                     timestamp: new Date().toISOString()
                 }]
             };
 
-            // GANTI URL INI DENGAN WEBHOOK DISCORD KAMU
+            // ==========================================
+            // ⚠️ GANTI URL DI BAWAH INI DENGAN WEBHOOK DISCORD KAMU
+            // ==========================================
             const webhookURL = "https://discord.com/api/webhooks/1562930745431826474/vO1UYMEEa3VpfgObIzqjlRF4CrlN8yjNmWBfNQuYPDRFdv-t71K_BStOe24KSiDX4Iw_"; 
             
             if(webhookURL === "URL_WEBHOOK_DISCORD_KAMU") {
@@ -98,13 +141,14 @@
                 body: JSON.stringify(data)
             }).then(res => {
                 if(res.ok) {
-                    alert("Pesan terkirim. Kami akan segera menghubungi Anda.");
-                    window.location.href = "index.html";
+                    alert("Pesan terkirim. Anda akan diarahkan ke Surat Perjanjian.");
+                    // REDIRECT KE SURAT KUASA DENGAN MEMBAWA DATA
+                    window.location.href = "surat-kuasa.html?nama=" + encodeURIComponent(name) + "&layanan=" + encodeURIComponent(service);
                 } else {
                     throw new Error('Gagal');
                 }
             }).catch(err => {
-                alert("Terjadi kesalahan saat mengirim pesan.");
+                alert("Terjadi kesalahan saat mengirim pesan. Coba lagi.");
                 btn.innerText = "Send Request"; btn.disabled = false;
             });
         });

@@ -3,38 +3,76 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Team — Frost & Hog</title>
+    <title>Founder Biodata — Frost & Hog</title>
     <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         :root { --bg: #F2F0E9; --ink: #111; --cyan: #00A3FF; --pink: #FF5C8A; --border: #D0CDC5; --font-serif: 'Instrument Serif', serif; --font-sans: 'Space Grotesk', sans-serif; }
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { background: var(--bg); color: var(--ink); font-family: var(--font-sans); }
+        body { background: var(--bg); color: var(--ink); font-family: var(--font-sans); line-height: 1.6; min-height: 100vh; }
+        
         nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 5vw; border-bottom: 1px solid var(--border); }
         .nav-brand { font-family: var(--font-serif); font-size: 1.5rem; font-style: italic; text-decoration: none; color: var(--ink); }
-        .nav-menu { font-weight: 700; font-size: 0.8rem; text-transform: uppercase; border: 1px solid var(--ink); padding: 8px 16px; border-radius: 20px; text-decoration: none; color: var(--ink); }
+        .nav-menu { font-weight: 700; font-size: 0.8rem; text-transform: uppercase; border: 1px solid var(--ink); padding: 8px 16px; border-radius: 20px; text-decoration: none; color: var(--ink); transition: 0.3s; }
+        .nav-menu:hover { background: var(--ink); color: var(--bg); }
 
-        .header { padding: 15vh 5vw 5vh; }
-        .header h1 { font-family: var(--font-serif); font-size: clamp(3rem, 8vw, 6rem); line-height: 1; }
+        .header { padding: 10vh 5vw 5vh; border-bottom: 1px solid var(--border); }
+        .header h1 { font-family: var(--font-serif); font-size: clamp(3rem, 8vw, 5rem); line-height: 1; margin-bottom: 10px; }
 
-        .team-section { padding: 0 5vw 10vh; display: flex; flex-direction: column; }
-        .member { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; padding: 60px 0; border-top: 1px solid var(--border); align-items: center; }
+        .team-section { padding: 10vh 5vw; display: flex; flex-wrap: wrap; gap: 50px; justify-content: center; align-items: flex-start; }
         
-        .member-info h2 { font-family: var(--font-serif); font-size: 3rem; line-height: 1; margin-bottom: 10px; }
-        .member-info .role { font-weight: 700; text-transform: uppercase; letter-spacing: 2px; font-size: 0.8rem; margin-bottom: 30px; }
-        .member-info .role.alexis { color: var(--cyan); }
-        .member-info .role.pigman { color: var(--pink); }
+        /* Desain ID Card Minimalis */
+        .id-card { 
+            background: #fff; 
+            border: 2px solid var(--ink); 
+            width: 100%; 
+            max-width: 380px; 
+            box-shadow: 8px 8px 0px rgba(0,0,0,0.1); 
+            position: relative;
+            overflow: hidden;
+        }
         
-        .member-info p { font-size: 1.1rem; color: #444; max-width: 90%; margin-bottom: 20px; }
-        
-        .quote-box { border-left: 3px solid var(--ink); padding-left: 20px; font-style: italic; font-size: 1.1rem; color: #666; margin-top: 30px; }
+        .card-top { padding: 20px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+        .card-top h4 { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; font-weight: 700; }
+        .card-top span { font-family: monospace; font-size: 0.9rem; color: #666; }
 
-        .member-img-container { width: 100%; height: 400px; background: #EBE9E0; border: 1px solid var(--border); position: relative; overflow: hidden; display: flex; justify-content: center; align-items: center; }
-        .member-img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%) contrast(120%); mix-blend-mode: multiply; }
-        .stamp { position: absolute; bottom: 20px; right: 20px; border: 2px solid #111; padding: 5px 10px; font-weight: 700; font-size: 0.8rem; transform: rotate(-5deg); }
+        /* Kotak 404 Not Found */
+        .photo-placeholder { 
+            width: 100%; 
+            height: 220px; 
+            background: #EBE9E0; 
+            display: flex; 
+            flex-direction: column;
+            justify-content: center; 
+            align-items: center; 
+            border-bottom: 1px solid var(--border);
+            background-image: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(0,0,0,0.03) 10px, rgba(0,0,0,0.03) 20px);
+        }
+        .photo-placeholder h2 { font-family: var(--font-serif); font-size: 4rem; line-height: 1; color: #555; margin-bottom: 5px; }
+        .photo-placeholder p { font-family: monospace; font-size: 0.9rem; color: #888; letter-spacing: 2px; text-transform: uppercase; }
+
+        .card-body { padding: 30px 20px; }
+        .name { font-family: var(--font-serif); font-size: 2.2rem; line-height: 1; margin-bottom: 5px; }
+        .role { font-weight: 700; text-transform: uppercase; letter-spacing: 1px; font-size: 0.8rem; margin-bottom: 25px; }
+        .role.cyan { color: var(--cyan); }
+        .role.pink { color: var(--pink); }
+
+        .data-row { display: grid; grid-template-columns: 100px 1fr; gap: 10px; margin-bottom: 12px; font-size: 0.95rem; }
+        .data-label { font-weight: 700; color: #666; }
+        .data-value { font-weight: 500; }
+
+        /* Efek barcode di bawah */
+        .card-footer { padding: 20px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: flex-end;}
+        .barcode { display: flex; gap: 3px; height: 30px; align-items: center; opacity: 0.4; }
+        .barcode span { width: 4px; height: 100%; background: var(--ink); display: block; }
+        .barcode span:nth-child(2n) { height: 70%; }
+        .barcode span:nth-child(3n) { height: 90%; width: 6px; }
+        
+        .id-number { font-family: monospace; font-size: 0.8rem; color: #666; }
 
         @media (max-width: 768px) {
-            .member { grid-template-columns: 1fr; }
-            .member-img-container { height: 300px; order: -1; } /* Gambar di atas */
+            .team-section { gap: 30px; }
+            .id-card { max-width: 100%; }
+            .name { font-size: 1.8rem; }
         }
     </style>
 </head>
@@ -45,39 +83,87 @@
     </nav>
 
     <div class="header">
-        <h1>The Founders.</h1>
+        <h1>Founder Biodata.</h1>
     </div>
 
     <div class="team-section">
-        <!-- Alexis -->
-        <div class="member">
-            <div class="member-info">
-                <h2>Alexis White</h2>
-                <div class="role alexis">Lead Web Developer</div>
-                <p>Bertanggung jawab pada arsitektur kode, performa web, dan penerjemahan desain menjadi baris-baris logika yang berfungsi. Fokus pada struktur yang bersih dan efisien.</p>
-                <div class="quote-box">"Kode adalah fondasi. Saya membangunnya untuk bertahan."</div>
+        
+        <!-- ID Card 1: Alexis White -->
+        <div class="id-card">
+            <div class="card-top">
+                <h4>FH2 PERSONNEL</h4>
+                <span>ID: 001-AW</span>
             </div>
-            <div class="member-img-container">
-                <!-- Ganti src dengan gambar asli jika ada -->
-                <img src="img/logo.jpg" alt="Alexis" class="member-img" style="opacity: 0.2;">
-                <div class="stamp">CLASSIFIED</div>
+            
+            <div class="photo-placeholder">
+                <h2>404</h2>
+                <p>Image Not Found</p>
+            </div>
+            
+            <div class="card-body">
+                <div class="name">Alexis White</div>
+                <div class="role cyan">Lead Web Developer</div>
+
+                <div class="data-row">
+                    <div class="data-label">Bidang</div>
+                    <div class="data-value">Web Development</div>
+                </div>
+                <div class="data-row">
+                    <div class="data-label">Keahlian</div>
+                    <div class="data-value">HTML, CSS, JS, UI/UX</div>
+                </div>
+                <div class="data-row">
+                    <div class="data-label">Status</div>
+                    <div class="data-value" style="color: green; font-weight: 700;">ACTIVE</div>
+                </div>
+            </div>
+
+            <div class="card-footer">
+                <div class="barcode">
+                    <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+                </div>
+                <div class="id-number">FH2-SYS-001</div>
             </div>
         </div>
 
-        <!-- Pig Man -->
-        <div class="member">
-            <div class="member-img-container">
-                <!-- Ganti src dengan gambar asli jika ada -->
-                <img src="img/logo.jpg" alt="Pig Man" class="member-img" style="opacity: 0.2;">
-                <div class="stamp">CLASSIFIED</div>
+        <!-- ID Card 2: Pig Man -->
+        <div class="id-card">
+            <div class="card-top">
+                <h4>FH2 PERSONNEL</h4>
+                <span>ID: 002-PM</span>
             </div>
-            <div class="member-info">
-                <h2>Pig Man</h2>
-                <div class="role pigman">Cyber Security Analyst</div>
-                <p>Berfokus pada pengujian ketahanan sistem, analisis celah keamanan, dan memastikan setiap sistem yang diluncurkan memiliki pertahanan berlapis dari serangan siber.</p>
-                <div class="quote-box">"Membangun itu mudah, menjaga kestabilan adalah seni."</div>
+            
+            <div class="photo-placeholder">
+                <h2>404</h2>
+                <p>Image Not Found</p>
+            </div>
+            
+            <div class="card-body">
+                <div class="name">Pig Man</div>
+                <div class="role pink">Cyber Security Analyst</div>
+
+                <div class="data-row">
+                    <div class="data-label">Bidang</div>
+                    <div class="data-value">Cyber Security</div>
+                </div>
+                <div class="data-row">
+                    <div class="data-label">Keahlian</div>
+                    <div class="data-value">PenTest, Network Audit, Python</div>
+                </div>
+                <div class="data-row">
+                    <div class="data-label">Status</div>
+                    <div class="data-value" style="color: green; font-weight: 700;">ACTIVE</div>
+                </div>
+            </div>
+
+            <div class="card-footer">
+                <div class="barcode">
+                    <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+                </div>
+                <div class="id-number">FH2-SYS-002</div>
             </div>
         </div>
+
     </div>
 </body>
 </html>

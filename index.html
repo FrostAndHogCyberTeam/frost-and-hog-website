@@ -13,38 +13,41 @@
             --font-serif: 'Instrument Serif', serif; --font-sans: 'Space Grotesk', sans-serif;
         }
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { background-color: var(--bg); color: var(--ink); font-family: var(--font-sans); line-height: 1.6; overflow-x: hidden; }
+        body { background-color: var(--bg); color: var(--ink); font-family: var(--font-sans); line-height: 1.6; overflow-x: hidden; display: flex; flex-direction: column; min-height: 100vh; }
         a { color: var(--ink); text-decoration: none; }
         
+        /* Animasi Fade Up saat halaman dibuka */
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        .animate-in { animation: fadeUp 0.8s ease-out forwards; }
+
         nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 5vw; border-bottom: 1px solid var(--border); position: fixed; top: 0; width: 100%; background: rgba(242, 240, 233, 0.95); backdrop-filter: blur(5px); z-index: 100; }
         .nav-brand { font-family: var(--font-serif); font-size: 1.5rem; font-style: italic; }
         .nav-menu { font-weight: 700; cursor: pointer; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px; border: 1px solid var(--ink); padding: 8px 16px; border-radius: 20px; transition: 0.3s; }
-        .nav-menu:hover { background: var(--ink); color: var(--bg); }
+        .nav-menu:hover { background: var(--ink); color: var(--bg); transform: scale(1.05); }
 
         .sidebar { position: fixed; top: 0; right: -100%; width: 350px; height: 100vh; background: var(--bg); border-left: 1px solid var(--border); z-index: 1001; transition: right 0.5s cubic-bezier(0.8, 0, 0.2, 1); padding: 10vh 40px; display: flex; flex-direction: column; }
         .sidebar.active { right: 0; }
-        .close-btn { position: absolute; top: 20px; right: 30px; font-size: 2rem; cursor: pointer; }
+        .close-btn { position: absolute; top: 20px; right: 30px; font-size: 2rem; cursor: pointer; transition: 0.3s; }
+        .close-btn:hover { transform: rotate(90deg) scale(1.1); }
         .menu-links { display: flex; flex-direction: column; gap: 15px; margin-top: 30px; }
-        .menu-links a { font-size: 1.2rem; font-weight: 700; text-transform: uppercase; border-bottom: 1px solid var(--border); padding-bottom: 10px; transition: 0.2s; }
+        .menu-links a { font-size: 1.2rem; font-weight: 700; text-transform: uppercase; border-bottom: 1px solid var(--border); padding-bottom: 10px; transition: 0.3s; }
         .menu-links a:hover { color: var(--pink); padding-left: 10px; }
-        .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.2); z-index: 1000; display: none; }
-        .overlay.active { display: block; }
+        .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.2); z-index: 1000; display: none; opacity: 0; transition: opacity 0.3s ease; }
+        .overlay.active { display: block; opacity: 1; }
 
-        .hero { padding: 20vh 5vw 10vh; display: grid; grid-template-columns: 1.5fr 1fr; gap: 40px; border-bottom: 1px solid var(--border); }
+        .hero { padding: 20vh 5vw 10vh; display: grid; grid-template-columns: 1.5fr 1fr; gap: 40px; border-bottom: 1px solid var(--border); flex: 1; }
         .hero-left { display: flex; flex-direction: column; justify-content: center; }
         .label { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 20px; display: inline-block; padding: 4px 10px; border: 1px solid var(--cyan); color: var(--cyan); }
         .hero h1 { font-family: var(--font-serif); font-size: clamp(4rem, 10vw, 9rem); line-height: 0.9; letter-spacing: -0.03em; margin-bottom: 30px; }
         .hero-desc { font-size: 1.1rem; max-width: 85%; color: #444; margin-bottom: 40px; border-left: 3px solid var(--pink); padding-left: 15px; }
         
-        /* Tombol di tengah dan agak naik */
-        .hero-btn-container { text-align: center; margin-top: 20px; margin-bottom: 40px; }
-        .btn-primary { display: inline-block; background: var(--ink); color: var(--bg); padding: 15px 40px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; font-size: 0.9rem; transition: 0.3s; }
-        .btn-primary:hover { background: var(--cyan); color: #000; transform: translateY(-3px); }
+        .hero-btn-container { margin-top: 20px; margin-bottom: 40px; }
+        /* Tombol Portal Utama */
+        .btn-portal { display: inline-block; background: var(--ink); color: var(--bg); padding: 15px 40px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; font-size: 0.9rem; transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); border: 2px solid var(--ink); cursor: pointer; }
+        .btn-portal:hover { background: var(--cyan); color: #000; border-color: var(--cyan); transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0, 163, 255, 0.2); }
 
         .hero-right { position: relative; display: flex; align-items: center; justify-content: center; }
         .mascot-img { width: 100%; max-width: 450px; filter: grayscale(100%) contrast(120%); mix-blend-mode: multiply; transform: rotate(3deg); }
-        
-        /* Label di atas maskot */
         .mascot-label { position: absolute; top: -15px; left: 50%; transform: translateX(-50%) rotate(-2deg); background: var(--bg); border: 1px solid var(--ink); padding: 5px 15px; font-family: var(--font-sans); font-weight: 700; font-size: 0.8rem; letter-spacing: 2px; box-shadow: 2px 2px 0px var(--ink); z-index: 10; }
 
         .story-section { padding: 10vh 5vw; display: grid; grid-template-columns: 1fr 2fr; gap: 60px; border-bottom: 1px solid var(--border); }
@@ -65,10 +68,13 @@
         .quote-box.hog h3 { color: var(--pink); }
         .quote-box p { font-size: 1rem; color: #444; font-style: italic; }
 
-        footer { padding: 60px 5vw; display: flex; justify-content: space-between; align-items: flex-end; background: var(--ink); color: var(--bg); }
-        .footer-left h2 { font-family: var(--font-serif); font-size: 3rem; line-height: 1; margin-bottom: 20px; }
-        .footer-left a { color: var(--cyan); text-decoration: underline; font-size: 1.2rem; }
-        .footer-right p { font-size: 0.8rem; opacity: 0.5; text-align: right; }
+        /* FOOTER GLOBAL */
+        footer { background-color: #111111; color: #F2F0E9; padding: 30px 5vw; border-top: 1px solid #333; margin-top: auto; width: 100%; }
+        .footer-content { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; font-family: 'Space Grotesk', sans-serif; }
+        .footer-left { display: flex; align-items: center; gap: 12px; font-size: 0.85rem; }
+        .footer-logo { font-family: 'Instrument Serif', serif; font-size: 1.5rem; border: 1px solid #F2F0E9; border-radius: 50%; width: 35px; height: 35px; display: flex; justify-content: center; align-items: center; }
+        .footer-right a { color: #F2F0E9; text-decoration: none; font-weight: 700; font-size: 0.8rem; text-transform: uppercase; border: 1px solid #F2F0E9; padding: 10px 20px; transition: 0.3s; display: inline-block; }
+        .footer-right a:hover { background: #F2F0E9; color: #111111; transform: translateY(-3px); }
 
         @media (max-width: 768px) {
             .hero { grid-template-columns: 1fr; padding-top: 15vh; }
@@ -77,15 +83,14 @@
             .hero-right { margin-top: 40px; }
             .story-section, .philosophy-section { grid-template-columns: 1fr; gap: 30px; }
             .quotes-grid { grid-template-columns: 1fr; }
-            footer { flex-direction: column; align-items: flex-start; gap: 30px; }
-            .footer-right p { text-align: left; }
             .sidebar { width: 100%; }
+            .footer-content { flex-direction: column; text-align: center; }
         }
     </style>
 </head>
 <body>
 
-    <nav>
+    <nav class="animate-in">
         <div class="nav-brand">Frost & Hog.</div>
         <div class="nav-menu" onclick="toggleMenu()">Menu</div>
     </nav>
@@ -95,36 +100,33 @@
         <div class="menu-links">
             <a href="index.html">Home</a>
             <a href="layanan.html">Services</a>
-            <a href="operations.html">Work Log</a>
             <a href="legalitas.html">Legal</a>
-            <a href="founders.html">The Team</a>
+            <a href="founders.html">Founder Biodata</a>
             <a href="https://frostandhogcyberteam.github.io/frost-and-hog-portofolio/" target="_blank">Portfolio ↗</a>
             <a href="https://frostandhogcyberteam.github.io/frost-and-hog-weather/" target="_blank">Weather ↗</a>
         </div>
     </div>
     <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
 
-    <section class="hero">
+    <section class="hero animate-in">
         <div class="hero-left">
             <span class="label">Independent Cyber Studio</span>
             <h1>We build.<br>We secure.</h1>
             <p class="hero-desc">
                 Bukan agensi besar dengan puluhan karyawan. Kami hanya dua orang yang fokus membangun website dengan performa optimal dan mengamankan infrastrukturnya dari celah keamanan.
             </p>
-            <!-- Tombol dipindah ke sini dan di tengah -->
             <div class="hero-btn-container">
-                <a href="layanan.html" class="btn-primary">Start a Project</a>
+                <a href="layanan.html" class="btn-portal">HIRE OUR TEAM</a>
             </div>
         </div>
         
         <div class="hero-right">
-            <!-- Label pengganti kotak transparan -->
             <div class="mascot-label">FROST & HOG</div>
             <img src="img/agents.png" alt="Frost and Hog" class="mascot-img" onerror="this.style.display='none'">
         </div>
     </section>
 
-    <section class="story-section">
+    <section class="story-section animate-in" style="animation-delay: 0.2s;">
         <div class="story-title">
             <h2>How it<br>started.</h2>
             <p>Est. 2026</p>
@@ -135,7 +137,7 @@
         </div>
     </section>
 
-    <section class="philosophy-section">
+    <section class="philosophy-section animate-in" style="animation-delay: 0.4s;">
         <div class="philosophy-title">
             <h2>Our<br>Philosophy.</h2>
         </div>
@@ -151,13 +153,16 @@
         </div>
     </section>
 
+    <!-- FOOTER GLOBAL -->
     <footer>
-        <div class="footer-left">
-            <h2>Got a project<br>in mind?</h2>
-            <a href="mailto:frostandhogcyberteam@gmail.com">frostandhogcyberteam@gmail.com</a>
-        </div>
-        <div class="footer-right">
-            <p>&copy; 2026 Frost & Hog Cyber Team.<br>All rights reserved.</p>
+        <div class="footer-content">
+            <div class="footer-left">
+                <div class="footer-logo">C</div>
+                <span>2026 Frost & Hog Cyber Team. All rights reserved.</span>
+            </div>
+            <div class="footer-right">
+                <a href="https://frostandhogcyberteam.github.io/frost-and-hog-website/">Back to Main Portal ↗</a>
+            </div>
         </div>
     </footer>
 

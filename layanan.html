@@ -8,66 +8,95 @@
     <style>
         :root { --bg: #F2F0E9; --ink: #111; --cyan: #00A3FF; --pink: #FF5C8A; --border: #D0CDC5; --font-serif: 'Instrument Serif', serif; --font-sans: 'Space Grotesk', sans-serif; }
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { background: var(--bg); color: var(--ink); font-family: var(--font-sans); line-height: 1.6; }
+        body { background: var(--bg); color: var(--ink); font-family: var(--font-sans); line-height: 1.6; display: flex; flex-direction: column; min-height: 100vh; }
         a { color: var(--ink); text-decoration: none; }
+        
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        .animate-in { animation: fadeUp 0.8s ease-out forwards; }
+
         nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 5vw; border-bottom: 1px solid var(--border); }
         .nav-brand { font-family: var(--font-serif); font-size: 1.5rem; font-style: italic; }
-        .nav-menu { font-weight: 700; font-size: 0.8rem; text-transform: uppercase; border: 1px solid var(--ink); padding: 8px 16px; border-radius: 20px; }
+        .nav-menu { font-weight: 700; font-size: 0.8rem; text-transform: uppercase; border: 1px solid var(--ink); padding: 8px 16px; border-radius: 20px; transition: 0.3s; }
+        .nav-menu:hover { background: var(--ink); color: var(--bg); }
         
         .header { padding: 15vh 5vw 5vh; border-bottom: 1px solid var(--border); }
         .header h1 { font-family: var(--font-serif); font-size: clamp(3rem, 8vw, 6rem); line-height: 1; margin-bottom: 20px; }
         .header p { font-size: 1.2rem; max-width: 600px; color: #444; }
 
-        .service-list { padding: 5vh 5vw; display: flex; flex-direction: column; }
-        .service-item { display: grid; grid-template-columns: 100px 1fr 2fr; gap: 30px; padding: 40px 0; border-bottom: 1px solid var(--border); align-items: start; }
+        .service-list { padding: 5vh 5vw; display: flex; flex-direction: column; flex: 1; }
+        .service-item { display: grid; grid-template-columns: 100px 1fr 2fr; gap: 30px; padding: 40px 0; border-bottom: 1px solid var(--border); align-items: center; }
         .service-num { font-family: var(--font-serif); font-size: 3rem; color: var(--border); font-style: italic; }
         .service-title { font-family: var(--font-serif); font-size: 2rem; line-height: 1.1; }
         .service-desc { font-size: 1.05rem; color: #444; margin-bottom: 20px; }
-        .service-btn { display: inline-block; font-weight: 700; text-transform: uppercase; font-size: 0.8rem; border-bottom: 2px solid var(--cyan); padding-bottom: 2px; }
-        .service-btn:hover { color: var(--cyan); }
+        
+        /* Tombol Portal di Layanan */
+        .btn-portal { display: inline-block; background: var(--ink); color: var(--bg); padding: 12px 30px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; font-size: 0.8rem; transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); border: 1px solid var(--ink); }
+        .btn-portal:hover { background: var(--pink); color: #fff; border-color: var(--pink); transform: translateY(-3px); box-shadow: 0 10px 15px rgba(255, 92, 138, 0.2); }
+
+        /* FOOTER GLOBAL */
+        footer { background-color: #111111; color: #F2F0E9; padding: 30px 5vw; border-top: 1px solid #333; margin-top: auto; width: 100%; }
+        .footer-content { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; font-family: 'Space Grotesk', sans-serif; }
+        .footer-left { display: flex; align-items: center; gap: 12px; font-size: 0.85rem; }
+        .footer-logo { font-family: 'Instrument Serif', serif; font-size: 1.5rem; border: 1px solid #F2F0E9; border-radius: 50%; width: 35px; height: 35px; display: flex; justify-content: center; align-items: center; }
+        .footer-right a { color: #F2F0E9; text-decoration: none; font-weight: 700; font-size: 0.8rem; text-transform: uppercase; border: 1px solid #F2F0E9; padding: 10px 20px; transition: 0.3s; display: inline-block; }
+        .footer-right a:hover { background: #F2F0E9; color: #111111; transform: translateY(-3px); }
 
         @media (max-width: 768px) {
             .service-item { grid-template-columns: 1fr; gap: 10px; padding: 30px 0; }
             .service-num { font-size: 2rem; }
+            .footer-content { flex-direction: column; text-align: center; }
         }
     </style>
 </head>
 <body>
-    <nav>
+    <nav class="animate-in">
         <a href="index.html" class="nav-brand">Frost & Hog.</a>
         <a href="index.html" class="nav-menu">Back to Home</a>
     </nav>
 
-    <div class="header">
+    <div class="header animate-in" style="animation-delay: 0.1s;">
         <h1>What we do.</h1>
         <p>Kami tidak menawarkan solusi ajaib. Kami menyediakan keahlian teknis untuk membangun dan mengamankan aset digital Anda.</p>
     </div>
 
-    <div class="service-list">
+    <div class="service-list animate-in" style="animation-delay: 0.2s;">
         <div class="service-item">
             <div class="service-num">01.</div>
             <div class="service-title">Web<br>Development</div>
             <div>
-                <p class="service-desc">Pembuatan website dari nol (landing page, company profile, hingga sistem kustom). Fokus pada performa cepat, struktur kode yang bersih, dan desain antarmuka yang responsif di semua perangkat.</p>
-                <a href="form.html?service=Web%20Development" class="service-btn">Request Service</a>
+                <p class="service-desc">Pembuatan website dari nol (landing page, company profile, hingga sistem kustom). Fokus pada performa cepat, struktur kode yang bersih, dan desain antarmuka yang responsif.</p>
+                <a href="form.html?service=Web%20Development" class="btn-portal">Request Service →</a>
             </div>
         </div>
         <div class="service-item">
             <div class="service-num">02.</div>
             <div class="service-title">Cyber<br>Security</div>
             <div>
-                <p class="service-desc">Audit keamanan web dan infrastruktur. Kami menguji celah keamanan (penetration testing) pada sistem yang Anda miliki secara legal dan etis, lalu memberikan laporan perbaikan yang jelas.</p>
-                <a href="form.html?service=Cyber%20Security" class="service-btn">Request Service</a>
+                <p class="service-desc">Audit keamanan web dan infrastruktur. Kami menguji celah keamanan (penetration testing) secara legal dan etis, lalu memberikan laporan perbaikan yang jelas.</p>
+                <a href="form.html?service=Cyber%20Security" class="btn-portal">Request Service →</a>
             </div>
         </div>
         <div class="service-item">
             <div class="service-num">03.</div>
             <div class="service-title">UI/UX<br>Design</div>
             <div>
-                <p class="service-desc">Perancangan antarmuka yang berpusat pada pengguna. Kami memastikan pengunjung website Anda tidak hanya datang, tetapi juga bingung ke mana harus mengklik—dalam artian positif (navigasi jelas).</p>
-                <a href="form.html?service=UI/UX%20Design" class="service-btn">Request Service</a>
+                <p class="service-desc">Perancangan antarmuka yang berpusat pada pengguna. Kami memastikan pengunjung website Anda memiliki navigasi yang jelas dan pengalaman yang nyaman.</p>
+                <a href="form.html?service=UI/UX%20Design" class="btn-portal">Request Service →</a>
             </div>
         </div>
     </div>
+
+    <!-- FOOTER GLOBAL -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-left">
+                <div class="footer-logo">C</div>
+                <span>2026 Frost & Hog Cyber Team. All rights reserved.</span>
+            </div>
+            <div class="footer-right">
+                <a href="https://frostandhogcyberteam.github.io/frost-and-hog-website/">Back to Main Portal ↗</a>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>
