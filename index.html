@@ -24,7 +24,7 @@
             background-color: var(--bg);
             color: var(--ink);
             font-family: var(--font-sans);
-            line-height: 1.5;
+            line-height: 1.6;
             overflow-x: hidden;
         }
 
@@ -34,7 +34,7 @@
         nav {
             display: flex; justify-content: space-between; align-items: center;
             padding: 20px 5vw; border-bottom: 1px solid var(--border);
-            position: fixed; top: 0; width: 100%; background: rgba(242, 240, 233, 0.9);
+            position: fixed; top: 0; width: 100%; background: rgba(242, 240, 233, 0.95);
             backdrop-filter: blur(5px); z-index: 100;
         }
         .nav-brand { font-family: var(--font-editorial); font-size: 1.5rem; font-style: italic; }
@@ -76,7 +76,7 @@
         }
         
         .hero-desc {
-            font-size: 1.1rem; max-width: 80%; color: #444; margin-bottom: 40px;
+            font-size: 1.1rem; max-width: 85%; color: #444; margin-bottom: 40px;
             border-left: 3px solid var(--pink); padding-left: 15px;
         }
 
@@ -86,7 +86,7 @@
             letter-spacing: 1px; font-size: 0.9rem; align-self: flex-start;
             transition: 0.3s;
         }
-        .btn-primary:hover { background: var(--pink); transform: translateY(-3px); }
+        .btn-primary:hover { background: var(--cyan); transform: translateY(-3px); color: #000; }
 
         .hero-right { position: relative; display: flex; align-items: center; justify-content: center; }
         
@@ -95,7 +95,7 @@
             width: 100%; max-width: 450px; 
             filter: grayscale(100%) contrast(120%);
             mix-blend-mode: multiply;
-            transform: rotate(3deg); /* Miring sedikit agar natural */
+            transform: rotate(3deg);
         }
         .mascot-tape {
             position: absolute; top: -10px; left: 50%; transform: translateX(-50%) rotate(-2deg);
@@ -103,7 +103,7 @@
             backdrop-filter: blur(2px); box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
 
-        /* --- SECTION: THE STORY (SPLIT LAYOUT) --- */
+        /* --- SECTION: THE STORY --- */
         .story-section {
             padding: 10vh 5vw; display: grid; grid-template-columns: 1fr 2fr; gap: 60px;
             border-bottom: 1px solid var(--border);
@@ -112,21 +112,35 @@
         .story-title h2 { font-family: var(--font-editorial); font-size: 3rem; line-height: 1; margin-bottom: 10px; }
         .story-title p { font-size: 0.9rem; color: #666; text-transform: uppercase; letter-spacing: 1px; }
 
-        .story-content { display: flex; flex-direction: column; gap: 20px; font-size: 1.1rem; color: #333; }
+        .story-content { display: flex; flex-direction: column; gap: 20px; font-size: 1.05rem; color: #333; }
         .story-content p { text-align: justify; }
-        .story-content strong { background: rgba(0, 163, 255, 0.2); padding: 0 5px; }
+        .story-content strong { background: rgba(255, 92, 138, 0.2); padding: 0 5px; }
 
-        /* --- QUOTES SECTION --- */
-        .quotes-section {
-            display: grid; grid-template-columns: 1fr 1fr; 
+        /* --- SECTION: QUOTES / PHILOSOPHY --- */
+        .philosophy-section {
+            padding: 10vh 5vw; display: grid; grid-template-columns: 1fr 2fr; gap: 60px;
             border-bottom: 1px solid var(--border);
+            background-color: #EBE9E0; /* Sedikit lebih gelap untuk variasi */
         }
-        .quote-box { padding: 60px 5vw; border-right: 1px solid var(--border); }
-        .quote-box:last-child { border-right: none; }
+
+        .philosophy-title h2 { font-family: var(--font-editorial); font-size: 3rem; line-height: 1; }
+        
+        .quotes-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+        
+        .quote-box { 
+            padding: 30px; 
+            border: 1px solid var(--border); 
+            background: var(--bg);
+            position: relative;
+        }
+        /* Aksen warna di atas kotak */
+        .quote-box.frost { border-top: 4px solid var(--cyan); }
+        .quote-box.hog { border-top: 4px solid var(--pink); }
+
         .quote-box h3 { font-family: var(--font-editorial); font-size: 2rem; margin-bottom: 15px; }
         .quote-box.frost h3 { color: var(--cyan); }
         .quote-box.hog h3 { color: var(--pink); }
-        .quote-box p { font-size: 1.1rem; font-style: italic; color: #555; }
+        .quote-box p { font-size: 1rem; color: #444; font-style: italic; }
 
         /* --- FOOTER --- */
         footer {
@@ -143,8 +157,8 @@
             .hero-desc { max-width: 100%; }
             .hero-right { margin-top: 40px; }
             .story-section { grid-template-columns: 1fr; gap: 30px; }
-            .quotes-section { grid-template-columns: 1fr; }
-            .quote-box { border-right: none; border-bottom: 1px solid var(--border); padding: 40px 5vw; }
+            .philosophy-section { grid-template-columns: 1fr; gap: 30px; }
+            .quotes-grid { grid-template-columns: 1fr; }
             footer { flex-direction: column; align-items: flex-start; gap: 30px; }
             .footer-right p { text-align: left; }
             .sidebar { width: 100%; }
@@ -177,7 +191,7 @@
             <span class="label cyan">Independent Cyber Studio</span>
             <h1>We build.<br>We secure.</h1>
             <p class="hero-desc">
-                Bukan agensi besar dengan puluhan karyawan. Kami hanya dua orang yang fokus bikin website kencang dan mengamankannya dari serangan siber dasar. Simpel, jujur, dan tepat sasaran.
+                Bukan agensi besar dengan puluhan karyawan. Kami hanya dua orang yang fokus membangun website dengan performa optimal dan mengamankan infrastrukturnya dari celah keamanan dasar.
             </p>
             <a href="layanan.html" class="btn-primary">Start a Project</a>
         </div>
@@ -188,27 +202,32 @@
         </div>
     </section>
 
-    <!-- STORY (Teks Rata Kiri, Judul di Kiri) -->
+    <!-- STORY -->
     <section class="story-section">
         <div class="story-title">
             <h2>How it<br>started.</h2>
-            <p>Est. Late 2026</p>
+            <p>Est. 2026</p>
         </div>
         <div class="story-content">
-            <p>Semua berawal dari malam yang sunyi dan rasa frustrasi. Waktu itu, kami sadar satu hal: skill main game kami biasa aja. Nggak ada masa depan di sana. Di tengah rasa putus asa, ingatan tentang dunia web dan keamanan siber muncul kembali.</p>
-            <p>Bermodal perangkat yang terbatas, akses internet seadanya, dan sedikit nekat, <strong>Frost & Hog Cyber Team</strong> dibentuk. Kami nggak punya server mahal atau kantor fisik. Kami cuma punya niat untuk membuktikan bahwa orang biasa juga bisa bikin sistem yang aman dan web yang keren.</p>
+            <p>Semua berawal dari refleksi kritis pada suatu malam. Menyadari bahwa keterampilan di bidang tertentu tidak memberikan prospek yang cukup, fokus akhirnya dialihkan kembali ke ranah pengembangan web dan keamanan siber.</p>
+            <p>Bermodal perangkat yang terbatas dan akses yang minim, <strong>Frost & Hog Cyber Team</strong> didirikan. Kami tidak memiliki fasilitas mewah atau server berskala besar. Kami membangun fondasi ini dari nol, mengandalkan kemampuan teknis dan visi untuk menyediakan sistem digital yang aman, fungsional, dan kompeten.</p>
         </div>
     </section>
 
-    <!-- QUOTES -->
-    <section class="quotes-section">
-        <div class="quote-box frost">
-            <h3>FROST</h3>
-            <p>"Sistem sekompleks apapun, celah terbesarnya selalu ada di manusianya. Kami memastikan web Anda aman dari kesalahan manusia."</p>
+    <!-- PHILOSOPHY -->
+    <section class="philosophy-section">
+        <div class="philosophy-title">
+            <h2>Our<br>Philosophy.</h2>
         </div>
-        <div class="quote-box hog">
-            <h3>HOG</h3>
-            <p>"Ketika kode gagal, insting yang bekerja. Kami nggak cuma nulis kode; kami memastikan web itu tetap hidup dan bisa diakses."</p>
+        <div class="quotes-grid">
+            <div class="quote-box frost">
+                <h3>FROST</h3>
+                <p>"Manusia adalah variabel paling rentan dalam sebuah sistem. Tugas kami adalah memastikan celah sekecil apapun tertutup rapat."</p>
+            </div>
+            <div class="quote-box hog">
+                <h3>HOG</h3>
+                <p>"Sistem yang baik bukan hanya yang mampu berjalan, tetapi yang bisa bertahan saat terjadi gangguan. Kami membangun ketahanan itu."</p>
+            </div>
         </div>
     </section>
 
