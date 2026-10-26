@@ -65,14 +65,11 @@
         .quote-box.hog h3 { color: var(--pink); }
         .quote-box p { font-size: 1rem; color: #444; font-style: italic; }
 
-        /* FOOTER GLOBAL */
+        /* FOOTER GLOBAL (Hanya Copyright, Tanpa Tombol Portal) */
         footer { background-color: var(--ink); color: var(--bg); padding: 30px 5vw; border-top: 1px solid #333; margin-top: auto; width: 100%; }
-        .footer-content { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+        .footer-content { display: flex; justify-content: flex-start; align-items: center; flex-wrap: wrap; gap: 20px; }
         .footer-left { display: flex; align-items: center; gap: 12px; font-size: 0.85rem; }
         .footer-logo { font-family: var(--font-serif); font-size: 1.5rem; border: 1px solid var(--bg); border-radius: 50%; width: 35px; height: 35px; display: flex; justify-content: center; align-items: center; }
-        .footer-right { display: flex; gap: 15px; }
-        .footer-right a { color: var(--bg); font-weight: 700; font-size: 0.8rem; text-transform: uppercase; border: 1px solid var(--bg); padding: 10px 20px; transition: 0.3s; display: inline-block; }
-        .footer-right a:hover { background: var(--bg); color: var(--ink); transform: translateY(-3px); }
 
         @media (max-width: 768px) {
             .hero { grid-template-columns: 1fr; padding-top: 15vh; }
@@ -82,9 +79,7 @@
             .story-section, .philosophy-section { grid-template-columns: 1fr; gap: 30px; }
             .quotes-grid { grid-template-columns: 1fr; }
             .sidebar { width: 100%; }
-            .footer-content { flex-direction: column; text-align: center; }
-            .footer-right { flex-direction: column; width: 100%; }
-            .footer-right a { width: 100%; text-align: center; }
+            .footer-content { justify-content: center; text-align: center; }
         }
     </style>
 </head>
@@ -95,11 +90,11 @@
         <div class="menu-btn" onclick="toggleMenu()">☰</div>
     </nav>
 
+    <!-- HAMBURGER MENU: "Services" sudah dihapus -->
     <div class="sidebar" id="sidebar">
         <div class="close-btn" onclick="toggleMenu()">×</div>
         <div class="menu-links">
             <a href="index.html">Home</a>
-            <a href="layanan.html">Services</a>
             <a href="operations.html">Operations Log</a>
             <a href="founders.html">Founder</a>
             <a href="legalitas.html">Legal</a>
@@ -154,15 +149,12 @@
         </div>
     </section>
 
+    <!-- FOOTER: Tombol portal dihapus, hanya sisa copyright -->
     <footer>
         <div class="footer-content">
             <div class="footer-left">
                 <div class="footer-logo">C</div>
                 <span>2026 Frost & Hog Cyber Team. All rights reserved.</span>
-            </div>
-            <div class="footer-right">
-                <a href="index.html">Back to Home</a>
-                <a href="https://frostandhogcyberteam.github.io/frost-and-hog-website/">Main Portal ↗</a>
             </div>
         </div>
     </footer>
