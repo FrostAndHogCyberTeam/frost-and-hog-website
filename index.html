@@ -3,334 +3,230 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Frost & Hog | Cyber Team</title>
-    
-    <!-- Typography: Editorial Serif + Tech Monospace -->
+    <title>Frost & Hog — Cyber Studio</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-color: #F4F4F0; /* Kertas / Off-white */
-            --text-color: #111111; /* Hitam pekat */
-            --accent-color: #FF3B30; /* Merah menyala (seperti stempel/peringatan) */
-            --border-color: #D1D1D1;
-            --font-serif: 'Instrument Serif', serif;
-            --font-mono: 'Space Mono', monospace;
+            --bg: #F2F0E9; /* Warna kertas */
+            --ink: #111111; /* Tinta hitam */
+            --cyan: #00A3FF; /* Frost (Biru) */
+            --pink: #FF5C8A; /* Hog (Pink) */
+            --border: #D0CDC5;
+            --font-editorial: 'Instrument Serif', serif;
+            --font-sans: 'Space Grotesk', sans-serif;
         }
 
-        /* --- RESET & BASE --- */
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
         body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            font-family: var(--font-mono);
+            background-color: var(--bg);
+            color: var(--ink);
+            font-family: var(--font-sans);
+            line-height: 1.5;
             overflow-x: hidden;
-            -webkit-font-smoothing: antialiased;
-            /* Tekstur noise halus khas kertas (efek manusiawi) */
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.04'/%3E%3C/svg%3E");
         }
 
-        a { color: var(--text-color); text-decoration: none; transition: color 0.2s ease; }
-        a:hover { color: var(--accent-color); }
-
-        /* --- CUSTOM CURSOR (Opsional, untuk desktop) --- */
-        @media (pointer: fine) {
-            .cursor-dot {
-                width: 8px; height: 8px; background: var(--accent-color); border-radius: 50%;
-                position: fixed; pointer-events: none; z-index: 9999;
-                transform: translate(-50%, -50%); transition: transform 0.1s ease;
-            }
-            .cursor-outline {
-                width: 40px; height: 40px; border: 1px solid var(--text-color); border-radius: 50%;
-                position: fixed; pointer-events: none; z-index: 9998;
-                transform: translate(-50%, -50%); transition: transform 0.15s ease-out, border-color 0.2s;
-            }
-        }
-
+        a { color: var(--ink); text-decoration: none; }
+        
         /* --- NAVBAR --- */
         nav {
-            position: fixed; top: 0; left: 0; width: 100%;
             display: flex; justify-content: space-between; align-items: center;
-            padding: 20px 5vw; z-index: 100;
-            mix-blend-mode: difference; /* Membuat teks terbaca di background apapun */
-            color: #fff;
+            padding: 20px 5vw; border-bottom: 1px solid var(--border);
+            position: fixed; top: 0; width: 100%; background: rgba(242, 240, 233, 0.9);
+            backdrop-filter: blur(5px); z-index: 100;
         }
-        .logo { font-family: var(--font-serif); font-size: 1.5rem; letter-spacing: -0.5px; }
-        .menu-btn { font-family: var(--font-mono); font-size: 0.9rem; font-weight: 700; cursor: pointer; text-transform: uppercase; }
+        .nav-brand { font-family: var(--font-editorial); font-size: 1.5rem; font-style: italic; }
+        .nav-menu { font-weight: 700; cursor: pointer; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px; border: 1px solid var(--ink); padding: 8px 16px; border-radius: 20px; transition: 0.3s; }
+        .nav-menu:hover { background: var(--ink); color: var(--bg); }
 
-        /* --- SIDEBAR MENU (Minimalis) --- */
+        /* --- SIDEBAR --- */
         .sidebar {
-            position: fixed; top: 0; right: -100%; width: 400px; height: 100vh;
-            background-color: var(--text-color); color: var(--bg-color);
-            z-index: 1001; transition: right 0.6s cubic-bezier(0.85, 0, 0.15, 1);
-            padding: 10vh 50px; display: flex; flex-direction: column; justify-content: space-between;
+            position: fixed; top: 0; right: -100%; width: 350px; height: 100vh;
+            background: var(--bg); border-left: 1px solid var(--border);
+            z-index: 1001; transition: right 0.5s cubic-bezier(0.8, 0, 0.2, 1);
+            padding: 10vh 40px; display: flex; flex-direction: column;
         }
         .sidebar.active { right: 0; }
-        .close-btn { position: absolute; top: 30px; right: 30px; font-size: 2rem; cursor: pointer; color: var(--bg-color); }
-        .menu-links { display: flex; flex-direction: column; gap: 20px; }
-        .menu-links a { color: var(--bg-color); font-family: var(--font-serif); font-size: clamp(2rem, 5vw, 3rem); line-height: 1; }
-        .menu-links a:hover { color: var(--accent-color); font-style: italic; }
-        .sidebar-footer { font-size: 0.8rem; opacity: 0.5; }
-        .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; display: none; backdrop-filter: blur(3px); }
+        .close-btn { position: absolute; top: 20px; right: 30px; font-size: 2rem; cursor: pointer; }
+        .menu-links { display: flex; flex-direction: column; gap: 15px; margin-top: 30px; }
+        .menu-links a { font-size: 1.2rem; font-weight: 700; text-transform: uppercase; border-bottom: 1px solid var(--border); padding-bottom: 10px; transition: 0.2s; }
+        .menu-links a:hover { color: var(--pink); padding-left: 10px; }
+        .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.2); z-index: 1000; display: none; }
         .overlay.active { display: block; }
 
-        /* --- HERO SECTION --- */
+        /* --- HERO SECTION (ASIMETRIS) --- */
         .hero {
-            min-height: 100vh; padding: 20vh 5vw 10vh;
-            display: flex; flex-direction: column; justify-content: space-between;
-            position: relative;
-        }
-
-        .hero-top-text {
-            display: flex; justify-content: space-between;
-            font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px;
-            border-bottom: 1px solid var(--border-color); padding-bottom: 10px;
-        }
-
-        .main-title {
-            font-family: var(--font-serif);
-            font-size: clamp(4rem, 15vw, 15rem);
-            line-height: 0.85;
-            letter-spacing: -0.04em;
-            margin-top: 5vh;
-            position: relative;
-            z-index: 2;
+            padding: 20vh 5vw 10vh;
+            display: grid; grid-template-columns: 1.5fr 1fr; gap: 40px;
+            border-bottom: 1px solid var(--border);
         }
         
-        .main-title span { font-style: italic; color: var(--accent-color); }
-
-        .hero-bottom {
-            display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 10vh;
-            border-top: 1px solid var(--border-color); padding-top: 20px;
+        .hero-left { display: flex; flex-direction: column; justify-content: center; }
+        
+        .label { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 20px; display: inline-block; padding: 4px 10px; border: 1px solid var(--border);}
+        .label.cyan { color: var(--cyan); border-color: var(--cyan); }
+        
+        .hero h1 {
+            font-family: var(--font-editorial);
+            font-size: clamp(4rem, 10vw, 9rem);
+            line-height: 0.9; letter-spacing: -0.03em;
+            margin-bottom: 30px;
         }
         
-        .hero-desc { font-size: 1rem; line-height: 1.6; max-width: 400px; }
-
-        /* Maskot gaya Stempel */
-        .agents-container {
-            position: relative; display: flex; justify-content: flex-end; align-items: flex-end;
-        }
-        .agents-img {
-            width: 100%; max-width: 400px; height: auto;
-            filter: grayscale(100%) contrast(120%); /* Dibuat hitam putih tegas */
-            mix-blend-mode: multiply; /* Menyatu dengan kertas */
-        }
-        .stamp {
-            position: absolute; bottom: 10%; right: 0;
-            border: 2px solid var(--accent-color); color: var(--accent-color);
-            padding: 5px 15px; font-size: 0.8rem; font-weight: bold;
-            transform: rotate(-10deg); letter-spacing: 2px; text-transform: uppercase;
+        .hero-desc {
+            font-size: 1.1rem; max-width: 80%; color: #444; margin-bottom: 40px;
+            border-left: 3px solid var(--pink); padding-left: 15px;
         }
 
-        /* --- LORE SECTION --- */
-        .lore-section {
-            padding: 15vh 5vw; background-color: var(--text-color); color: var(--bg-color);
-            position: relative;
+        .btn-primary {
+            display: inline-block; background: var(--ink); color: var(--bg);
+            padding: 15px 30px; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 1px; font-size: 0.9rem; align-self: flex-start;
+            transition: 0.3s;
         }
+        .btn-primary:hover { background: var(--pink); transform: translateY(-3px); }
 
-        .lore-header { font-family: var(--font-serif); font-size: 3rem; margin-bottom: 40px; font-style: italic; }
+        .hero-right { position: relative; display: flex; align-items: center; justify-content: center; }
         
-        .lore-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; }
-        
-        .lore-text { font-size: 1rem; line-height: 1.8; color: #A0A0A0; }
-        .lore-text strong { color: var(--bg-color); font-weight: 700; }
-        
-        .lore-quotes { display: flex; flex-direction: column; gap: 30px; }
-        .quote-block { border-left: 2px solid var(--accent-color); padding-left: 20px; }
-        .quote-block h4 { font-family: var(--font-serif); font-size: 1.5rem; margin-bottom: 10px; color: var(--bg-color); }
-        .quote-block p { font-size: 0.9rem; font-style: italic; color: #A0A0A0; }
-
-        /* --- ARCTIC SECTION (Kutub Utara) --- */
-        .arctic-section {
-            padding: 10vh 5vw; border-bottom: 1px solid var(--border-color);
-            display: flex; justify-content: space-between; align-items: center;
-            overflow: hidden; position: relative;
+        /* Maskot gaya tempelan/stempel */
+        .mascot-img {
+            width: 100%; max-width: 450px; 
+            filter: grayscale(100%) contrast(120%);
+            mix-blend-mode: multiply;
+            transform: rotate(3deg); /* Miring sedikit agar natural */
         }
-        .arctic-text h2 { font-family: var(--font-serif); font-size: 4rem; line-height: 1; margin-bottom: 10px; }
-        .arctic-text p { font-size: 0.9rem; letter-spacing: 1px; text-transform: uppercase; }
-        
-        .ski-container { width: 50%; height: 200px; position: relative; overflow: hidden; }
-        .ski-img {
-            position: absolute; bottom: 0; left: -100%;
-            height: 180px;
-            animation: skiAnim 6s linear infinite;
-            filter: grayscale(100%) contrast(150%);
+        .mascot-tape {
+            position: absolute; top: -10px; left: 50%; transform: translateX(-50%) rotate(-2deg);
+            width: 100px; height: 30px; background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(2px); box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
 
-        @keyframes skiAnim {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(250%); } /* Meluncur mulus */
+        /* --- SECTION: THE STORY (SPLIT LAYOUT) --- */
+        .story-section {
+            padding: 10vh 5vw; display: grid; grid-template-columns: 1fr 2fr; gap: 60px;
+            border-bottom: 1px solid var(--border);
         }
+        
+        .story-title h2 { font-family: var(--font-editorial); font-size: 3rem; line-height: 1; margin-bottom: 10px; }
+        .story-title p { font-size: 0.9rem; color: #666; text-transform: uppercase; letter-spacing: 1px; }
+
+        .story-content { display: flex; flex-direction: column; gap: 20px; font-size: 1.1rem; color: #333; }
+        .story-content p { text-align: justify; }
+        .story-content strong { background: rgba(0, 163, 255, 0.2); padding: 0 5px; }
+
+        /* --- QUOTES SECTION --- */
+        .quotes-section {
+            display: grid; grid-template-columns: 1fr 1fr; 
+            border-bottom: 1px solid var(--border);
+        }
+        .quote-box { padding: 60px 5vw; border-right: 1px solid var(--border); }
+        .quote-box:last-child { border-right: none; }
+        .quote-box h3 { font-family: var(--font-editorial); font-size: 2rem; margin-bottom: 15px; }
+        .quote-box.frost h3 { color: var(--cyan); }
+        .quote-box.hog h3 { color: var(--pink); }
+        .quote-box p { font-size: 1.1rem; font-style: italic; color: #555; }
 
         /* --- FOOTER --- */
-        .footer { padding: 10vh 5vw 5vh; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; border-top: 1px solid var(--border-color); }
-        .footer h3 { font-family: var(--font-serif); font-size: 2rem; margin-bottom: 10px; }
-        .footer-links { display: flex; flex-direction: column; gap: 10px; font-size: 0.9rem; }
-        .btn-minimal {
-            display: inline-block; margin-top: 20px; padding: 15px 30px;
-            border: 1px solid var(--text-color); font-family: var(--font-mono);
-            text-transform: uppercase; font-weight: 700; font-size: 0.8rem;
-            transition: all 0.3s; cursor: pointer;
+        footer {
+            padding: 60px 5vw; display: flex; justify-content: space-between; align-items: flex-end;
+            background: var(--ink); color: var(--bg);
         }
-        .btn-minimal:hover { background: var(--text-color); color: var(--bg-color); }
-        
-        .footer-bottom { margin-top: 5vh; font-size: 0.75rem; color: #888; display: flex; justify-content: space-between; border-top: 1px solid var(--border-color); padding-top: 20px;}
+        .footer-left h2 { font-family: var(--font-editorial); font-size: 3rem; line-height: 1; margin-bottom: 20px; }
+        .footer-left a { color: var(--cyan); text-decoration: underline; font-size: 1.2rem; }
+        .footer-right p { font-size: 0.8rem; opacity: 0.5; text-align: right; }
 
-        /* --- RESPONSIVE --- */
         @media (max-width: 768px) {
-            .hero-bottom, .lore-grid, .footer { grid-template-columns: 1fr; gap: 30px; }
-            .agents-container { justify-content: center; }
+            .hero { grid-template-columns: 1fr; padding-top: 15vh; }
+            .hero h1 { font-size: 4rem; }
+            .hero-desc { max-width: 100%; }
+            .hero-right { margin-top: 40px; }
+            .story-section { grid-template-columns: 1fr; gap: 30px; }
+            .quotes-section { grid-template-columns: 1fr; }
+            .quote-box { border-right: none; border-bottom: 1px solid var(--border); padding: 40px 5vw; }
+            footer { flex-direction: column; align-items: flex-start; gap: 30px; }
+            .footer-right p { text-align: left; }
             .sidebar { width: 100%; }
-            .main-title { font-size: clamp(3rem, 20vw, 6rem); }
-            .ski-container { width: 100%; margin-top: 20px; }
-            .arctic-section { flex-direction: column; align-items: flex-start; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Custom Cursor Elements -->
-    <div class="cursor-dot"></div>
-    <div class="cursor-outline"></div>
-
-    <!-- NAVBAR -->
     <nav>
-        <div class="logo">Frost & Hog.</div>
-        <div class="menu-btn" onclick="toggleMenu()">Menu / 2026</div>
+        <div class="nav-brand">Frost & Hog.</div>
+        <div class="nav-menu" onclick="toggleMenu()">Menu</div>
     </nav>
 
-    <!-- SIDEBAR -->
     <div class="sidebar" id="sidebar">
         <div class="close-btn" onclick="toggleMenu()">×</div>
         <div class="menu-links">
-            <a href="index.html">Index</a>
+            <a href="index.html">Home</a>
+            <a href="operations.html">Work / Log</a>
+            <a href="legalitas.html">Legal</a>
+            <a href="founders.html">The Team</a>
             <a href="https://frostandhogcyberteam.github.io/frost-and-hog-portofolio/" target="_blank">Portfolio ↗</a>
             <a href="https://frostandhogcyberteam.github.io/frost-and-hog-weather/" target="_blank">Weather ↗</a>
-            <a href="legalitas.html">Legal</a>
-        </div>
-        <div class="sidebar-footer">
-            <p>Frost & Hog Cyber Team.<br>Est. 2026. All rights reserved.</p>
         </div>
     </div>
     <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
 
-    <!-- HERO SECTION -->
+    <!-- HERO -->
     <section class="hero">
-        <div class="hero-top-text">
-            <span>Independent Cyber Security & Web Dev</span>
-            <span>Based in the Cold</span>
+        <div class="hero-left">
+            <span class="label cyan">Independent Cyber Studio</span>
+            <h1>We build.<br>We secure.</h1>
+            <p class="hero-desc">
+                Bukan agensi besar dengan puluhan karyawan. Kami hanya dua orang yang fokus bikin website kencang dan mengamankannya dari serangan siber dasar. Simpel, jujur, dan tepat sasaran.
+            </p>
+            <a href="layanan.html" class="btn-primary">Start a Project</a>
         </div>
-
-        <h1 class="main-title">
-            FROST <br>
-            AND <span>HOG</span>.
-        </h1>
-
-        <div class="hero-bottom">
-            <div class="hero-desc">
-                We don't just build websites; we forge digital fortresses. Born from limitations, engineered for the world.
-            </div>
-            <div class="agents-container">
-                <img src="img/agents.png" alt="Frost and Hog" class="agents-img" onerror="this.style.display='none'">
-                <div class="stamp">Classified</div>
-            </div>
+        
+        <div class="hero-right">
+            <div class="mascot-tape"></div>
+            <img src="img/agents.png" alt="Frost and Hog" class="mascot-img" onerror="this.style.display='none'">
         </div>
     </section>
 
-    <!-- ARCTIC SECTION -->
-    <section class="arctic-section">
-        <div class="arctic-text">
-            <h2>Arctic Ops.</h2>
-            <p>Operating in extreme conditions.</p>
+    <!-- STORY (Teks Rata Kiri, Judul di Kiri) -->
+    <section class="story-section">
+        <div class="story-title">
+            <h2>How it<br>started.</h2>
+            <p>Est. Late 2026</p>
         </div>
-        <div class="ski-container">
-            <img src="img/ski.png" alt="Skiing" class="ski-img" onerror="this.style.display='none'">
+        <div class="story-content">
+            <p>Semua berawal dari malam yang sunyi dan rasa frustrasi. Waktu itu, kami sadar satu hal: skill main game kami biasa aja. Nggak ada masa depan di sana. Di tengah rasa putus asa, ingatan tentang dunia web dan keamanan siber muncul kembali.</p>
+            <p>Bermodal satu HP, akses internet seadanya, dan sedikit nekat, <strong>Frost & Hog Cyber Team</strong> dibentuk. Kami nggak punya server mahal atau kantor fisik. Kami cuma punya niat untuk membuktikan bahwa orang biasa juga bisa bikin sistem yang aman dan web yang keren.</p>
         </div>
     </section>
 
-    <!-- LORE SECTION -->
-    <section class="lore-section">
-        <h2 class="lore-header">Our Genesis.</h2>
-        <div class="lore-grid">
-            <div class="lore-text">
-                <p>Founded from a critical reflection on personal limitations, <strong>Frost & Hog Cyber Team</strong> was born as an independent entity focusing on web development and cyber security.</p><br>
-                <p>Starting from limited devices and access, this team was built purely on determination and a strong strategic vision. Amidst the escalating cyber threats, Frost & Hog is here to prove that innovation does not always demand luxurious facilities.</p>
-            </div>
-            <div class="lore-quotes">
-                <div class="quote-block">
-                    <h4>FROST</h4>
-                    <p>"Humans are far more dangerous than the most complex system. At their lowest, they will do anything to survive."</p>
-                </div>
-                <div class="quote-block" style="border-color: #555;">
-                    <h4>HOG</h4>
-                    <p>"When technology fails, primal instinct takes over. Survival isn't about code, it's about the courage to keep moving."</p>
-                </div>
-            </div>
+    <!-- QUOTES -->
+    <section class="quotes-section">
+        <div class="quote-box frost">
+            <h3>FROST</h3>
+            <p>"Sistem sekompleks apapun, celah terbesarnya selalu ada di manusianya. Kami memastikan web Anda aman dari kesalahan manusia."</p>
+        </div>
+        <div class="quote-box hog">
+            <h3>HOG</h3>
+            <p>"Ketika kode gagal, insting yang bekerja. Kami nggak cuma nulis kode; kami memastikan web itu tetap hidup dan bisa diakses."</p>
         </div>
     </section>
 
     <!-- FOOTER -->
-    <footer class="footer">
-        <div>
-            <h3>Ready to build?</h3>
-            <p style="font-size: 0.9rem; color: #666;">Secure your digital infrastructure today.</p>
-            <a href="layanan.html" class="btn-minimal">Hire The Team</a>
-        </div>
-        <div class="footer-links">
+    <footer>
+        <div class="footer-left">
+            <h2>Got a project<br>in mind?</h2>
             <a href="mailto:frostandhogcyberteam@gmail.com">frostandhogcyberteam@gmail.com</a>
-            <a href="#">Discord</a>
-            <a href="#">Instagram</a>
         </div>
-        <div class="footer-bottom">
-            <span>&copy; 2026 Frost & Hog Cyber Team.</span>
-            <span>Designed by humans, secured by code.</span>
+        <div class="footer-right">
+            <p>&copy; 2026 Frost & Hog Cyber Team.<br>All rights reserved.<br><br>Designed by humans.</p>
         </div>
     </footer>
 
     <script>
-        // --- LOGIKA SIDEBAR ---
         function toggleMenu() {
             document.getElementById('sidebar').classList.toggle('active');
             document.getElementById('overlay').classList.toggle('active');
-        }
-
-        // --- CUSTOM CURSOR LOGIC (Hanya untuk Desktop) ---
-        if (window.matchMedia("(pointer: fine)").matches) {
-            const dot = document.querySelector('.cursor-dot');
-            const outline = document.querySelector('.cursor-outline');
-
-            window.addEventListener('mousemove', (e) => {
-                const posX = e.clientX;
-                const posY = e.clientY;
-
-                dot.style.left = `${posX}px`;
-                dot.style.top = `${posY}px`;
-
-                // Outline bergerak sedikit lebih lambat
-                outline.animate({
-                    left: `${posX}px`,
-                    top: `${posY}px`
-                }, { duration: 500, fill: "forwards" });
-            });
-
-            // Efek saat hover link
-            document.querySelectorAll('a, .menu-btn').forEach(link => {
-                link.addEventListener('mouseenter', () => {
-                    outline.style.transform = 'translate(-50%, -50%) scale(1.5)';
-                    outline.style.borderColor = 'var(--accent-color)';
-                });
-                link.addEventListener('mouseleave', () => {
-                    outline.style.transform = 'translate(-50%, -50%) scale(1)';
-                    outline.style.borderColor = 'var(--text-color)';
-                });
-            });
         }
     </script>
 </body>
