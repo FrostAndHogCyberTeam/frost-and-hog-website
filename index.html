@@ -9,45 +9,19 @@
     <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #F2F0E9; /* Warna kertas */
-            --ink: #111111; /* Tinta hitam */
-            --cyan: #00A3FF; /* Frost (Biru) */
-            --pink: #FF5C8A; /* Hog (Pink) */
-            --border: #D0CDC5;
-            --font-editorial: 'Instrument Serif', serif;
-            --font-sans: 'Space Grotesk', sans-serif;
+            --bg: #F2F0E9; --ink: #111111; --cyan: #00A3FF; --pink: #FF5C8A; --border: #D0CDC5;
+            --font-serif: 'Instrument Serif', serif; --font-sans: 'Space Grotesk', sans-serif;
         }
-
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        
-        body {
-            background-color: var(--bg);
-            color: var(--ink);
-            font-family: var(--font-sans);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
+        body { background-color: var(--bg); color: var(--ink); font-family: var(--font-sans); line-height: 1.6; overflow-x: hidden; }
         a { color: var(--ink); text-decoration: none; }
         
-        /* --- NAVBAR --- */
-        nav {
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 20px 5vw; border-bottom: 1px solid var(--border);
-            position: fixed; top: 0; width: 100%; background: rgba(242, 240, 233, 0.95);
-            backdrop-filter: blur(5px); z-index: 100;
-        }
-        .nav-brand { font-family: var(--font-editorial); font-size: 1.5rem; font-style: italic; }
+        nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 5vw; border-bottom: 1px solid var(--border); position: fixed; top: 0; width: 100%; background: rgba(242, 240, 233, 0.95); backdrop-filter: blur(5px); z-index: 100; }
+        .nav-brand { font-family: var(--font-serif); font-size: 1.5rem; font-style: italic; }
         .nav-menu { font-weight: 700; cursor: pointer; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px; border: 1px solid var(--ink); padding: 8px 16px; border-radius: 20px; transition: 0.3s; }
         .nav-menu:hover { background: var(--ink); color: var(--bg); }
 
-        /* --- SIDEBAR --- */
-        .sidebar {
-            position: fixed; top: 0; right: -100%; width: 350px; height: 100vh;
-            background: var(--bg); border-left: 1px solid var(--border);
-            z-index: 1001; transition: right 0.5s cubic-bezier(0.8, 0, 0.2, 1);
-            padding: 10vh 40px; display: flex; flex-direction: column;
-        }
+        .sidebar { position: fixed; top: 0; right: -100%; width: 350px; height: 100vh; background: var(--bg); border-left: 1px solid var(--border); z-index: 1001; transition: right 0.5s cubic-bezier(0.8, 0, 0.2, 1); padding: 10vh 40px; display: flex; flex-direction: column; }
         .sidebar.active { right: 0; }
         .close-btn { position: absolute; top: 20px; right: 30px; font-size: 2rem; cursor: pointer; }
         .menu-links { display: flex; flex-direction: column; gap: 15px; margin-top: 30px; }
@@ -56,98 +30,43 @@
         .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.2); z-index: 1000; display: none; }
         .overlay.active { display: block; }
 
-        /* --- HERO SECTION (ASIMETRIS) --- */
-        .hero {
-            padding: 20vh 5vw 10vh;
-            display: grid; grid-template-columns: 1.5fr 1fr; gap: 40px;
-            border-bottom: 1px solid var(--border);
-        }
-        
+        .hero { padding: 20vh 5vw 10vh; display: grid; grid-template-columns: 1.5fr 1fr; gap: 40px; border-bottom: 1px solid var(--border); }
         .hero-left { display: flex; flex-direction: column; justify-content: center; }
+        .label { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 20px; display: inline-block; padding: 4px 10px; border: 1px solid var(--cyan); color: var(--cyan); }
+        .hero h1 { font-family: var(--font-serif); font-size: clamp(4rem, 10vw, 9rem); line-height: 0.9; letter-spacing: -0.03em; margin-bottom: 30px; }
+        .hero-desc { font-size: 1.1rem; max-width: 85%; color: #444; margin-bottom: 40px; border-left: 3px solid var(--pink); padding-left: 15px; }
         
-        .label { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 20px; display: inline-block; padding: 4px 10px; border: 1px solid var(--border);}
-        .label.cyan { color: var(--cyan); border-color: var(--cyan); }
-        
-        .hero h1 {
-            font-family: var(--font-editorial);
-            font-size: clamp(4rem, 10vw, 9rem);
-            line-height: 0.9; letter-spacing: -0.03em;
-            margin-bottom: 30px;
-        }
-        
-        .hero-desc {
-            font-size: 1.1rem; max-width: 85%; color: #444; margin-bottom: 40px;
-            border-left: 3px solid var(--pink); padding-left: 15px;
-        }
-
-        .btn-primary {
-            display: inline-block; background: var(--ink); color: var(--bg);
-            padding: 15px 30px; font-weight: 700; text-transform: uppercase;
-            letter-spacing: 1px; font-size: 0.9rem; align-self: flex-start;
-            transition: 0.3s;
-        }
-        .btn-primary:hover { background: var(--cyan); transform: translateY(-3px); color: #000; }
+        /* Tombol di tengah dan agak naik */
+        .hero-btn-container { text-align: center; margin-top: 20px; margin-bottom: 40px; }
+        .btn-primary { display: inline-block; background: var(--ink); color: var(--bg); padding: 15px 40px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; font-size: 0.9rem; transition: 0.3s; }
+        .btn-primary:hover { background: var(--cyan); color: #000; transform: translateY(-3px); }
 
         .hero-right { position: relative; display: flex; align-items: center; justify-content: center; }
+        .mascot-img { width: 100%; max-width: 450px; filter: grayscale(100%) contrast(120%); mix-blend-mode: multiply; transform: rotate(3deg); }
         
-        /* Maskot gaya tempelan/stempel */
-        .mascot-img {
-            width: 100%; max-width: 450px; 
-            filter: grayscale(100%) contrast(120%);
-            mix-blend-mode: multiply;
-            transform: rotate(3deg);
-        }
-        .mascot-tape {
-            position: absolute; top: -10px; left: 50%; transform: translateX(-50%) rotate(-2deg);
-            width: 100px; height: 30px; background: rgba(255, 255, 255, 0.4);
-            backdrop-filter: blur(2px); box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
+        /* Label di atas maskot */
+        .mascot-label { position: absolute; top: -15px; left: 50%; transform: translateX(-50%) rotate(-2deg); background: var(--bg); border: 1px solid var(--ink); padding: 5px 15px; font-family: var(--font-sans); font-weight: 700; font-size: 0.8rem; letter-spacing: 2px; box-shadow: 2px 2px 0px var(--ink); z-index: 10; }
 
-        /* --- SECTION: THE STORY --- */
-        .story-section {
-            padding: 10vh 5vw; display: grid; grid-template-columns: 1fr 2fr; gap: 60px;
-            border-bottom: 1px solid var(--border);
-        }
-        
-        .story-title h2 { font-family: var(--font-editorial); font-size: 3rem; line-height: 1; margin-bottom: 10px; }
+        .story-section { padding: 10vh 5vw; display: grid; grid-template-columns: 1fr 2fr; gap: 60px; border-bottom: 1px solid var(--border); }
+        .story-title h2 { font-family: var(--font-serif); font-size: 3rem; line-height: 1; margin-bottom: 10px; }
         .story-title p { font-size: 0.9rem; color: #666; text-transform: uppercase; letter-spacing: 1px; }
-
         .story-content { display: flex; flex-direction: column; gap: 20px; font-size: 1.05rem; color: #333; }
         .story-content p { text-align: justify; }
         .story-content strong { background: rgba(255, 92, 138, 0.2); padding: 0 5px; }
 
-        /* --- SECTION: QUOTES / PHILOSOPHY --- */
-        .philosophy-section {
-            padding: 10vh 5vw; display: grid; grid-template-columns: 1fr 2fr; gap: 60px;
-            border-bottom: 1px solid var(--border);
-            background-color: #EBE9E0; /* Sedikit lebih gelap untuk variasi */
-        }
-
-        .philosophy-title h2 { font-family: var(--font-editorial); font-size: 3rem; line-height: 1; }
-        
+        .philosophy-section { padding: 10vh 5vw; display: grid; grid-template-columns: 1fr 2fr; gap: 60px; border-bottom: 1px solid var(--border); background-color: #EBE9E0; }
+        .philosophy-title h2 { font-family: var(--font-serif); font-size: 3rem; line-height: 1; }
         .quotes-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
-        
-        .quote-box { 
-            padding: 30px; 
-            border: 1px solid var(--border); 
-            background: var(--bg);
-            position: relative;
-        }
-        /* Aksen warna di atas kotak */
+        .quote-box { padding: 30px; border: 1px solid var(--border); background: var(--bg); }
         .quote-box.frost { border-top: 4px solid var(--cyan); }
         .quote-box.hog { border-top: 4px solid var(--pink); }
-
-        .quote-box h3 { font-family: var(--font-editorial); font-size: 2rem; margin-bottom: 15px; }
+        .quote-box h3 { font-family: var(--font-serif); font-size: 2rem; margin-bottom: 15px; }
         .quote-box.frost h3 { color: var(--cyan); }
         .quote-box.hog h3 { color: var(--pink); }
         .quote-box p { font-size: 1rem; color: #444; font-style: italic; }
 
-        /* --- FOOTER --- */
-        footer {
-            padding: 60px 5vw; display: flex; justify-content: space-between; align-items: flex-end;
-            background: var(--ink); color: var(--bg);
-        }
-        .footer-left h2 { font-family: var(--font-editorial); font-size: 3rem; line-height: 1; margin-bottom: 20px; }
+        footer { padding: 60px 5vw; display: flex; justify-content: space-between; align-items: flex-end; background: var(--ink); color: var(--bg); }
+        .footer-left h2 { font-family: var(--font-serif); font-size: 3rem; line-height: 1; margin-bottom: 20px; }
         .footer-left a { color: var(--cyan); text-decoration: underline; font-size: 1.2rem; }
         .footer-right p { font-size: 0.8rem; opacity: 0.5; text-align: right; }
 
@@ -156,8 +75,7 @@
             .hero h1 { font-size: 4rem; }
             .hero-desc { max-width: 100%; }
             .hero-right { margin-top: 40px; }
-            .story-section { grid-template-columns: 1fr; gap: 30px; }
-            .philosophy-section { grid-template-columns: 1fr; gap: 30px; }
+            .story-section, .philosophy-section { grid-template-columns: 1fr; gap: 30px; }
             .quotes-grid { grid-template-columns: 1fr; }
             footer { flex-direction: column; align-items: flex-start; gap: 30px; }
             .footer-right p { text-align: left; }
@@ -176,7 +94,8 @@
         <div class="close-btn" onclick="toggleMenu()">×</div>
         <div class="menu-links">
             <a href="index.html">Home</a>
-            <a href="operations.html">Work / Log</a>
+            <a href="layanan.html">Services</a>
+            <a href="operations.html">Work Log</a>
             <a href="legalitas.html">Legal</a>
             <a href="founders.html">The Team</a>
             <a href="https://frostandhogcyberteam.github.io/frost-and-hog-portofolio/" target="_blank">Portfolio ↗</a>
@@ -185,24 +104,26 @@
     </div>
     <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
 
-    <!-- HERO -->
     <section class="hero">
         <div class="hero-left">
-            <span class="label cyan">Independent Cyber Studio</span>
+            <span class="label">Independent Cyber Studio</span>
             <h1>We build.<br>We secure.</h1>
             <p class="hero-desc">
-                Bukan agensi besar dengan puluhan karyawan. Kami hanya dua orang yang fokus membangun website dengan performa optimal dan mengamankan infrastrukturnya dari celah keamanan dasar.
+                Bukan agensi besar dengan puluhan karyawan. Kami hanya dua orang yang fokus membangun website dengan performa optimal dan mengamankan infrastrukturnya dari celah keamanan.
             </p>
-            <a href="layanan.html" class="btn-primary">Start a Project</a>
+            <!-- Tombol dipindah ke sini dan di tengah -->
+            <div class="hero-btn-container">
+                <a href="layanan.html" class="btn-primary">Start a Project</a>
+            </div>
         </div>
         
         <div class="hero-right">
-            <div class="mascot-tape"></div>
+            <!-- Label pengganti kotak transparan -->
+            <div class="mascot-label">FROST & HOG</div>
             <img src="img/agents.png" alt="Frost and Hog" class="mascot-img" onerror="this.style.display='none'">
         </div>
     </section>
 
-    <!-- STORY -->
     <section class="story-section">
         <div class="story-title">
             <h2>How it<br>started.</h2>
@@ -214,7 +135,6 @@
         </div>
     </section>
 
-    <!-- PHILOSOPHY -->
     <section class="philosophy-section">
         <div class="philosophy-title">
             <h2>Our<br>Philosophy.</h2>
@@ -231,14 +151,13 @@
         </div>
     </section>
 
-    <!-- FOOTER -->
     <footer>
         <div class="footer-left">
             <h2>Got a project<br>in mind?</h2>
             <a href="mailto:frostandhogcyberteam@gmail.com">frostandhogcyberteam@gmail.com</a>
         </div>
         <div class="footer-right">
-            <p>&copy; 2026 Frost & Hog Cyber Team.<br>All rights reserved.<br><br>Designed by humans.</p>
+            <p>&copy; 2026 Frost & Hog Cyber Team.<br>All rights reserved.</p>
         </div>
     </footer>
 

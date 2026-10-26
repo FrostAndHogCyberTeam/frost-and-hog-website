@@ -3,61 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Our Services | Frost & Hog</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <title>Services — Frost & Hog</title>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
-        :root { --bg-dark: #05080f; --cyan: #00f3ff; --pink: #ff7eb3; --text-light: #e2e8f0; }
+        :root { --bg: #F2F0E9; --ink: #111; --cyan: #00A3FF; --pink: #FF5C8A; --border: #D0CDC5; --font-serif: 'Instrument Serif', serif; --font-sans: 'Space Grotesk', sans-serif; }
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Inter', sans-serif; background-color: var(--bg-dark); color: var(--text-light); text-align: center; padding: 60px 20px; min-height: 100vh; background-image: linear-gradient(rgba(0, 243, 255, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 243, 255, 0.03) 1px, transparent 1px); background-size: 30px 30px; }
+        body { background: var(--bg); color: var(--ink); font-family: var(--font-sans); line-height: 1.6; }
+        a { color: var(--ink); text-decoration: none; }
+        nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 5vw; border-bottom: 1px solid var(--border); }
+        .nav-brand { font-family: var(--font-serif); font-size: 1.5rem; font-style: italic; }
+        .nav-menu { font-weight: 700; font-size: 0.8rem; text-transform: uppercase; border: 1px solid var(--ink); padding: 8px 16px; border-radius: 20px; }
         
-        h1 { font-family: 'Orbitron', sans-serif; font-size: 3rem; color: var(--cyan); text-shadow: 0 0 15px rgba(0, 243, 255, 0.5); text-transform: uppercase; margin-bottom: 10px; }
-        p.subtitle { color: #8892b0; margin-bottom: 50px; font-size: 1.1rem; }
+        .header { padding: 15vh 5vw 5vh; border-bottom: 1px solid var(--border); }
+        .header h1 { font-family: var(--font-serif); font-size: clamp(3rem, 8vw, 6rem); line-height: 1; margin-bottom: 20px; }
+        .header p { font-size: 1.2rem; max-width: 600px; color: #444; }
 
-        .services-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; max-width: 1000px; margin: 0 auto; }
-        
-        .service-card {
-            background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 15px; padding: 40px 30px; width: 300px; text-decoration: none; color: var(--text-light);
-            transition: all 0.3s ease; backdrop-filter: blur(10px);
-            display: flex; flex-direction: column; align-items: center;
+        .service-list { padding: 5vh 5vw; display: flex; flex-direction: column; }
+        .service-item { display: grid; grid-template-columns: 100px 1fr 2fr; gap: 30px; padding: 40px 0; border-bottom: 1px solid var(--border); align-items: start; }
+        .service-num { font-family: var(--font-serif); font-size: 3rem; color: var(--border); font-style: italic; }
+        .service-title { font-family: var(--font-serif); font-size: 2rem; line-height: 1.1; }
+        .service-desc { font-size: 1.05rem; color: #444; margin-bottom: 20px; }
+        .service-btn { display: inline-block; font-weight: 700; text-transform: uppercase; font-size: 0.8rem; border-bottom: 2px solid var(--cyan); padding-bottom: 2px; }
+        .service-btn:hover { color: var(--cyan); }
+
+        @media (max-width: 768px) {
+            .service-item { grid-template-columns: 1fr; gap: 10px; padding: 30px 0; }
+            .service-num { font-size: 2rem; }
         }
-        .service-card:hover { transform: translateY(-10px); box-shadow: 0 0 30px rgba(0, 243, 255, 0.2); border-color: var(--cyan); background: rgba(0, 243, 255, 0.05); }
-        
-        .service-icon { font-size: 3rem; margin-bottom: 20px; }
-        
-        .service-card h2 { font-family: 'Orbitron', sans-serif; color: var(--pink); font-size: 1.5rem; margin-bottom: 15px; }
-        .service-card p { color: #a8b2c1; font-size: 0.95rem; line-height: 1.6; }
-        
-        .back-btn { display: inline-block; margin-top: 60px; color: #8892b0; text-decoration: none; font-weight: 600; padding: 10px 20px; border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; transition: 0.3s; }
-        .back-btn:hover { color: #fff; border-color: var(--pink); background: rgba(255, 126, 179, 0.1); }
     </style>
 </head>
 <body>
+    <nav>
+        <a href="index.html" class="nav-brand">Frost & Hog.</a>
+        <a href="index.html" class="nav-menu">Back to Home</a>
+    </nav>
 
-    <h1>Hire Our Team</h1>
-    <p class="subtitle">Pilih divisi yang sesuai dengan kebutuhan digital Anda.</p>
-
-    <div class="services-grid">
-        <a href="form.html?layanan=Cyber Security" class="service-card">
-            <div class="service-icon">🛡️</div>
-            <h2>Cyber Security</h2>
-            <p>Audit keamanan, penetration testing, dan proteksi infrastruktur digital Anda dari ancaman siber.</p>
-        </a>
-
-        <a href="form.html?layanan=Design UI/UX" class="service-card">
-            <div class="service-icon">🎨</div>
-            <h2>Design UI/UX</h2>
-            <p>Pembuatan desain antarmuka yang modern, interaktif, dan berpusat pada kenyamanan pengguna.</p>
-        </a>
-
-        <a href="form.html?layanan=Web Developing" class="service-card">
-            <div class="service-icon">💻</div>
-            <h2>Web Developing</h2>
-            <p>Pengembangan website dari landing page interaktif hingga sistem berbasis web yang kompleks.</p>
-        </a>
+    <div class="header">
+        <h1>What we do.</h1>
+        <p>Kami tidak menawarkan solusi ajaib. Kami menyediakan keahlian teknis untuk membangun dan mengamankan aset digital Anda.</p>
     </div>
 
-    <a href="index.html" class="back-btn">← Kembali ke Beranda</a>
-
+    <div class="service-list">
+        <div class="service-item">
+            <div class="service-num">01.</div>
+            <div class="service-title">Web<br>Development</div>
+            <div>
+                <p class="service-desc">Pembuatan website dari nol (landing page, company profile, hingga sistem kustom). Fokus pada performa cepat, struktur kode yang bersih, dan desain antarmuka yang responsif di semua perangkat.</p>
+                <a href="form.html?service=Web%20Development" class="service-btn">Request Service</a>
+            </div>
+        </div>
+        <div class="service-item">
+            <div class="service-num">02.</div>
+            <div class="service-title">Cyber<br>Security</div>
+            <div>
+                <p class="service-desc">Audit keamanan web dan infrastruktur. Kami menguji celah keamanan (penetration testing) pada sistem yang Anda miliki secara legal dan etis, lalu memberikan laporan perbaikan yang jelas.</p>
+                <a href="form.html?service=Cyber%20Security" class="service-btn">Request Service</a>
+            </div>
+        </div>
+        <div class="service-item">
+            <div class="service-num">03.</div>
+            <div class="service-title">UI/UX<br>Design</div>
+            <div>
+                <p class="service-desc">Perancangan antarmuka yang berpusat pada pengguna. Kami memastikan pengunjung website Anda tidak hanya datang, tetapi juga bingung ke mana harus mengklik—dalam artian positif (navigasi jelas).</p>
+                <a href="form.html?service=UI/UX%20Design" class="service-btn">Request Service</a>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

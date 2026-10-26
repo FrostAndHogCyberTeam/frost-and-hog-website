@@ -3,217 +3,81 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Co-Founders Biodata | Frost & Hog</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <title>The Team — Frost & Hog</title>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
-        :root { --bg-dark: #05080f; --cyan: #00f3ff; --pink: #ff7eb3; --gold: #f1c40f; --text-light: #e2e8f0; --danger: #ff3333; }
+        :root { --bg: #F2F0E9; --ink: #111; --cyan: #00A3FF; --pink: #FF5C8A; --border: #D0CDC5; --font-serif: 'Instrument Serif', serif; --font-sans: 'Space Grotesk', sans-serif; }
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Inter', sans-serif; background-color: var(--bg-dark); color: var(--text-light); padding: 80px 20px 60px; overflow-x: hidden; }
+        body { background: var(--bg); color: var(--ink); font-family: var(--font-sans); }
+        nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 5vw; border-bottom: 1px solid var(--border); }
+        .nav-brand { font-family: var(--font-serif); font-size: 1.5rem; font-style: italic; text-decoration: none; color: var(--ink); }
+        .nav-menu { font-weight: 700; font-size: 0.8rem; text-transform: uppercase; border: 1px solid var(--ink); padding: 8px 16px; border-radius: 20px; text-decoration: none; color: var(--ink); }
+
+        .header { padding: 15vh 5vw 5vh; }
+        .header h1 { font-family: var(--font-serif); font-size: clamp(3rem, 8vw, 6rem); line-height: 1; }
+
+        .team-section { padding: 0 5vw 10vh; display: flex; flex-direction: column; }
+        .member { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; padding: 60px 0; border-top: 1px solid var(--border); align-items: center; }
         
-        /* --- NAVBAR & SIDEBAR --- */
-        .navbar { position: fixed; top: 0; left: 0; width: 100%; display: flex; justify-content: flex-end; padding: 20px 30px; z-index: 1000; background: linear-gradient(to bottom, rgba(5,8,15,0.9) 0%, transparent 100%); }
-        .menu-btn { font-size: 35px; color: var(--cyan); cursor: pointer; text-shadow: 0 0 10px rgba(0, 243, 255, 0.5); transition: 0.3s; }
-        .menu-btn:hover { transform: scale(1.1); }
-        .sidebar { position: fixed; top: 0; right: -320px; width: 280px; height: 100vh; background: rgba(10, 15, 22, 0.95); backdrop-filter: blur(15px); border-left: 1px solid rgba(0, 243, 255, 0.2); z-index: 1001; transition: 0.4s ease; padding: 80px 20px; display: flex; flex-direction: column; gap: 15px; }
-        .sidebar.active { right: 0; }
-        .close-btn { position: absolute; top: 20px; right: 25px; font-size: 30px; color: var(--pink); cursor: pointer; }
-        .sidebar a { color: var(--text-light); text-decoration: none; font-family: 'Orbitron', sans-serif; font-weight: 700; font-size: 1rem; padding: 12px 10px; border-bottom: 1px solid rgba(255,255,255,0.05); transition: 0.3s; }
-        .sidebar a:hover { color: var(--cyan); padding-left: 15px; border-left: 3px solid var(--cyan); }
-        .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 1000; display: none; }
-        .overlay.active { display: block; }
-
-        /* --- KONTEN FOUNDER --- */
-        .container { max-width: 900px; margin: 0 auto; }
-        h1 { font-family: 'Orbitron', sans-serif; color: var(--cyan); text-align: center; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 2px; }
-        .subtitle { text-align: center; color: #8892b0; margin-bottom: 50px; font-size: 0.9rem; font-weight: bold; }
+        .member-info h2 { font-family: var(--font-serif); font-size: 3rem; line-height: 1; margin-bottom: 10px; }
+        .member-info .role { font-weight: 700; text-transform: uppercase; letter-spacing: 2px; font-size: 0.8rem; margin-bottom: 30px; }
+        .member-info .role.alexis { color: var(--cyan); }
+        .member-info .role.pigman { color: var(--pink); }
         
-        .founders-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 40px; }
+        .member-info p { font-size: 1.1rem; color: #444; max-width: 90%; margin-bottom: 20px; }
         
-        /* --- DESAIN ID CARD --- */
-        .id-card {
-            width: 100%; max-width: 400px;
-            background: linear-gradient(135deg, rgba(20, 25, 35, 0.9), rgba(10, 12, 18, 0.95));
-            border: 2px solid rgba(0, 243, 255, 0.3);
-            border-radius: 15px; padding: 25px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.6), inset 0 0 20px rgba(0, 243, 255, 0.05);
-            position: relative; overflow: hidden;
-            transition: transform 0.3s ease;
-        }
-        .id-card:hover { transform: translateY(-5px); border-color: var(--cyan); box-shadow: 0 20px 40px rgba(0,243,255,0.15); }
-        
-        /* Garis hologram di atas kartu */
-        .id-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px; background: linear-gradient(90deg, var(--cyan), var(--pink)); }
+        .quote-box { border-left: 3px solid var(--ink); padding-left: 20px; font-style: italic; font-size: 1.1rem; color: #666; margin-top: 30px; }
 
-        /* Header ID Card (Logo & Title) */
-        .id-header { display: flex; align-items: center; gap: 15px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 15px; margin-bottom: 20px; }
-        .id-logo { width: 45px; height: 45px; border-radius: 50%; border: 2px solid var(--cyan); object-fit: cover; box-shadow: 0 0 10px rgba(0,243,255,0.4); }
-        .id-agency { font-family: 'Orbitron', sans-serif; font-size: 0.9rem; color: var(--cyan); line-height: 1.2; }
-        .id-agency span { display: block; font-size: 0.65rem; color: #8892b0; letter-spacing: 1px; }
+        .member-img-container { width: 100%; height: 400px; background: #EBE9E0; border: 1px solid var(--border); position: relative; overflow: hidden; display: flex; justify-content: center; align-items: center; }
+        .member-img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%) contrast(120%); mix-blend-mode: multiply; }
+        .stamp { position: absolute; bottom: 20px; right: 20px; border: 2px solid #111; padding: 5px 10px; font-weight: 700; font-size: 0.8rem; transform: rotate(-5deg); }
 
-        /* Body ID Card (Foto Anonim & Data) */
-        .id-body { display: flex; gap: 20px; }
-        
-        /* DESAIN FOTO 404 NOT FOUND */
-        .photo-box {
-            width: 110px; height: 140px; background: #05080f;
-            border: 1px solid rgba(255, 51, 51, 0.4); border-radius: 8px;
-            display: flex; flex-direction: column; justify-content: center; align-items: center;
-            position: relative; overflow: hidden; box-shadow: inset 0 0 15px rgba(255, 51, 51, 0.1);
-        }
-        .photo-box h4 { font-family: 'Orbitron'; font-size: 1.5rem; color: var(--danger); margin-bottom: 5px; text-shadow: 0 0 10px rgba(255,51,51,0.5); }
-        .photo-box p { font-family: 'Courier New', monospace; font-size: 0.6rem; color: var(--danger); text-align: center; padding: 0 5px; line-height: 1.2; }
-        
-        /* Efek garis scan pada foto */
-        .photo-box::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: var(--danger); animation: scan 2s linear infinite; opacity: 0.5; box-shadow: 0 0 10px var(--danger); }
-        @keyframes scan { 0% { top: 0; } 100% { top: 100%; } }
-
-        .data-box { flex-grow: 1; display: flex; flex-direction: column; justify-content: center; gap: 10px; }
-        .data-row { display: flex; flex-direction: column; }
-        .data-label { font-size: 0.65rem; color: #8892b0; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 2px; }
-        .data-value { font-family: 'Orbitron', sans-serif; font-size: 1rem; color: #fff; font-weight: 700; text-shadow: 0 0 5px rgba(255,255,255,0.2); }
-        
-        /* Warna khusus: Alexis = Cyan, PigMan = Pink */
-        .role-alexis { color: var(--cyan); }
-        .role-pigman { color: var(--pink); }
-
-        /* Footer ID Card (Barcode saja) */
-        .id-footer { margin-top: 25px; padding-top: 15px; border-top: 1px dashed rgba(255,255,255,0.1); display: flex; justify-content: center; align-items: center; }
-        .barcode { display: flex; gap: 2px; height: 25px; align-items: center; opacity: 0.6; }
-        .barcode span { width: 4px; height: 100%; background: #8892b0; display: block; }
-        .barcode span:nth-child(2n) { height: 70%; }
-        .barcode span:nth-child(3n) { height: 85%; width: 6px; }
-
-        /* Quote di bawah ID Card */
-        .card-quote { margin-top: 25px; font-size: 0.85rem; font-style: italic; color: #a8b2c1; text-align: center; border-left: 2px solid rgba(255,255,255,0.1); padding-left: 10px; }
-
-        .back-btn { display: inline-block; margin-top: 50px; padding: 12px 25px; background: transparent; color: var(--cyan); border: 1px solid var(--cyan); border-radius: 5px; text-decoration: none; font-weight: bold; transition: 0.3s; text-align: center; }
-        .back-btn:hover { background: var(--cyan); color: #000; box-shadow: 0 0 15px rgba(0,243,255,0.4); }
-        .back-container { text-align: center; }
-
-        @media (max-width: 768px) { 
-            .id-card { max-width: 100%; }
-            .id-body { flex-direction: column; align-items: center; text-align: center; }
-            .data-box { align-items: center; }
+        @media (max-width: 768px) {
+            .member { grid-template-columns: 1fr; }
+            .member-img-container { height: 300px; order: -1; } /* Gambar di atas */
         }
     </style>
 </head>
 <body>
+    <nav>
+        <a href="index.html" class="nav-brand">Frost & Hog.</a>
+        <a href="index.html" class="nav-menu">Back to Home</a>
+    </nav>
 
-    <!-- NAVBAR & SIDEBAR -->
-    <div class="navbar"><div class="menu-btn" onclick="toggleMenu()">☰</div></div>
-    <div class="sidebar" id="sidebar">
-        <div class="close-btn" onclick="toggleMenu()">×</div>
-        <a href="index.html">Home</a>
-        <a href="https://frostandhogcyberteam.github.io/frost-and-hog-portofolio/" target="_blank" style="color: var(--cyan);">Our Portfolio ↗</a>
-        <a href="operations.html">Operations Log</a>
-        <a href="legalitas.html">Legal & Copyright</a>
-        <a href="founders.html">Co-Founders Biodata</a>
-    </div>
-    <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
-
-    <!-- KONTEN -->
-    <div class="container">
-        <h1>Co-Founders Biodata</h1>
-        <div class="subtitle">Top Secret Personnel Files - Frost & Hog Cyber Team</div>
-        
-        <div class="founders-grid">
-            
-            <!-- ID CARD 1: ALEXIS WHITE -->
-            <div class="id-card">
-                <div class="id-header">
-                    <img src="img/logo.jpg" alt="FH2 Logo" class="id-logo" onerror="this.style.display='none'">
-                    <div class="id-agency">
-                        FROST & HOG
-                        <span>CYBER TEAM DIVISION</span>
-                    </div>
-                </div>
-
-                <div class="id-body">
-                    <div class="photo-box">
-                        <h4>404</h4>
-                        <p>IDENTITY<br>NOT FOUND</p>
-                    </div>
-                    <div class="data-box">
-                        <div class="data-row">
-                            <span class="data-label">Nama Operasional</span>
-                            <span class="data-value role-alexis">ALEXIS WHITE</span>
-                        </div>
-                        <div class="data-row">
-                            <span class="data-label">Jabatan / Divisi</span>
-                            <span class="data-value" style="font-size: 0.85rem;">Co-Founder & Lead Web Dev</span>
-                        </div>
-                        <div class="data-row">
-                            <span class="data-label">Status Keanggotaan</span>
-                            <span class="data-value" style="font-size: 0.85rem; color: #27c93f;">ACTIVE</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="id-footer">
-                    <div class="barcode">
-                        <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
-                    </div>
-                </div>
-                
-                <div class="card-quote">
-                    "Membangun dengan logika. Kode adalah fondasi, dan saya membangunnya untuk bertahan."
-                </div>
-            </div>
-
-            <!-- ID CARD 2: PIG MAN -->
-            <div class="id-card">
-                <div class="id-header">
-                    <img src="img/logo.jpg" alt="FH2 Logo" class="id-logo" onerror="this.style.display='none'">
-                    <div class="id-agency">
-                        FROST & HOG
-                        <span>CYBER TEAM DIVISION</span>
-                    </div>
-                </div>
-
-                <div class="id-body">
-                    <div class="photo-box">
-                        <h4>404</h4>
-                        <p>IDENTITY<br>NOT FOUND</p>
-                    </div>
-                    <div class="data-box">
-                        <div class="data-row">
-                            <span class="data-label">Nama Operasional</span>
-                            <span class="data-value role-pigman">PIG MAN</span>
-                        </div>
-                        <div class="data-row">
-                            <span class="data-label">Jabatan / Divisi</span>
-                            <span class="data-value" style="font-size: 0.85rem;">Co-Founder & Cyber Security</span>
-                        </div>
-                        <div class="data-row">
-                            <span class="data-label">Status Keanggotaan</span>
-                            <span class="data-value" style="font-size: 0.85rem; color: #27c93f;">ACTIVE</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="id-footer">
-                    <div class="barcode">
-                        <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
-                    </div>
-                </div>
-                
-                <div class="card-quote">
-                    "Membangun itu mudah, tapi menjaga kestabilan adalah seni. Saya memastikan benteng ini tetap berdiri."
-                </div>
-            </div>
-
-        </div>
-
-        <div class="back-container">
-            <a href="index.html" class="back-btn">← Kembali ke Beranda</a>
-        </div>
+    <div class="header">
+        <h1>The Founders.</h1>
     </div>
 
-    <script>
-        function toggleMenu() {
-            document.getElementById('sidebar').classList.toggle('active');
-            document.getElementById('overlay').classList.toggle('active');
-        }
-    </script>
+    <div class="team-section">
+        <!-- Alexis -->
+        <div class="member">
+            <div class="member-info">
+                <h2>Alexis White</h2>
+                <div class="role alexis">Lead Web Developer</div>
+                <p>Bertanggung jawab pada arsitektur kode, performa web, dan penerjemahan desain menjadi baris-baris logika yang berfungsi. Fokus pada struktur yang bersih dan efisien.</p>
+                <div class="quote-box">"Kode adalah fondasi. Saya membangunnya untuk bertahan."</div>
+            </div>
+            <div class="member-img-container">
+                <!-- Ganti src dengan gambar asli jika ada -->
+                <img src="img/logo.jpg" alt="Alexis" class="member-img" style="opacity: 0.2;">
+                <div class="stamp">CLASSIFIED</div>
+            </div>
+        </div>
+
+        <!-- Pig Man -->
+        <div class="member">
+            <div class="member-img-container">
+                <!-- Ganti src dengan gambar asli jika ada -->
+                <img src="img/logo.jpg" alt="Pig Man" class="member-img" style="opacity: 0.2;">
+                <div class="stamp">CLASSIFIED</div>
+            </div>
+            <div class="member-info">
+                <h2>Pig Man</h2>
+                <div class="role pigman">Cyber Security Analyst</div>
+                <p>Berfokus pada pengujian ketahanan sistem, analisis celah keamanan, dan memastikan setiap sistem yang diluncurkan memiliki pertahanan berlapis dari serangan siber.</p>
+                <div class="quote-box">"Membangun itu mudah, menjaga kestabilan adalah seni."</div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
