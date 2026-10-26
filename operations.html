@@ -3,121 +3,133 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Operations Log | Frost & Hog</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <title>Operations Log — Frost & Hog</title>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
-        :root { --bg-dark: #05080f; --cyan: #00f3ff; --pink: #ff7eb3; --gold: #f1c40f; --text-light: #e2e8f0; }
+        :root { --bg: #F2F0E9; --ink: #111; --cyan: #00A3FF; --pink: #FF5C8A; --border: #D0CDC5; --font-serif: 'Instrument Serif', serif; --font-sans: 'Space Grotesk', sans-serif; }
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Inter', sans-serif; background-color: var(--bg-dark); color: var(--text-light); padding: 80px 20px 60px; overflow-x: hidden; }
-        
-        /* NAVBAR & SIDEBAR */
-        .navbar { position: fixed; top: 0; left: 0; width: 100%; display: flex; justify-content: flex-end; padding: 20px 30px; z-index: 1000; background: linear-gradient(to bottom, rgba(5,8,15,0.9) 0%, transparent 100%); }
-        .menu-btn { font-size: 35px; color: var(--cyan); cursor: pointer; text-shadow: 0 0 10px rgba(0, 243, 255, 0.5); transition: 0.3s; }
-        .menu-btn:hover { transform: scale(1.1); }
-        .sidebar { position: fixed; top: 0; right: -300px; width: 250px; height: 100vh; background: rgba(10, 15, 22, 0.95); backdrop-filter: blur(15px); border-left: 1px solid rgba(0, 243, 255, 0.2); z-index: 1001; transition: 0.4s ease; padding: 80px 20px; display: flex; flex-direction: column; gap: 20px; }
+        body { background: var(--bg); color: var(--ink); font-family: var(--font-sans); line-height: 1.6; display: flex; flex-direction: column; min-height: 100vh; }
+        a { color: var(--ink); text-decoration: none; }
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        .animate-in { animation: fadeUp 0.8s ease-out forwards; }
+
+        nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 5vw; border-bottom: 1px solid var(--border); }
+        .nav-brand { font-family: var(--font-serif); font-size: 1.5rem; font-style: italic; }
+        .menu-btn { font-size: 1.5rem; cursor: pointer; transition: 0.3s; }
+        .menu-btn:hover { color: var(--pink); }
+
+        .sidebar { position: fixed; top: 0; right: -100%; width: 350px; height: 100vh; background: var(--ink); color: var(--bg); border-left: 1px solid var(--border); z-index: 1001; transition: right 0.5s cubic-bezier(0.8, 0, 0.2, 1); padding: 10vh 40px; display: flex; flex-direction: column; }
         .sidebar.active { right: 0; }
-        .close-btn { position: absolute; top: 20px; right: 25px; font-size: 30px; color: var(--pink); cursor: pointer; }
-        .sidebar a { color: var(--text-light); text-decoration: none; font-family: 'Orbitron', sans-serif; font-weight: 700; font-size: 1.1rem; padding: 10px; border-bottom: 1px solid rgba(255,255,255,0.05); transition: 0.3s; }
-        .sidebar a:hover { color: var(--cyan); padding-left: 15px; border-left: 3px solid var(--cyan); }
-        .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 1000; display: none; }
-        .overlay.active { display: block; }
+        .close-btn { position: absolute; top: 20px; right: 30px; font-size: 2rem; cursor: pointer; color: var(--bg); transition: 0.3s; }
+        .close-btn:hover { transform: rotate(90deg); color: var(--pink); }
+        .menu-links { display: flex; flex-direction: column; gap: 15px; margin-top: 30px; }
+        .menu-links a { color: var(--bg); font-size: 1.2rem; font-weight: 700; text-transform: uppercase; border-bottom: 1px solid #333; padding-bottom: 10px; transition: 0.2s; }
+        .menu-links a:hover { color: var(--cyan); padding-left: 10px; }
+        .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); z-index: 1000; display: none; opacity: 0; transition: opacity 0.3s ease; }
+        .overlay.active { display: block; opacity: 1; }
 
-        /* KONTEN */
-        .container { max-width: 900px; margin: 0 auto; }
-        h1 { font-family: 'Orbitron', sans-serif; color: var(--cyan); text-align: center; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 2px; }
-        .subtitle { text-align: center; color: #8892b0; margin-bottom: 50px; font-size: 0.9rem; font-weight: bold; }
-        
-        /* OPERATIONS LOG GRID */
-        .ops-grid { display: flex; flex-direction: column; gap: 25px; }
-        .op-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-left: 4px solid var(--cyan); border-radius: 8px; padding: 25px; transition: 0.3s; }
-        .op-card:hover { transform: translateX(10px); border-color: var(--cyan); box-shadow: 0 0 20px rgba(0,243,255,0.1); }
-        .op-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 10px; }
-        .op-title { font-family: 'Orbitron', sans-serif; font-size: 1.2rem; color: #fff; font-weight: 700; }
-        .op-status { font-size: 0.75rem; padding: 4px 10px; border-radius: 20px; font-weight: 800; letter-spacing: 1px; }
-        .status-success { background: rgba(39, 201, 63, 0.2); color: #27c93f; border: 1px solid #27c93f; }
-        .status-dev { background: rgba(241, 196, 15, 0.2); color: var(--gold); border: 1px solid var(--gold); }
-        .op-desc { font-size: 0.95rem; color: #a8b2c1; margin-bottom: 15px; line-height: 1.6; }
-        .op-tech { display: flex; flex-wrap: wrap; gap: 10px; }
-        .tech-tag { background: rgba(0, 243, 255, 0.1); color: var(--cyan); font-size: 0.75rem; padding: 3px 10px; border-radius: 4px; font-weight: 600; }
+        .header { padding: 15vh 5vw 5vh; border-bottom: 1px solid var(--border); }
+        .header h1 { font-family: var(--font-serif); font-size: clamp(3rem, 8vw, 6rem); line-height: 1; margin-bottom: 20px; }
+        .header p { font-size: 1.2rem; max-width: 600px; color: #444; }
 
-        .back-btn { display: inline-block; margin-top: 50px; padding: 12px 25px; background: transparent; color: var(--cyan); border: 1px solid var(--cyan); border-radius: 5px; text-decoration: none; font-weight: bold; transition: 0.3s; }
-        .back-btn:hover { background: var(--cyan); color: #000; box-shadow: 0 0 15px rgba(0,243,255,0.4); }
-        .back-container { text-align: center; }
+        .log-list { padding: 5vh 5vw; display: flex; flex-direction: column; flex: 1; }
+        .log-item { display: grid; grid-template-columns: 150px 1fr 2fr; gap: 30px; padding: 40px 0; border-bottom: 1px solid var(--border); align-items: start; }
+        .log-date { font-family: monospace; font-size: 0.9rem; color: #666; }
+        .log-title { font-family: var(--font-serif); font-size: 2rem; line-height: 1.1; }
+        .log-desc { font-size: 1.05rem; color: #444; margin-bottom: 20px; }
+        .status-tag { display: inline-block; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; padding: 4px 8px; border: 1px solid var(--ink); margin-bottom: 10px; }
+        .status-tag.completed { background: var(--cyan); color: #000; border-color: var(--cyan); }
+        .status-tag.dev { background: var(--pink); color: #fff; border-color: var(--pink); }
+
+        footer { background-color: var(--ink); color: var(--bg); padding: 30px 5vw; border-top: 1px solid #333; margin-top: auto; width: 100%; }
+        .footer-content { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+        .footer-left { display: flex; align-items: center; gap: 12px; font-size: 0.85rem; }
+        .footer-logo { font-family: var(--font-serif); font-size: 1.5rem; border: 1px solid var(--bg); border-radius: 50%; width: 35px; height: 35px; display: flex; justify-content: center; align-items: center; }
+        .footer-right { display: flex; gap: 15px; }
+        .footer-right a { color: var(--bg); font-weight: 700; font-size: 0.8rem; text-transform: uppercase; border: 1px solid var(--bg); padding: 10px 20px; transition: 0.3s; display: inline-block; }
+        .footer-right a:hover { background: var(--bg); color: var(--ink); transform: translateY(-3px); }
+
+        @media (max-width: 768px) {
+            .log-item { grid-template-columns: 1fr; gap: 10px; padding: 30px 0; }
+            .sidebar { width: 100%; }
+            .footer-content { flex-direction: column; text-align: center; }
+            .footer-right { flex-direction: column; width: 100%; }
+            .footer-right a { width: 100%; text-align: center; }
+        }
     </style>
 </head>
 <body>
+    <nav class="animate-in">
+        <a href="index.html" class="nav-brand">Frost & Hog.</a>
+        <div class="menu-btn" onclick="toggleMenu()">☰</div>
+    </nav>
 
-    <div class="navbar"><div class="menu-btn" onclick="toggleMenu()">☰</div></div>
     <div class="sidebar" id="sidebar">
         <div class="close-btn" onclick="toggleMenu()">×</div>
-        <a href="index.html">Home</a>
-        <!-- Menu Our Services SUDAH DIHAPUS -->
-        <a href="operations.html">Operations Log</a>
-        <a href="legalitas.html">Legal & Copyright</a>
-        <a href="founders.html">Founder Biodata</a>
-        <a href="checklist.html" style="color: var(--cyan);">Security Checklist</a>
-        <a href="https://frostandhogcyberteam.github.io/frost-and-hog-portofolio/" target="_blank" style="color: var(--cyan);">Our Portfolio ↗</a>
+        <div class="menu-links">
+            <a href="index.html">Home</a>
+            <a href="layanan.html">Services</a>
+            <a href="operations.html">Operations Log</a>
+            <a href="founders.html">Founder</a>
+            <a href="legalitas.html">Legal</a>
+            <a href="https://frostandhogcyberteam.github.io/frost-and-hog-portofolio/" target="_blank">Portfolio ↗</a>
+            <a href="https://frostandhogcyberteam.github.io/frost-and-hog-weather/" target="_blank">Weather ↗</a>
+        </div>
     </div>
     <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
 
-    <div class="container">
-        <h1>Operations Log</h1>
-        <div class="subtitle">Classified Records of Completed Missions & Projects</div>
-        
-        <div class="ops-grid">
-            <!-- Proyek 1 -->
-            <div class="op-card">
-                <div class="op-header">
-                    <div class="op-title">Project: Frost & Hog HQ</div>
-                    <div class="op-status status-success">COMPLETED</div>
-                </div>
-                <div class="op-desc">
-                    Pembangunan markas digital utama (Landing Page) untuk Frost & Hog Cyber Team. Mengintegrasikan desain UI/UX bertema agen rahasia, animasi dinamis, serta sistem keamanan anti-copy.
-                </div>
-                <div class="op-tech">
-                    <span class="tech-tag">HTML5</span>
-                    <span class="tech-tag">CSS3</span>
-                    <span class="tech-tag">JavaScript</span>
-                </div>
-            </div>
+    <div class="header animate-in" style="animation-delay: 0.1s;">
+        <h1>Operations Log.</h1>
+        <p>Arsip proyek dan eksperimen yang telah kami selesaikan dan sedang kami kembangkan.</p>
+    </div>
 
-            <!-- Proyek 2 -->
-            <div class="op-card" style="border-left-color: var(--pink);">
-                <div class="op-header">
-                    <div class="op-title">Client Portal & Discord Integration</div>
-                    <div class="op-status status-success">COMPLETED</div>
-                </div>
-                <div class="op-desc">
-                    Sistem pendaftaran klien otomatis. Klien dapat memilih layanan dan mengisi formulir, yang datanya langsung dikirim secara real-time ke server Discord (Webhook) tanpa database server.
-                </div>
-                <div class="op-tech">
-                    <span class="tech-tag">JS Fetch API</span>
-                    <span class="tech-tag">Discord Webhook</span>
-                    <span class="tech-tag">Backend-less</span>
-                </div>
-            </div>
-
-            <!-- Proyek 3 (Fiktif / Segera Hadir) -->
-            <div class="op-card">
-                <div class="op-header">
-                    <div class="op-title">Vulnerability Scanner (Internal Tool)</div>
-                    <div class="op-status status-dev">IN DEVELOPMENT</div>
-                </div>
-                <div class="op-desc">
-                    Pengembangan alat pemindai celah keamanan web (Web Vulnerability Scanner) berbasis Python dan Bash yang akan dijalankan melalui terminal. Ditujukan untuk audit keamanan internal klien.
-                </div>
-                <div class="op-tech">
-                    <span class="tech-tag">Python</span>
-                    <span class="tech-tag">Bash Script</span>
-                    <span class="tech-tag">Cyber Security</span>
-                </div>
+    <div class="log-list animate-in" style="animation-delay: 0.2s;">
+        <div class="log-item">
+            <div class="log-date">2026<br>MAIN PROJECT</div>
+            <div class="log-title">Frost & Hog<br>Cyber HQ</div>
+            <div>
+                <span class="status-tag completed">Completed</span>
+                <p class="log-desc">Website utama dan *landing page* yang berfungsi sebagai markas pusat informasi, portal *client*, dan identitas digital Frost & Hog.</p>
             </div>
         </div>
-
-        <div class="back-container">
-            <a href="index.html" class="back-btn">← Kembali ke Beranda</a>
+        <div class="log-item">
+            <div class="log-date">2026<br>PORTFOLIO</div>
+            <div class="log-title">Kopi Senja<br>& Portfolios</div>
+            <div>
+                <span class="status-tag completed">Completed</span>
+                <p class="log-desc">Desain antarmuka web untuk Coffee Shop (Kopi Senja) sebagai studi kasus *showcase* bagi calon klien.</p>
+            </div>
+        </div>
+        <div class="log-item">
+            <div class="log-date">2026<br>WEB APP</div>
+            <div class="log-title">Global Weather<br>Dashboard</div>
+            <div>
+                <span class="status-tag completed">Completed</span>
+                <p class="log-desc">Sistem pemantauan cuaca dan kualitas udara *real-time* menggunakan API Open-Meteo yang mencakup kota-kota besar dunia.</p>
+            </div>
+        </div>
+        <div class="log-item">
+            <div class="log-date">2026<br>RESEARCH</div>
+            <div class="log-title">Vulnerability<br>Scanner</div>
+            <div>
+                <span class="status-tag dev">In Development</span>
+                <p class="log-desc">Pengembangan *tools* internal berbasis Python untuk melakukan audit keamanan dasar secara otomatis pada sistem klien.</p>
+            </div>
         </div>
     </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-left">
+                <div class="footer-logo">C</div>
+                <span>2026 Frost & Hog Cyber Team. All rights reserved.</span>
+            </div>
+            <div class="footer-right">
+                <a href="index.html">Back to Home</a>
+                <a href="https://frostandhogcyberteam.github.io/frost-and-hog-website/">Main Portal ↗</a>
+            </div>
+        </div>
+    </footer>
 
     <script>
         function toggleMenu() {

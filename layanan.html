@@ -10,15 +10,24 @@
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { background: var(--bg); color: var(--ink); font-family: var(--font-sans); line-height: 1.6; display: flex; flex-direction: column; min-height: 100vh; }
         a { color: var(--ink); text-decoration: none; }
-        
         @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
         .animate-in { animation: fadeUp 0.8s ease-out forwards; }
 
         nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 5vw; border-bottom: 1px solid var(--border); }
         .nav-brand { font-family: var(--font-serif); font-size: 1.5rem; font-style: italic; }
-        .nav-menu { font-weight: 700; font-size: 0.8rem; text-transform: uppercase; border: 1px solid var(--ink); padding: 8px 16px; border-radius: 20px; transition: 0.3s; }
-        .nav-menu:hover { background: var(--ink); color: var(--bg); }
-        
+        .menu-btn { font-size: 1.5rem; cursor: pointer; transition: 0.3s; }
+        .menu-btn:hover { color: var(--pink); }
+
+        .sidebar { position: fixed; top: 0; right: -100%; width: 350px; height: 100vh; background: var(--ink); color: var(--bg); border-left: 1px solid var(--border); z-index: 1001; transition: right 0.5s cubic-bezier(0.8, 0, 0.2, 1); padding: 10vh 40px; display: flex; flex-direction: column; }
+        .sidebar.active { right: 0; }
+        .close-btn { position: absolute; top: 20px; right: 30px; font-size: 2rem; cursor: pointer; color: var(--bg); transition: 0.3s; }
+        .close-btn:hover { transform: rotate(90deg); color: var(--pink); }
+        .menu-links { display: flex; flex-direction: column; gap: 15px; margin-top: 30px; }
+        .menu-links a { color: var(--bg); font-size: 1.2rem; font-weight: 700; text-transform: uppercase; border-bottom: 1px solid #333; padding-bottom: 10px; transition: 0.2s; }
+        .menu-links a:hover { color: var(--cyan); padding-left: 10px; }
+        .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); z-index: 1000; display: none; opacity: 0; transition: opacity 0.3s ease; }
+        .overlay.active { display: block; opacity: 1; }
+
         .header { padding: 15vh 5vw 5vh; border-bottom: 1px solid var(--border); }
         .header h1 { font-family: var(--font-serif); font-size: clamp(3rem, 8vw, 6rem); line-height: 1; margin-bottom: 20px; }
         .header p { font-size: 1.2rem; max-width: 600px; color: #444; }
@@ -29,30 +38,46 @@
         .service-title { font-family: var(--font-serif); font-size: 2rem; line-height: 1.1; }
         .service-desc { font-size: 1.05rem; color: #444; margin-bottom: 20px; }
         
-        /* Tombol Portal di Layanan */
-        .btn-portal { display: inline-block; background: var(--ink); color: var(--bg); padding: 12px 30px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; font-size: 0.8rem; transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); border: 1px solid var(--ink); }
-        .btn-portal:hover { background: var(--pink); color: #fff; border-color: var(--pink); transform: translateY(-3px); box-shadow: 0 10px 15px rgba(255, 92, 138, 0.2); }
+        .btn-portal { display: inline-block; background: var(--ink); color: var(--bg); padding: 12px 30px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; font-size: 0.8rem; transition: all 0.3s; border: 1px solid var(--ink); }
+        .btn-portal:hover { background: var(--pink); color: #fff; border-color: var(--pink); transform: translateY(-3px); }
 
-        /* FOOTER GLOBAL */
-        footer { background-color: #111111; color: #F2F0E9; padding: 30px 5vw; border-top: 1px solid #333; margin-top: auto; width: 100%; }
-        .footer-content { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; font-family: 'Space Grotesk', sans-serif; }
+        footer { background-color: var(--ink); color: var(--bg); padding: 30px 5vw; border-top: 1px solid #333; margin-top: auto; width: 100%; }
+        .footer-content { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
         .footer-left { display: flex; align-items: center; gap: 12px; font-size: 0.85rem; }
-        .footer-logo { font-family: 'Instrument Serif', serif; font-size: 1.5rem; border: 1px solid #F2F0E9; border-radius: 50%; width: 35px; height: 35px; display: flex; justify-content: center; align-items: center; }
-        .footer-right a { color: #F2F0E9; text-decoration: none; font-weight: 700; font-size: 0.8rem; text-transform: uppercase; border: 1px solid #F2F0E9; padding: 10px 20px; transition: 0.3s; display: inline-block; }
-        .footer-right a:hover { background: #F2F0E9; color: #111111; transform: translateY(-3px); }
+        .footer-logo { font-family: var(--font-serif); font-size: 1.5rem; border: 1px solid var(--bg); border-radius: 50%; width: 35px; height: 35px; display: flex; justify-content: center; align-items: center; }
+        .footer-right { display: flex; gap: 15px; }
+        .footer-right a { color: var(--bg); font-weight: 700; font-size: 0.8rem; text-transform: uppercase; border: 1px solid var(--bg); padding: 10px 20px; transition: 0.3s; display: inline-block; }
+        .footer-right a:hover { background: var(--bg); color: var(--ink); transform: translateY(-3px); }
 
         @media (max-width: 768px) {
             .service-item { grid-template-columns: 1fr; gap: 10px; padding: 30px 0; }
             .service-num { font-size: 2rem; }
+            .sidebar { width: 100%; }
             .footer-content { flex-direction: column; text-align: center; }
+            .footer-right { flex-direction: column; width: 100%; }
+            .footer-right a { width: 100%; text-align: center; }
         }
     </style>
 </head>
 <body>
     <nav class="animate-in">
         <a href="index.html" class="nav-brand">Frost & Hog.</a>
-        <a href="index.html" class="nav-menu">Back to Home</a>
+        <div class="menu-btn" onclick="toggleMenu()">☰</div>
     </nav>
+
+    <div class="sidebar" id="sidebar">
+        <div class="close-btn" onclick="toggleMenu()">×</div>
+        <div class="menu-links">
+            <a href="index.html">Home</a>
+            <a href="layanan.html">Services</a>
+            <a href="operations.html">Operations Log</a>
+            <a href="founders.html">Founder</a>
+            <a href="legalitas.html">Legal</a>
+            <a href="https://frostandhogcyberteam.github.io/frost-and-hog-portofolio/" target="_blank">Portfolio ↗</a>
+            <a href="https://frostandhogcyberteam.github.io/frost-and-hog-weather/" target="_blank">Weather ↗</a>
+        </div>
+    </div>
+    <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
 
     <div class="header animate-in" style="animation-delay: 0.1s;">
         <h1>What we do.</h1>
@@ -86,7 +111,6 @@
         </div>
     </div>
 
-    <!-- FOOTER GLOBAL -->
     <footer>
         <div class="footer-content">
             <div class="footer-left">
@@ -94,9 +118,17 @@
                 <span>2026 Frost & Hog Cyber Team. All rights reserved.</span>
             </div>
             <div class="footer-right">
-                <a href="https://frostandhogcyberteam.github.io/frost-and-hog-website/">Back to Main Portal ↗</a>
+                <a href="index.html">Back to Home</a>
+                <a href="https://frostandhogcyberteam.github.io/frost-and-hog-website/">Main Portal ↗</a>
             </div>
         </div>
     </footer>
+
+    <script>
+        function toggleMenu() {
+            document.getElementById('sidebar').classList.toggle('active');
+            document.getElementById('overlay').classList.toggle('active');
+        }
+    </script>
 </body>
 </html>

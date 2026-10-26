@@ -8,31 +8,29 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --bg: #F2F0E9; --ink: #111111; --cyan: #00A3FF; --pink: #FF5C8A; --border: #D0CDC5;
-            --font-serif: 'Instrument Serif', serif; --font-sans: 'Space Grotesk', sans-serif;
-        }
+        :root { --bg: #F2F0E9; --ink: #111111; --cyan: #00A3FF; --pink: #FF5C8A; --border: #D0CDC5; --font-serif: 'Instrument Serif', serif; --font-sans: 'Space Grotesk', sans-serif; }
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { background-color: var(--bg); color: var(--ink); font-family: var(--font-sans); line-height: 1.6; overflow-x: hidden; display: flex; flex-direction: column; min-height: 100vh; }
         a { color: var(--ink); text-decoration: none; }
         
-        /* Animasi Fade Up saat halaman dibuka */
         @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
         .animate-in { animation: fadeUp 0.8s ease-out forwards; }
 
+        /* NAVBAR & HAMBURGER */
         nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 5vw; border-bottom: 1px solid var(--border); position: fixed; top: 0; width: 100%; background: rgba(242, 240, 233, 0.95); backdrop-filter: blur(5px); z-index: 100; }
         .nav-brand { font-family: var(--font-serif); font-size: 1.5rem; font-style: italic; }
-        .nav-menu { font-weight: 700; cursor: pointer; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px; border: 1px solid var(--ink); padding: 8px 16px; border-radius: 20px; transition: 0.3s; }
-        .nav-menu:hover { background: var(--ink); color: var(--bg); transform: scale(1.05); }
+        .menu-btn { font-size: 1.5rem; cursor: pointer; transition: 0.3s; }
+        .menu-btn:hover { color: var(--pink); }
 
-        .sidebar { position: fixed; top: 0; right: -100%; width: 350px; height: 100vh; background: var(--bg); border-left: 1px solid var(--border); z-index: 1001; transition: right 0.5s cubic-bezier(0.8, 0, 0.2, 1); padding: 10vh 40px; display: flex; flex-direction: column; }
+        /* SIDEBAR MENU */
+        .sidebar { position: fixed; top: 0; right: -100%; width: 350px; height: 100vh; background: var(--ink); color: var(--bg); border-left: 1px solid var(--border); z-index: 1001; transition: right 0.5s cubic-bezier(0.8, 0, 0.2, 1); padding: 10vh 40px; display: flex; flex-direction: column; }
         .sidebar.active { right: 0; }
-        .close-btn { position: absolute; top: 20px; right: 30px; font-size: 2rem; cursor: pointer; transition: 0.3s; }
-        .close-btn:hover { transform: rotate(90deg) scale(1.1); }
+        .close-btn { position: absolute; top: 20px; right: 30px; font-size: 2rem; cursor: pointer; color: var(--bg); transition: 0.3s; }
+        .close-btn:hover { transform: rotate(90deg); color: var(--pink); }
         .menu-links { display: flex; flex-direction: column; gap: 15px; margin-top: 30px; }
-        .menu-links a { font-size: 1.2rem; font-weight: 700; text-transform: uppercase; border-bottom: 1px solid var(--border); padding-bottom: 10px; transition: 0.3s; }
-        .menu-links a:hover { color: var(--pink); padding-left: 10px; }
-        .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.2); z-index: 1000; display: none; opacity: 0; transition: opacity 0.3s ease; }
+        .menu-links a { color: var(--bg); font-size: 1.2rem; font-weight: 700; text-transform: uppercase; border-bottom: 1px solid #333; padding-bottom: 10px; transition: 0.2s; }
+        .menu-links a:hover { color: var(--cyan); padding-left: 10px; }
+        .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); z-index: 1000; display: none; opacity: 0; transition: opacity 0.3s ease; }
         .overlay.active { display: block; opacity: 1; }
 
         .hero { padding: 20vh 5vw 10vh; display: grid; grid-template-columns: 1.5fr 1fr; gap: 40px; border-bottom: 1px solid var(--border); flex: 1; }
@@ -42,13 +40,12 @@
         .hero-desc { font-size: 1.1rem; max-width: 85%; color: #444; margin-bottom: 40px; border-left: 3px solid var(--pink); padding-left: 15px; }
         
         .hero-btn-container { margin-top: 20px; margin-bottom: 40px; }
-        /* Tombol Portal Utama */
-        .btn-portal { display: inline-block; background: var(--ink); color: var(--bg); padding: 15px 40px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; font-size: 0.9rem; transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); border: 2px solid var(--ink); cursor: pointer; }
-        .btn-portal:hover { background: var(--cyan); color: #000; border-color: var(--cyan); transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0, 163, 255, 0.2); }
+        .btn-portal { display: inline-block; background: var(--ink); color: var(--bg); padding: 15px 40px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; font-size: 0.9rem; transition: all 0.3s; border: 2px solid var(--ink); cursor: pointer; }
+        .btn-portal:hover { background: var(--cyan); color: #000; border-color: var(--cyan); transform: translateY(-5px); }
 
         .hero-right { position: relative; display: flex; align-items: center; justify-content: center; }
         .mascot-img { width: 100%; max-width: 450px; filter: grayscale(100%) contrast(120%); mix-blend-mode: multiply; transform: rotate(3deg); }
-        .mascot-label { position: absolute; top: -15px; left: 50%; transform: translateX(-50%) rotate(-2deg); background: var(--bg); border: 1px solid var(--ink); padding: 5px 15px; font-family: var(--font-sans); font-weight: 700; font-size: 0.8rem; letter-spacing: 2px; box-shadow: 2px 2px 0px var(--ink); z-index: 10; }
+        .mascot-label { position: absolute; top: -15px; left: 50%; transform: translateX(-50%) rotate(-2deg); background: var(--bg); border: 1px solid var(--ink); padding: 5px 15px; font-weight: 700; font-size: 0.8rem; letter-spacing: 2px; box-shadow: 2px 2px 0px var(--ink); z-index: 10; }
 
         .story-section { padding: 10vh 5vw; display: grid; grid-template-columns: 1fr 2fr; gap: 60px; border-bottom: 1px solid var(--border); }
         .story-title h2 { font-family: var(--font-serif); font-size: 3rem; line-height: 1; margin-bottom: 10px; }
@@ -69,12 +66,13 @@
         .quote-box p { font-size: 1rem; color: #444; font-style: italic; }
 
         /* FOOTER GLOBAL */
-        footer { background-color: #111111; color: #F2F0E9; padding: 30px 5vw; border-top: 1px solid #333; margin-top: auto; width: 100%; }
-        .footer-content { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; font-family: 'Space Grotesk', sans-serif; }
+        footer { background-color: var(--ink); color: var(--bg); padding: 30px 5vw; border-top: 1px solid #333; margin-top: auto; width: 100%; }
+        .footer-content { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
         .footer-left { display: flex; align-items: center; gap: 12px; font-size: 0.85rem; }
-        .footer-logo { font-family: 'Instrument Serif', serif; font-size: 1.5rem; border: 1px solid #F2F0E9; border-radius: 50%; width: 35px; height: 35px; display: flex; justify-content: center; align-items: center; }
-        .footer-right a { color: #F2F0E9; text-decoration: none; font-weight: 700; font-size: 0.8rem; text-transform: uppercase; border: 1px solid #F2F0E9; padding: 10px 20px; transition: 0.3s; display: inline-block; }
-        .footer-right a:hover { background: #F2F0E9; color: #111111; transform: translateY(-3px); }
+        .footer-logo { font-family: var(--font-serif); font-size: 1.5rem; border: 1px solid var(--bg); border-radius: 50%; width: 35px; height: 35px; display: flex; justify-content: center; align-items: center; }
+        .footer-right { display: flex; gap: 15px; }
+        .footer-right a { color: var(--bg); font-weight: 700; font-size: 0.8rem; text-transform: uppercase; border: 1px solid var(--bg); padding: 10px 20px; transition: 0.3s; display: inline-block; }
+        .footer-right a:hover { background: var(--bg); color: var(--ink); transform: translateY(-3px); }
 
         @media (max-width: 768px) {
             .hero { grid-template-columns: 1fr; padding-top: 15vh; }
@@ -85,6 +83,8 @@
             .quotes-grid { grid-template-columns: 1fr; }
             .sidebar { width: 100%; }
             .footer-content { flex-direction: column; text-align: center; }
+            .footer-right { flex-direction: column; width: 100%; }
+            .footer-right a { width: 100%; text-align: center; }
         }
     </style>
 </head>
@@ -92,7 +92,7 @@
 
     <nav class="animate-in">
         <div class="nav-brand">Frost & Hog.</div>
-        <div class="nav-menu" onclick="toggleMenu()">Menu</div>
+        <div class="menu-btn" onclick="toggleMenu()">☰</div>
     </nav>
 
     <div class="sidebar" id="sidebar">
@@ -100,8 +100,9 @@
         <div class="menu-links">
             <a href="index.html">Home</a>
             <a href="layanan.html">Services</a>
+            <a href="operations.html">Operations Log</a>
+            <a href="founders.html">Founder</a>
             <a href="legalitas.html">Legal</a>
-            <a href="founders.html">Founder Biodata</a>
             <a href="https://frostandhogcyberteam.github.io/frost-and-hog-portofolio/" target="_blank">Portfolio ↗</a>
             <a href="https://frostandhogcyberteam.github.io/frost-and-hog-weather/" target="_blank">Weather ↗</a>
         </div>
@@ -153,7 +154,6 @@
         </div>
     </section>
 
-    <!-- FOOTER GLOBAL -->
     <footer>
         <div class="footer-content">
             <div class="footer-left">
@@ -161,7 +161,8 @@
                 <span>2026 Frost & Hog Cyber Team. All rights reserved.</span>
             </div>
             <div class="footer-right">
-                <a href="https://frostandhogcyberteam.github.io/frost-and-hog-website/">Back to Main Portal ↗</a>
+                <a href="index.html">Back to Home</a>
+                <a href="https://frostandhogcyberteam.github.io/frost-and-hog-website/">Main Portal ↗</a>
             </div>
         </div>
     </footer>
