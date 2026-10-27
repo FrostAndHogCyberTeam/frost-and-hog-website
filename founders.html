@@ -4,250 +4,121 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Founder Biodata — Frost & Hog</title>
-    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        :root { 
-            --bg: #F2F0E9; 
-            --ink: #111111; 
-            --cyan: #00A3FF; 
-            --pink: #FF5C8A; 
-            --border: #D0CDC5; 
-            --card-bg: #ffffff;
-            --font-serif: 'Instrument Serif', serif; 
-            --font-sans: 'Space Grotesk', sans-serif; 
-        }
+        :root { --bg: #09090B; --panel: #111113; --border: #27272A; --ink: #FAFAFA; --muted: #A1A1AA; --cyan: #00F0FF; --pink: #FF007F; --font-sans: 'Inter', sans-serif; --font-mono: 'JetBrains Mono', monospace; }
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { background: var(--bg); color: var(--ink); font-family: var(--font-sans); line-height: 1.6; display: flex; flex-direction: column; min-height: 100vh; }
+        body { background-color: var(--bg); color: var(--ink); font-family: var(--font-sans); line-height: 1.5; display: flex; flex-direction: column; min-height: 100vh; }
         a { color: var(--ink); text-decoration: none; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .animate-in { animation: fadeIn 0.6s ease-out forwards; }
+
+        nav { display: flex; justify-content: space-between; align-items: center; padding: 0 20px; height: 60px; border-bottom: 1px solid var(--border); position: fixed; top: 0; width: 100%; background: rgba(9, 9, 11, 0.8); backdrop-filter: blur(10px); z-index: 100; }
+        .nav-left { display: flex; align-items: center; gap: 20px; }
+        .nav-brand { font-family: var(--font-mono); font-size: 1.1rem; font-weight: 700; letter-spacing: -0.5px; }
+        .nav-links { display: flex; gap: 20px; align-items: center; }
+        .nav-links a { font-size: 0.85rem; font-weight: 500; color: var(--muted); transition: color 0.2s; }
+        .nav-links a:hover, .nav-links a.active { color: var(--ink); }
+        .btn-nav-hire { background: var(--ink); color: var(--bg); padding: 6px 16px; border-radius: 6px; font-size: 0.85rem; font-weight: 600; }
+
+        .header { padding: 120px 20px 40px; max-width: 1000px; margin: 0 auto; width: 100%; border-bottom: 1px solid var(--border); }
+        .header h1 { font-size: 2.5rem; font-weight: 700; letter-spacing: -0.03em; margin-bottom: 10px; }
+        .header p { color: var(--muted); font-size: 1rem; }
+
+        .team-section { padding: 40px 20px; max-width: 1000px; margin: 0 auto; width: 100%; display: flex; flex-wrap: wrap; gap: 30px; justify-content: center; flex: 1; }
         
-        @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
-        .animate-in { animation: fadeUp 0.8s ease-out forwards; }
-
-        /* NAVBAR & HAMBURGER */
-        nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 5vw; border-bottom: 1px solid var(--border); position: fixed; top: 0; width: 100%; background: rgba(242, 240, 233, 0.95); backdrop-filter: blur(5px); z-index: 100; }
-        .nav-brand { font-family: var(--font-serif); font-size: 1.5rem; font-style: italic; }
-        .menu-btn { font-size: 1.5rem; cursor: pointer; transition: 0.3s; }
-        .menu-btn:hover { color: var(--pink); }
-
-        /* SIDEBAR MENU */
-        .sidebar { position: fixed; top: 0; right: -100%; width: 350px; height: 100vh; background: var(--ink); color: var(--bg); border-left: 1px solid var(--border); z-index: 1001; transition: right 0.5s cubic-bezier(0.8, 0, 0.2, 1); padding: 10vh 40px; display: flex; flex-direction: column; }
-        .sidebar.active { right: 0; }
-        .close-btn { position: absolute; top: 20px; right: 30px; font-size: 2rem; cursor: pointer; color: var(--bg); transition: 0.3s; }
-        .close-btn:hover { transform: rotate(90deg); color: var(--pink); }
-        .menu-links { display: flex; flex-direction: column; gap: 15px; margin-top: 30px; }
-        .menu-links a { color: var(--bg); font-size: 1.2rem; font-weight: 700; text-transform: uppercase; border-bottom: 1px solid #333; padding-bottom: 10px; transition: 0.2s; }
-        .menu-links a:hover { color: var(--cyan); padding-left: 10px; }
-        .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); z-index: 1000; display: none; opacity: 0; transition: opacity 0.3s ease; }
-        .overlay.active { display: block; opacity: 1; }
-
-        /* HEADER PAGE */
-        .header { padding: 15vh 5vw 5vh; border-bottom: 1px solid var(--border); }
-        .header h1 { font-family: var(--font-serif); font-size: clamp(3rem, 8vw, 6rem); line-height: 1; margin-bottom: 20px; }
-        .header p { font-size: 1.2rem; max-width: 600px; color: #444; }
-
-        /* TEAM / ID CARD SECTION */
-        .team-section { padding: 10vh 5vw; display: flex; flex-wrap: wrap; gap: 50px; justify-content: center; align-items: flex-start; flex: 1; }
+        .id-card { background: var(--panel); border: 1px solid var(--border); border-radius: 12px; width: 100%; max-width: 380px; overflow: hidden; position: relative; transition: 0.3s; }
+        .id-card.alexis:hover { border-color: var(--cyan); box-shadow: 0 0 20px rgba(0, 240, 255, 0.1); }
+        .id-card.pigman:hover { border-color: var(--pink); box-shadow: 0 0 20px rgba(255, 0, 127, 0.1); }
         
-        .id-card { 
-            background: var(--card-bg); 
-            border: 2px solid var(--ink); 
-            width: 100%; 
-            max-width: 380px; 
-            position: relative;
-            overflow: hidden;
-            transition: transform 0.3s ease;
-        }
-        
-        /* Efek Nyala / Glow sesuai warna masing-masing */
-        .id-card.alexis { box-shadow: 10px 10px 0px var(--cyan); }
-        .id-card.alexis:hover { transform: translateY(-5px); box-shadow: 15px 15px 0px var(--cyan); }
-        
-        .id-card.pigman { box-shadow: 10px 10px 0px var(--pink); }
-        .id-card.pigman:hover { transform: translateY(-5px); box-shadow: 15px 15px 0px var(--pink); }
-        
-        .card-top { padding: 20px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; background: #f9f9f9; }
-        .card-top h4 { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; font-weight: 700; }
-        .card-top span { font-family: monospace; font-size: 0.9rem; color: #666; }
+        .card-top { padding: 15px 20px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; background: var(--bg); }
+        .card-top h4 { font-family: var(--font-mono); font-size: 0.75rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
+        .card-top span { font-family: var(--font-mono); font-size: 0.75rem; color: var(--border); }
 
-        /* Kotak 404 Not Found (Pengganti Foto) */
-        .photo-placeholder { 
-            width: 100%; 
-            height: 220px; 
-            background: #EBE9E0; 
-            display: flex; 
-            flex-direction: column;
-            justify-content: center; 
-            align-items: center; 
-            border-bottom: 1px solid var(--border);
-            background-image: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(0,0,0,0.03) 10px, rgba(0,0,0,0.03) 20px);
-        }
-        .photo-placeholder h2 { font-family: var(--font-serif); font-size: 5rem; line-height: 1; color: #333; margin-bottom: 5px; }
-        .photo-placeholder p { font-family: monospace; font-size: 1rem; color: #666; letter-spacing: 2px; text-transform: uppercase; }
+        .photo-placeholder { width: 100%; height: 200px; background: var(--bg); display: flex; flex-direction: column; justify-content: center; align-items: center; border-bottom: 1px solid var(--border); background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px); background-size: 20px 20px; }
+        .photo-placeholder h2 { font-family: var(--font-mono); font-size: 3rem; line-height: 1; color: var(--border); margin-bottom: 5px; }
+        .photo-placeholder p { font-family: var(--font-mono); font-size: 0.75rem; color: var(--muted); letter-spacing: 2px; text-transform: uppercase; }
 
-        .card-body { padding: 30px 20px; }
-        .name { font-family: var(--font-serif); font-size: 2.2rem; line-height: 1; margin-bottom: 5px; }
-        .role { font-weight: 700; text-transform: uppercase; letter-spacing: 1px; font-size: 0.8rem; margin-bottom: 25px; }
+        .card-body { padding: 25px 20px; }
+        .name { font-size: 1.5rem; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 5px; }
+        .role { font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 20px; }
         .role.cyan { color: var(--cyan); }
         .role.pink { color: var(--pink); }
 
-        .data-row { display: grid; grid-template-columns: 100px 1fr; gap: 10px; margin-bottom: 12px; font-size: 0.95rem; }
-        .data-label { font-weight: 700; color: #666; }
+        .data-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px dashed var(--border); font-size: 0.85rem; }
+        .data-label { color: var(--muted); }
         .data-value { font-weight: 500; }
 
-        .card-footer { padding: 20px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: flex-end; background: #f9f9f9;}
-        .barcode { display: flex; gap: 3px; height: 30px; align-items: center; opacity: 0.6; }
-        .barcode span { width: 4px; height: 100%; background: var(--ink); display: block; }
-        .barcode span:nth-child(2n) { height: 70%; }
-        .barcode span:nth-child(3n) { height: 90%; width: 6px; }
-        
-        .id-number { font-family: monospace; font-size: 0.8rem; color: #666; }
-
-        /* FOOTER GLOBAL */
-        footer { background-color: var(--ink); color: var(--bg); padding: 30px 5vw; border-top: 1px solid #333; margin-top: auto; width: 100%; }
-        .footer-content { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
-        .footer-left { display: flex; align-items: center; gap: 12px; font-size: 0.85rem; }
-        .footer-logo { font-family: var(--font-serif); font-size: 1.5rem; border: 1px solid var(--bg); border-radius: 50%; width: 35px; height: 35px; display: flex; justify-content: center; align-items: center; }
-        .footer-right { display: flex; gap: 15px; }
-        .footer-right a { color: var(--bg); font-weight: 700; font-size: 0.8rem; text-transform: uppercase; border: 1px solid var(--bg); padding: 10px 20px; transition: 0.3s; display: inline-block; }
-        .footer-right a:hover { background: var(--bg); color: var(--ink); transform: translateY(-3px); }
+        footer { border-top: 1px solid var(--border); padding: 20px; display: flex; justify-content: space-between; align-items: center; font-family: var(--font-mono); font-size: 0.75rem; color: var(--muted); margin-top: auto; }
+        .c-icon { border: 1px solid var(--border); width: 20px; height: 20px; border-radius: 50%; display: inline-flex; justify-content: center; align-items: center; margin-right: 5px;}
 
         @media (max-width: 768px) {
-            .team-section { gap: 30px; }
-            .id-card { max-width: 100%; box-shadow: 6px 6px 0px var(--cyan) !important; }
-            .id-card.pigman { box-shadow: 6px 6px 0px var(--pink) !important; }
-            .name { font-size: 1.8rem; }
-            .sidebar { width: 100%; }
-            .footer-content { flex-direction: column; text-align: center; }
-            .footer-right { flex-direction: column; width: 100%; }
-            .footer-right a { width: 100%; text-align: center; }
+            .nav-links { display: none; }
+            footer { flex-direction: column; gap: 10px; text-align: center; }
         }
     </style>
 </head>
 <body>
-
     <nav class="animate-in">
-        <a href="index.html" class="nav-brand">Frost & Hog.</a>
-        <div class="menu-btn" onclick="toggleMenu()">☰</div>
+        <div class="nav-left">
+            <div class="nav-brand">FROST & HOG</div>
+        </div>
+        <div class="nav-links">
+            <a href="operations.html">Operations</a>
+            <a href="founders.html" class="active">Founder</a>
+            <a href="legalitas.html">Legal</a>
+            <a href="layanan.html" class="btn-nav-hire">Hire Us</a>
+        </div>
     </nav>
 
-    <div class="sidebar" id="sidebar">
-        <div class="close-btn" onclick="toggleMenu()">×</div>
-        <div class="menu-links">
-            <a href="index.html">Home</a>
-            <a href="operations.html">Operations Log</a>
-            <a href="founders.html">Founder</a>
-            <a href="legalitas.html">Legal</a>
-            <a href="https://frostandhogcyberteam.github.io/frost-and-hog-portofolio/" target="_blank">Portfolio ↗</a>
-            <a href="https://frostandhogcyberteam.github.io/frost-and-hog-weather/" target="_blank">Weather ↗</a>
-        </div>
-    </div>
-    <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
-
-    <div class="header animate-in" style="animation-delay: 0.1s;">
+    <div class="header animate-in">
         <h1>Founder Biodata.</h1>
         <p>Data personel dan pembagian divisi operasional di Frost & Hog Cyber Team.</p>
     </div>
 
-    <div class="team-section animate-in" style="animation-delay: 0.2s;">
+    <div class="team-section animate-in" style="animation-delay: 0.1s;">
         
-        <!-- ID Card 1: Alexis White -->
         <div class="id-card alexis">
             <div class="card-top">
                 <h4>FH2 PERSONNEL</h4>
                 <span>ID: 001-AW</span>
             </div>
-            
-            <!-- 404 Placeholder -->
             <div class="photo-placeholder">
                 <h2>404</h2>
                 <p>Identity Not Found</p>
             </div>
-            
             <div class="card-body">
                 <div class="name">Alexis White</div>
                 <div class="role cyan">Lead Web Developer</div>
-
-                <div class="data-row">
-                    <div class="data-label">Bidang</div>
-                    <div class="data-value">Web Development</div>
-                </div>
-                <div class="data-row">
-                    <div class="data-label">Keahlian</div>
-                    <div class="data-value">HTML, CSS, JS, UI/UX</div>
-                </div>
-                <div class="data-row">
-                    <div class="data-label">Status</div>
-                    <div class="data-value" style="color: #27c93f; font-weight: 700;">ACTIVE</div>
-                </div>
-            </div>
-
-            <div class="card-footer">
-                <div class="barcode">
-                    <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
-                </div>
-                <div class="id-number">FH2-SYS-001</div>
+                <div class="data-row"><div class="data-label">Bidang</div><div class="data-value">Web Development</div></div>
+                <div class="data-row"><div class="data-label">Keahlian</div><div class="data-value">HTML, CSS, JS, UI/UX</div></div>
+                <div class="data-row"><div class="data-label">Status</div><div class="data-value" style="color: #27c93f;">ACTIVE</div></div>
             </div>
         </div>
 
-        <!-- ID Card 2: Pig Man -->
         <div class="id-card pigman">
             <div class="card-top">
                 <h4>FH2 PERSONNEL</h4>
                 <span>ID: 002-PM</span>
             </div>
-            
-            <!-- 404 Placeholder -->
             <div class="photo-placeholder">
                 <h2>404</h2>
                 <p>Identity Not Found</p>
             </div>
-            
             <div class="card-body">
                 <div class="name">Pig Man</div>
                 <div class="role pink">Cyber Security Analyst</div>
-
-                <div class="data-row">
-                    <div class="data-label">Bidang</div>
-                    <div class="data-value">Cyber Security</div>
-                </div>
-                <div class="data-row">
-                    <div class="data-label">Keahlian</div>
-                    <div class="data-value">PenTest, Network Audit, Python</div>
-                </div>
-                <div class="data-row">
-                    <div class="data-label">Status</div>
-                    <div class="data-value" style="color: #27c93f; font-weight: 700;">ACTIVE</div>
-                </div>
-            </div>
-
-            <div class="card-footer">
-                <div class="barcode">
-                    <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
-                </div>
-                <div class="id-number">FH2-SYS-002</div>
+                <div class="data-row"><div class="data-label">Bidang</div><div class="data-value">Cyber Security</div></div>
+                <div class="data-row"><div class="data-label">Keahlian</div><div class="data-value">PenTest, Network Audit</div></div>
+                <div class="data-row"><div class="data-label">Status</div><div class="data-value" style="color: #27c93f;">ACTIVE</div></div>
             </div>
         </div>
 
     </div>
 
     <footer>
-        <div class="footer-content">
-            <div class="footer-left">
-                <div class="footer-logo">C</div>
-                <span>2026 Frost & Hog Cyber Team. All rights reserved.</span>
-            </div>
-            <div class="footer-right">
-                <a href="index.html">Back to Home</a>
-                <a href="https://frostandhogcyberteam.github.io/frost-and-hog-website/">Main Portal ↗</a>
-            </div>
-        </div>
+        <span><span class="c-icon">C</span> 2026 FROST & HOG.</span>
+        <span>ALL RIGHTS RESERVED.</span>
     </footer>
-
-    <script>
-        function toggleMenu() {
-            document.getElementById('sidebar').classList.toggle('active');
-            document.getElementById('overlay').classList.toggle('active');
-        }
-    </script>
 </body>
 </html>

@@ -4,83 +4,43 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Start a Project — Frost & Hog</title>
-    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        :root { --bg: #F2F0E9; --ink: #111; --cyan: #00A3FF; --pink: #FF5C8A; --border: #D0CDC5; --font-serif: 'Instrument Serif', serif; --font-sans: 'Space Grotesk', sans-serif; }
+        :root { --bg: #09090B; --panel: #111113; --border: #27272A; --ink: #FAFAFA; --muted: #A1A1AA; --cyan: #00F0FF; --pink: #FF007F; --font-sans: 'Inter', sans-serif; --font-mono: 'JetBrains Mono', monospace; }
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { background: var(--bg); color: var(--ink); font-family: var(--font-sans); line-height: 1.6; display: flex; flex-direction: column; min-height: 100vh; }
-        @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
-        .animate-in { animation: fadeUp 0.8s ease-out forwards; }
-        
-        nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 5vw; border-bottom: 1px solid var(--border); }
-        .nav-brand { font-family: var(--font-serif); font-size: 1.5rem; font-style: italic; }
-        .menu-btn { font-size: 1.5rem; cursor: pointer; transition: 0.3s; }
-        .menu-btn:hover { color: var(--pink); }
-        
-        .sidebar { position: fixed; top: 0; right: -100%; width: 350px; height: 100vh; background: var(--ink); color: var(--bg); border-left: 1px solid var(--border); z-index: 1001; transition: right 0.5s cubic-bezier(0.8, 0, 0.2, 1); padding: 10vh 40px; display: flex; flex-direction: column; }
-        .sidebar.active { right: 0; }
-        .close-btn { position: absolute; top: 20px; right: 30px; font-size: 2rem; cursor: pointer; color: var(--bg); transition: 0.3s; }
-        .close-btn:hover { transform: rotate(90deg); color: var(--pink); }
-        .menu-links { display: flex; flex-direction: column; gap: 15px; margin-top: 30px; }
-        .menu-links a { color: var(--bg); font-size: 1.2rem; font-weight: 700; text-transform: uppercase; border-bottom: 1px solid #333; padding-bottom: 10px; transition: 0.2s; }
-        .menu-links a:hover { color: var(--cyan); padding-left: 10px; }
-        .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); z-index: 1000; display: none; opacity: 0; transition: opacity 0.3s ease; }
-        .overlay.active { display: block; opacity: 1; }
+        body { background-color: var(--bg); color: var(--ink); font-family: var(--font-sans); line-height: 1.5; display: flex; flex-direction: column; min-height: 100vh; }
+        a { color: var(--ink); text-decoration: none; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .animate-in { animation: fadeIn 0.6s ease-out forwards; }
 
-        .form-wrapper { flex: 1; display: flex; justify-content: center; align-items: center; padding: 40px 20px; }
-        .form-container { width: 100%; max-width: 600px; padding: 40px; background: #fff; border: 1px solid var(--border); box-shadow: 10px 10px 0px rgba(0,0,0,0.05); }
-        
-        .header h1 { font-family: var(--font-serif); font-size: 3rem; line-height: 1; margin-bottom: 10px; }
-        .header p { font-size: 1rem; color: #666; margin-bottom: 40px; }
+        nav { display: flex; justify-content: space-between; align-items: center; padding: 0 20px; height: 60px; border-bottom: 1px solid var(--border); position: fixed; top: 0; width: 100%; background: rgba(9, 9, 11, 0.8); backdrop-filter: blur(10px); z-index: 100; }
+        .nav-brand { font-family: var(--font-mono); font-size: 1.1rem; font-weight: 700; letter-spacing: -0.5px; }
 
-        .form-group { margin-bottom: 25px; }
-        label { display: block; font-weight: 700; text-transform: uppercase; font-size: 0.8rem; margin-bottom: 8px; letter-spacing: 1px; }
-        input, textarea { width: 100%; padding: 12px 0; background: transparent; border: none; border-bottom: 1px solid var(--border); font-family: var(--font-sans); font-size: 1rem; color: var(--ink); outline: none; transition: 0.3s; }
-        input:focus, textarea:focus { border-bottom-color: var(--cyan); }
+        .form-wrapper { flex: 1; display: flex; justify-content: center; align-items: center; padding: 100px 20px 40px; }
+        .form-container { width: 100%; max-width: 500px; background: var(--panel); border: 1px solid var(--border); border-radius: 12px; padding: 40px; }
+        
+        .header h1 { font-size: 1.8rem; font-weight: 700; margin-bottom: 10px; letter-spacing: -0.03em; }
+        .header p { font-size: 0.9rem; color: var(--muted); margin-bottom: 30px; }
+
+        .form-group { margin-bottom: 20px; }
+        label { display: block; font-family: var(--font-mono); font-size: 0.75rem; color: var(--muted); text-transform: uppercase; margin-bottom: 8px; letter-spacing: 1px; }
+        input, textarea { width: 100%; padding: 12px; background: var(--bg); border: 1px solid var(--border); border-radius: 6px; font-family: var(--font-sans); font-size: 0.95rem; color: var(--ink); outline: none; transition: 0.2s; }
+        input:focus, textarea:focus { border-color: var(--cyan); }
         textarea { resize: vertical; min-height: 100px; }
         
-        button { width: 100%; padding: 15px; background: var(--ink); color: var(--bg); border: none; font-family: var(--font-sans); font-weight: 700; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; transition: 0.3s; margin-top: 20px; }
-        button:hover { background: var(--pink); color: #fff; transform: translateY(-3px); box-shadow: 0 10px 15px rgba(255, 92, 138, 0.2); }
+        button { width: 100%; padding: 14px; background: var(--ink); color: var(--bg); border: none; border-radius: 6px; font-family: var(--font-mono); font-weight: 700; font-size: 0.85rem; cursor: pointer; transition: 0.2s; margin-top: 20px; text-transform: uppercase; letter-spacing: 1px; }
+        button:hover { background: var(--cyan); color: #000; }
 
-        .back-link { display: inline-block; margin-top: 20px; font-size: 0.9rem; text-decoration: underline; color: #666; }
-        .back-link:hover { color: var(--ink); }
+        .back-link { display: block; text-align: center; margin-top: 20px; font-size: 0.85rem; color: var(--muted); text-decoration: underline; }
 
-        footer { background-color: var(--ink); color: var(--bg); padding: 30px 5vw; border-top: 1px solid #333; margin-top: auto; width: 100%; }
-        .footer-content { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
-        .footer-left { display: flex; align-items: center; gap: 12px; font-size: 0.85rem; }
-        .footer-logo { font-family: var(--font-serif); font-size: 1.5rem; border: 1px solid var(--bg); border-radius: 50%; width: 35px; height: 35px; display: flex; justify-content: center; align-items: center; }
-        .footer-right { display: flex; gap: 15px; }
-        .footer-right a { color: var(--bg); font-weight: 700; font-size: 0.8rem; text-transform: uppercase; border: 1px solid var(--bg); padding: 10px 20px; transition: 0.3s; display: inline-block; }
-        .footer-right a:hover { background: var(--bg); color: var(--ink); transform: translateY(-3px); }
-
-        @media (max-width: 768px) {
-            .form-container { padding: 30px 20px; }
-            .sidebar { width: 100%; }
-            .footer-content { flex-direction: column; text-align: center; }
-            .footer-right { flex-direction: column; width: 100%; }
-            .footer-right a { width: 100%; text-align: center; }
-        }
+        footer { border-top: 1px solid var(--border); padding: 20px; display: flex; justify-content: space-between; align-items: center; font-family: var(--font-mono); font-size: 0.75rem; color: var(--muted); margin-top: auto; }
+        .c-icon { border: 1px solid var(--border); width: 20px; height: 20px; border-radius: 50%; display: inline-flex; justify-content: center; align-items: center; margin-right: 5px;}
     </style>
 </head>
 <body>
     <nav class="animate-in">
-        <a href="index.html" class="nav-brand">Frost & Hog.</a>
-        <div class="menu-btn" onclick="toggleMenu()">☰</div>
+        <div class="nav-brand">FROST & HOG</div>
     </nav>
-
-    <div class="sidebar" id="sidebar">
-        <div class="close-btn" onclick="toggleMenu()">×</div>
-        <div class="menu-links">
-            <a href="index.html">Home</a>
-            <a href="layanan.html">Services</a>
-            <a href="operations.html">Operations Log</a>
-            <a href="founders.html">Founder</a>
-            <a href="legalitas.html">Legal</a>
-            <a href="https://frostandhogcyberteam.github.io/frost-and-hog-portofolio/" target="_blank">Portfolio ↗</a>
-            <a href="https://frostandhogcyberteam.github.io/frost-and-hog-weather/" target="_blank">Weather ↗</a>
-        </div>
-    </div>
-    <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
 
     <div class="form-wrapper animate-in">
         <div class="form-container">
@@ -92,7 +52,7 @@
             <form id="clientForm">
                 <div class="form-group">
                     <label>Service Needed</label>
-                    <input type="text" id="serviceInput" readonly value="General Inquiry" style="border-bottom: 1px dashed var(--pink);">
+                    <input type="text" id="serviceInput" readonly value="General Inquiry" style="border-color: var(--pink); color: var(--pink); font-weight: bold;">
                 </div>
                 <div class="form-group">
                     <label>Your Name</label>
@@ -104,7 +64,7 @@
                 </div>
                 <div class="form-group">
                     <label>Project Details</label>
-                    <textarea id="detailInput" required placeholder="Jelaskan secara singkat apa yang ingin dibangun atau diamankan."></textarea>
+                    <textarea id="detailInput" required placeholder="Jelaskan secara singkat kebutuhan Anda."></textarea>
                 </div>
                 <button type="submit" id="submitBtn">Send Request</button>
             </form>
@@ -113,30 +73,19 @@
     </div>
 
     <footer>
-        <div class="footer-content">
-            <div class="footer-left">
-                <div class="footer-logo">C</div>
-                <span>2026 Frost & Hog Cyber Team. All rights reserved.</span>
-            </div>
-            <div class="footer-right">
-                <a href="index.html">Back to Home</a>
-                <a href="https://frostandhogcyberteam.github.io/frost-and-hog-website/">Main Portal ↗</a>
-            </div>
-        </div>
+        <span><span class="c-icon">C</span> 2026 FROST & HOG.</span>
+        <span>ALL RIGHTS RESERVED.</span>
     </footer>
 
     <script>
         const urlParams = new URLSearchParams(window.location.search);
         const serviceParam = urlParams.get('service');
-        if(serviceParam) {
-            document.getElementById('serviceInput').value = serviceParam;
-        }
+        if(serviceParam) { document.getElementById('serviceInput').value = serviceParam; }
 
         document.getElementById('clientForm').addEventListener('submit', function(e) {
             e.preventDefault();
             const btn = document.getElementById('submitBtn');
-            btn.innerText = "Sending...";
-            btn.disabled = true;
+            btn.innerText = "Sending..."; btn.disabled = true;
 
             const name = document.getElementById('nameInput').value;
             const contact = document.getElementById('contactInput').value;
@@ -147,7 +96,7 @@
                 username: "🚨 FH2 EMERGENCY SYSTEM 🚨",
                 embeds: [{
                     title: "🚨 ATTENTION: NEW CLIENT REQUEST 🚨",
-                    description: "**ACTION REQUIRED IMMEDIATELY**\n\nAda klien baru yang membutuhkan bantuan Anda. Segera hubungi mereka!",
+                    description: "**ACTION REQUIRED IMMEDIATELY**\n\nAda klien baru. Segera hubungi mereka!",
                     color: 16711680, // MERAH MENYALA
                     fields: [
                         { name: "🛠️ Service", value: `\`${service}\``, inline: true },
@@ -160,8 +109,10 @@
                 }]
             };
 
-            // GANTI URL INI DENGAN WEBHOOK DISCORD KAMU
-            const webhookURL = "https://discord.com/api/webhooks/1562930745431826474/vO1UYMEEa3VpfgObIzqjlRF4CrlN8yjNmWBfNQuYPDRFdv-t71K_BStOe24KSiDX4Iw_"; 
+            // ==========================================
+            // ⚠️ GANTI URL DI BAWAH INI DENGAN WEBHOOK DISCORD KAMU
+            // ==========================================
+            const webhookURL = "URL_WEBHOOK_DISCORD_KAMU"; 
             
             if(webhookURL === "URL_WEBHOOK_DISCORD_KAMU") {
                 alert("Sistem belum terhubung ke Discord. Harap isi URL Webhook di kode form.html.");
@@ -176,19 +127,12 @@
                 if(res.ok) {
                     alert("Pesan terkirim. Anda akan diarahkan ke Surat Perjanjian.");
                     window.location.href = "surat-kuasa.html?nama=" + encodeURIComponent(name) + "&layanan=" + encodeURIComponent(service);
-                } else {
-                    throw new Error('Gagal');
-                }
+                } else { throw new Error('Gagal'); }
             }).catch(err => {
-                alert("Terjadi kesalahan saat mengirim pesan. Coba lagi.");
+                alert("Terjadi kesalahan. Coba lagi.");
                 btn.innerText = "Send Request"; btn.disabled = false;
             });
         });
-
-        function toggleMenu() {
-            document.getElementById('sidebar').classList.toggle('active');
-            document.getElementById('overlay').classList.toggle('active');
-        }
     </script>
 </body>
 </html>

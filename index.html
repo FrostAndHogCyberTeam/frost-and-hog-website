@@ -6,164 +6,151 @@
     <title>Frost & Hog — Cyber Studio</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        :root { --bg: #F2F0E9; --ink: #111111; --cyan: #00A3FF; --pink: #FF5C8A; --border: #D0CDC5; --font-serif: 'Instrument Serif', serif; --font-sans: 'Space Grotesk', sans-serif; }
+        :root {
+            --bg: #09090B; 
+            --panel: #111113; 
+            --border: #27272A; 
+            --ink: #FAFAFA; 
+            --muted: #A1A1AA; 
+            --cyan: #00F0FF; 
+            --pink: #FF007F;
+            --font-sans: 'Inter', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { background-color: var(--bg); color: var(--ink); font-family: var(--font-sans); line-height: 1.6; overflow-x: hidden; display: flex; flex-direction: column; min-height: 100vh; }
+        body { background-color: var(--bg); color: var(--ink); font-family: var(--font-sans); line-height: 1.5; overflow-x: hidden; display: flex; flex-direction: column; min-height: 100vh; }
         a { color: var(--ink); text-decoration: none; }
         
-        @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
-        .animate-in { animation: fadeUp 0.8s ease-out forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .animate-in { animation: fadeIn 0.6s ease-out forwards; }
 
-        /* NAVBAR & HAMBURGER */
-        nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 5vw; border-bottom: 1px solid var(--border); position: fixed; top: 0; width: 100%; background: rgba(242, 240, 233, 0.95); backdrop-filter: blur(5px); z-index: 100; }
-        .nav-brand { font-family: var(--font-serif); font-size: 1.5rem; font-style: italic; }
-        .menu-btn { font-size: 1.5rem; cursor: pointer; transition: 0.3s; }
-        .menu-btn:hover { color: var(--pink); }
-
-        /* SIDEBAR MENU */
-        .sidebar { position: fixed; top: 0; right: -100%; width: 350px; height: 100vh; background: var(--ink); color: var(--bg); border-left: 1px solid var(--border); z-index: 1001; transition: right 0.5s cubic-bezier(0.8, 0, 0.2, 1); padding: 10vh 40px; display: flex; flex-direction: column; }
-        .sidebar.active { right: 0; }
-        .close-btn { position: absolute; top: 20px; right: 30px; font-size: 2rem; cursor: pointer; color: var(--bg); transition: 0.3s; }
-        .close-btn:hover { transform: rotate(90deg); color: var(--pink); }
-        .menu-links { display: flex; flex-direction: column; gap: 15px; margin-top: 30px; }
-        .menu-links a { color: var(--bg); font-size: 1.2rem; font-weight: 700; text-transform: uppercase; border-bottom: 1px solid #333; padding-bottom: 10px; transition: 0.2s; }
-        .menu-links a:hover { color: var(--cyan); padding-left: 10px; }
-        .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); z-index: 1000; display: none; opacity: 0; transition: opacity 0.3s ease; }
-        .overlay.active { display: block; opacity: 1; }
-
-        .hero { padding: 20vh 5vw 10vh; display: grid; grid-template-columns: 1.5fr 1fr; gap: 40px; border-bottom: 1px solid var(--border); flex: 1; }
-        .hero-left { display: flex; flex-direction: column; justify-content: center; }
-        .label { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 20px; display: inline-block; padding: 4px 10px; border: 1px solid var(--cyan); color: var(--cyan); }
-        .hero h1 { font-family: var(--font-serif); font-size: clamp(4rem, 10vw, 9rem); line-height: 0.9; letter-spacing: -0.03em; margin-bottom: 30px; }
-        .hero-desc { font-size: 1.1rem; max-width: 85%; color: #444; margin-bottom: 40px; border-left: 3px solid var(--pink); padding-left: 15px; }
+        /* NAVBAR (Gaya Dashboard) */
+        nav { display: flex; justify-content: space-between; align-items: center; padding: 0 20px; height: 60px; border-bottom: 1px solid var(--border); position: fixed; top: 0; width: 100%; background: rgba(9, 9, 11, 0.8); backdrop-filter: blur(10px); z-index: 100; }
+        .nav-left { display: flex; align-items: center; gap: 20px; }
+        .nav-brand { font-family: var(--font-mono); font-size: 1.1rem; font-weight: 700; letter-spacing: -0.5px; }
+        .nav-status { font-family: var(--font-mono); font-size: 0.75rem; color: #27C93F; display: flex; align-items: center; gap: 6px; border: 1px solid #27272A; padding: 4px 10px; border-radius: 20px; }
+        .nav-status::before { content: ''; width: 6px; height: 6px; background: #27C93F; border-radius: 50%; box-shadow: 0 0 8px #27C93F; }
         
-        .hero-btn-container { margin-top: 20px; margin-bottom: 40px; }
-        .btn-portal { display: inline-block; background: var(--ink); color: var(--bg); padding: 15px 40px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; font-size: 0.9rem; transition: all 0.3s; border: 2px solid var(--ink); cursor: pointer; }
-        .btn-portal:hover { background: var(--cyan); color: #000; border-color: var(--cyan); transform: translateY(-5px); }
+        .nav-links { display: flex; gap: 20px; align-items: center; }
+        .nav-links a { font-size: 0.85rem; font-weight: 500; color: var(--muted); transition: color 0.2s; }
+        .nav-links a:hover { color: var(--ink); }
+        .btn-nav-hire { background: var(--ink); color: var(--bg); padding: 6px 16px; border-radius: 6px; font-size: 0.85rem; font-weight: 600; transition: 0.2s; }
+        .btn-nav-hire:hover { background: var(--muted); }
 
-        .hero-right { position: relative; display: flex; align-items: center; justify-content: center; }
-        .mascot-img { width: 100%; max-width: 450px; filter: grayscale(100%) contrast(120%); mix-blend-mode: multiply; transform: rotate(3deg); }
-        .mascot-label { position: absolute; top: -15px; left: 50%; transform: translateX(-50%) rotate(-2deg); background: var(--bg); border: 1px solid var(--ink); padding: 5px 15px; font-weight: 700; font-size: 0.8rem; letter-spacing: 2px; box-shadow: 2px 2px 0px var(--ink); z-index: 10; }
+        /* HERO SECTION */
+        .hero { padding: 140px 20px 80px; text-align: center; border-bottom: 1px solid var(--border); background-image: radial-gradient(circle at 50% 0%, rgba(255,255,255,0.05) 0%, transparent 50%); }
+        .hero h1 { font-size: clamp(3rem, 8vw, 6rem); font-weight: 700; letter-spacing: -0.04em; line-height: 1.1; margin-bottom: 20px; }
+        .hero h1 span { color: transparent; -webkit-text-stroke: 1px var(--muted); }
+        .hero p { font-size: 1.1rem; color: var(--muted); max-width: 600px; margin: 0 auto 40px; }
+        
+        .btn-main { display: inline-flex; align-items: center; gap: 10px; background: var(--ink); color: var(--bg); padding: 12px 28px; font-size: 0.95rem; font-weight: 600; border-radius: 8px; transition: 0.2s; }
+        .btn-main:hover { transform: translateY(-2px); box-shadow: 0 4px 20px rgba(255,255,255,0.2); }
 
-        .story-section { padding: 10vh 5vw; display: grid; grid-template-columns: 1fr 2fr; gap: 60px; border-bottom: 1px solid var(--border); }
-        .story-title h2 { font-family: var(--font-serif); font-size: 3rem; line-height: 1; margin-bottom: 10px; }
-        .story-title p { font-size: 0.9rem; color: #666; text-transform: uppercase; letter-spacing: 1px; }
-        .story-content { display: flex; flex-direction: column; gap: 20px; font-size: 1.05rem; color: #333; }
-        .story-content p { text-align: justify; }
-        .story-content strong { background: rgba(255, 92, 138, 0.2); padding: 0 5px; }
+        /* BENTO GRID (Khas 21st.dev) */
+        .bento-grid { padding: 40px 20px; max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; flex: 1; }
+        
+        .bento-item { background: var(--panel); border: 1px solid var(--border); border-radius: 12px; padding: 30px; position: relative; overflow: hidden; transition: 0.3s; }
+        .bento-item:hover { border-color: #52525B; }
+        
+        .bento-item h3 { font-family: var(--font-mono); font-size: 0.8rem; text-transform: uppercase; color: var(--muted); margin-bottom: 20px; letter-spacing: 1px; display: flex; justify-content: space-between; align-items: center;}
+        .bento-item h3 span { color: var(--border); }
 
-        .philosophy-section { padding: 10vh 5vw; display: grid; grid-template-columns: 1fr 2fr; gap: 60px; border-bottom: 1px solid var(--border); background-color: #EBE9E0; }
-        .philosophy-title h2 { font-family: var(--font-serif); font-size: 3rem; line-height: 1; }
-        .quotes-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
-        .quote-box { padding: 30px; border: 1px solid var(--border); background: var(--bg); }
-        .quote-box.frost { border-top: 4px solid var(--cyan); }
-        .quote-box.hog { border-top: 4px solid var(--pink); }
-        .quote-box h3 { font-family: var(--font-serif); font-size: 2rem; margin-bottom: 15px; }
-        .quote-box.frost h3 { color: var(--cyan); }
-        .quote-box.hog h3 { color: var(--pink); }
-        .quote-box p { font-size: 1rem; color: #444; font-style: italic; }
+        .bento-story { grid-column: span 2; }
+        .bento-story p { font-size: 1rem; color: #D4D4D8; line-height: 1.7; margin-bottom: 15px; }
+        
+        .bento-mascot { grid-column: span 1; display: flex; justify-content: center; align-items: center; background: linear-gradient(180deg, #18181B, #09090B); }
+        .bento-mascot img { width: 100%; max-width: 200px; filter: grayscale(100%) contrast(120%); transition: 0.5s; }
+        .bento-mascot:hover img { transform: scale(1.05); filter: grayscale(0%); }
 
-        /* FOOTER GLOBAL (Hanya Copyright, Tanpa Tombol Portal) */
-        footer { background-color: var(--ink); color: var(--bg); padding: 30px 5vw; border-top: 1px solid #333; margin-top: auto; width: 100%; }
-        .footer-content { display: flex; justify-content: flex-start; align-items: center; flex-wrap: wrap; gap: 20px; }
-        .footer-left { display: flex; align-items: center; gap: 12px; font-size: 0.85rem; }
-        .footer-logo { font-family: var(--font-serif); font-size: 1.5rem; border: 1px solid var(--bg); border-radius: 50%; width: 35px; height: 35px; display: flex; justify-content: center; align-items: center; }
+        .bento-quote { grid-column: span 1; }
+        .bento-quote p { font-size: 0.95rem; color: #D4D4D8; font-style: italic; }
+        .bento-quote.cyan { border-top: 2px solid var(--cyan); }
+        .bento-quote.pink { border-top: 2px solid var(--pink); }
+
+        .bento-tech { grid-column: span 1; }
+        .tech-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+        .tech-tags span { font-family: var(--font-mono); font-size: 0.75rem; border: 1px solid var(--border); padding: 4px 10px; border-radius: 20px; color: var(--muted); }
+
+        /* FOOTER */
+        footer { border-top: 1px solid var(--border); padding: 20px; display: flex; justify-content: space-between; align-items: center; font-family: var(--font-mono); font-size: 0.75rem; color: var(--muted); }
+        footer span { display: flex; align-items: center; gap: 10px; }
+        footer .c-icon { border: 1px solid var(--border); width: 20px; height: 20px; border-radius: 50%; display: inline-flex; justify-content: center; align-items: center; }
 
         @media (max-width: 768px) {
-            .hero { grid-template-columns: 1fr; padding-top: 15vh; }
-            .hero h1 { font-size: 4rem; }
-            .hero-desc { max-width: 100%; }
-            .hero-right { margin-top: 40px; }
-            .story-section, .philosophy-section { grid-template-columns: 1fr; gap: 30px; }
-            .quotes-grid { grid-template-columns: 1fr; }
-            .sidebar { width: 100%; }
-            .footer-content { justify-content: center; text-align: center; }
+            .bento-grid { grid-template-columns: 1fr; }
+            .bento-story { grid-column: span 1; }
+            .bento-mascot { grid-column: span 1; }
+            .nav-links { display: none; } /* Sembunyikan link di HP, fokus ke tombol */
+            footer { flex-direction: column; gap: 10px; text-align: center; }
         }
     </style>
 </head>
 <body>
 
     <nav class="animate-in">
-        <div class="nav-brand">Frost & Hog.</div>
-        <div class="menu-btn" onclick="toggleMenu()">☰</div>
-    </nav>
-
-    <!-- HAMBURGER MENU: "Services" sudah dihapus -->
-    <div class="sidebar" id="sidebar">
-        <div class="close-btn" onclick="toggleMenu()">×</div>
-        <div class="menu-links">
-            <a href="index.html">Home</a>
-            <a href="operations.html">Operations Log</a>
+        <div class="nav-left">
+            <div class="nav-brand">FROST & HOG</div>
+            <div class="nav-status">SYSTEM ONLINE</div>
+        </div>
+        <div class="nav-links">
+            <a href="operations.html">Operations</a>
             <a href="founders.html">Founder</a>
             <a href="legalitas.html">Legal</a>
-            <a href="https://frostandhogcyberteam.github.io/frost-and-hog-portofolio/" target="_blank">Portfolio ↗</a>
-            <a href="https://frostandhogcyberteam.github.io/frost-and-hog-weather/" target="_blank">Weather ↗</a>
+            <a href="layanan.html" class="btn-nav-hire">Hire Us</a>
         </div>
-    </div>
-    <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
+    </nav>
 
     <section class="hero animate-in">
-        <div class="hero-left">
-            <span class="label">Independent Cyber Studio</span>
-            <h1>We build.<br>We secure.</h1>
-            <p class="hero-desc">
-                Bukan agensi besar dengan puluhan karyawan. Kami hanya dua orang yang fokus membangun website dengan performa optimal dan mengamankan infrastrukturnya dari celah keamanan.
-            </p>
-            <div class="hero-btn-container">
-                <a href="layanan.html" class="btn-portal">HIRE OUR TEAM</a>
-            </div>
-        </div>
+        <h1>We build.<br><span>We secure.</span></h1>
+        <p>Bukan agensi besar dengan puluhan karyawan. Kami hanya dua orang yang fokus membangun website dengan performa optimal dan mengamankan infrastrukturnya dari celah keamanan.</p>
+        <a href="layanan.html" class="btn-main">
+            Start a Project
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+    </section>
+
+    <div class="bento-grid animate-in" style="animation-delay: 0.2s;">
         
-        <div class="hero-right">
-            <div class="mascot-label">FROST & HOG</div>
-            <img src="img/agents.png" alt="Frost and Hog" class="mascot-img" onerror="this.style.display='none'">
-        </div>
-    </section>
-
-    <section class="story-section animate-in" style="animation-delay: 0.2s;">
-        <div class="story-title">
-            <h2>How it<br>started.</h2>
-            <p>Est. 2026</p>
-        </div>
-        <div class="story-content">
+        <div class="bento-item bento-story">
+            <h3>Our Genesis <span>[01]</span></h3>
             <p>Semua berawal dari refleksi kritis pada suatu malam. Menyadari bahwa keterampilan di bidang tertentu tidak memberikan prospek yang cukup, fokus akhirnya dialihkan kembali ke ranah pengembangan web dan keamanan siber.</p>
-            <p>Bermodal perangkat yang terbatas dan akses yang minim, <strong>Frost & Hog Cyber Team</strong> didirikan. Kami tidak memiliki fasilitas mewah atau server berskala besar. Kami membangun fondasi ini dari nol, mengandalkan kemampuan teknis dan visi untuk menyediakan sistem digital yang aman, fungsional, dan kompeten.</p>
+            <p>Bermodal perangkat yang terbatas dan akses yang minim, <strong>Frost & Hog Cyber Team</strong> didirikan. Kami tidak memiliki fasilitas mewah atau server berskala besar. Kami membangun fondasi ini dari nol, mengandalkan kemampuan teknis dan visi.</p>
         </div>
-    </section>
 
-    <section class="philosophy-section animate-in" style="animation-delay: 0.4s;">
-        <div class="philosophy-title">
-            <h2>Our<br>Philosophy.</h2>
+        <div class="bento-item bento-mascot">
+            <img src="img/agents.png" alt="Frost & Hog" onerror="this.style.display='none'">
         </div>
-        <div class="quotes-grid">
-            <div class="quote-box frost">
-                <h3>FROST</h3>
-                <p>"Manusia adalah variabel paling rentan dalam sebuah sistem. Tugas kami adalah memastikan celah sekecil apapun tertutup rapat."</p>
-            </div>
-            <div class="quote-box hog">
-                <h3>HOG</h3>
-                <p>"Sistem yang baik bukan hanya yang mampu berjalan, tetapi yang bisa bertahan saat terjadi gangguan. Kami membangun ketahanan itu."</p>
-            </div>
-        </div>
-    </section>
 
-    <!-- FOOTER: Tombol portal dihapus, hanya sisa copyright -->
+        <div class="bento-item bento-quote cyan">
+            <h3>Frost Philosophy</h3>
+            <p>"Manusia adalah variabel paling rentan dalam sebuah sistem. Tugas kami adalah memastikan celah sekecil apapun tertutup rapat."</p>
+        </div>
+
+        <div class="bento-item bento-quote pink">
+            <h3>Hog Philosophy</h3>
+            <p>"Sistem yang baik bukan hanya yang mampu berjalan, tetapi yang bisa bertahan saat terjadi gangguan. Kami membangun ketahanan itu."</p>
+        </div>
+
+        <div class="bento-item bento-tech">
+            <h3>Tech Stack <span>[02]</span></h3>
+            <div class="tech-tags">
+                <span>HTML5</span>
+                <span>CSS3</span>
+                <span>JavaScript</span>
+                <span>Node.js</span>
+                <span>Linux</span>
+                <span>PenTesting</span>
+            </div>
+        </div>
+
+    </div>
+
     <footer>
-        <div class="footer-content">
-            <div class="footer-left">
-                <div class="footer-logo">C</div>
-                <span>2026 Frost & Hog Cyber Team. All rights reserved.</span>
-            </div>
-        </div>
+        <span><div class="c-icon">C</div> 2026 FROST & HOG.</span>
+        <span>ALL RIGHTS RESERVED.</span>
     </footer>
 
-    <script>
-        function toggleMenu() {
-            document.getElementById('sidebar').classList.toggle('active');
-            document.getElementById('overlay').classList.toggle('active');
-        }
-    </script>
 </body>
 </html>
