@@ -21,11 +21,12 @@
         .nav-links a:hover, .nav-links a.active { color: var(--ink); }
         .btn-nav-hire { background: var(--ink); color: var(--bg); padding: 6px 16px; border-radius: 6px; font-size: 0.85rem; font-weight: 600; }
 
-        .legal-content { max-width: 800px; margin: 120px auto 60px; padding: 0 20px; flex: 1; }
+        .legal-content { max-width: 800px; margin: 120px auto 60px; padding: 0 20px; flex: 1; width: 100%; }
+        .back-nav { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 0.8rem; color: var(--muted); margin-bottom: 20px; transition: color 0.2s; }
+        .back-nav:hover { color: var(--cyan); }
         h1 { font-size: 2.5rem; font-weight: 700; letter-spacing: -0.03em; margin-bottom: 40px; border-bottom: 1px solid var(--border); padding-bottom: 20px; }
         h2 { font-family: var(--font-mono); font-size: 1rem; color: var(--muted); margin-top: 40px; margin-bottom: 15px; }
         p { margin-bottom: 20px; color: #D4D4D8; text-align: justify; font-size: 0.95rem;}
-        ul { margin-left: 20px; margin-bottom: 20px; color: #D4D4D8; font-size: 0.95rem;}
 
         footer { border-top: 1px solid var(--border); padding: 20px; display: flex; justify-content: space-between; align-items: center; font-family: var(--font-mono); font-size: 0.75rem; color: var(--muted); margin-top: auto; }
         .c-icon { border: 1px solid var(--border); width: 20px; height: 20px; border-radius: 50%; display: inline-flex; justify-content: center; align-items: center; margin-right: 5px;}
@@ -39,14 +40,17 @@
             <div class="nav-brand">FROST & HOG</div>
         </div>
         <div class="nav-links">
+            <a href="index.html">Interface</a>
             <a href="operations.html">Operations</a>
-            <a href="founders.html">Founder</a>
+            <a href="founders.html">Co-Founders</a>
             <a href="legalitas.html" class="active">Legal</a>
             <a href="layanan.html" class="btn-nav-hire">Hire Us</a>
         </div>
     </nav>
 
     <div class="legal-content animate-in">
+        <a href="index.html" class="back-nav">← Back to Interface</a>
+        
         <h1>Legal & Copyright.</h1>
         
         <h2>1. INTELLECTUAL PROPERTY</h2>

@@ -3,13 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Founder Biodata — Frost & Hog</title>
+    <title>Co-Founders — Frost & Hog</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root { --bg: #09090B; --panel: #111113; --border: #27272A; --ink: #FAFAFA; --muted: #A1A1AA; --cyan: #00F0FF; --pink: #FF007F; --font-sans: 'Inter', sans-serif; --font-mono: 'JetBrains Mono', monospace; }
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { background-color: var(--bg); color: var(--ink); font-family: var(--font-sans); line-height: 1.5; display: flex; flex-direction: column; min-height: 100vh; }
         a { color: var(--ink); text-decoration: none; }
+        
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         .animate-in { animation: fadeIn 0.6s ease-out forwards; }
 
@@ -22,12 +23,17 @@
         .btn-nav-hire { background: var(--ink); color: var(--bg); padding: 6px 16px; border-radius: 6px; font-size: 0.85rem; font-weight: 600; }
 
         .header { padding: 120px 20px 40px; max-width: 1000px; margin: 0 auto; width: 100%; border-bottom: 1px solid var(--border); }
+        
+        /* Tombol Back to Interface untuk HP & Desktop */
+        .back-nav { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 0.8rem; color: var(--muted); margin-bottom: 20px; transition: color 0.2s; }
+        .back-nav:hover { color: var(--cyan); }
+        
         .header h1 { font-size: 2.5rem; font-weight: 700; letter-spacing: -0.03em; margin-bottom: 10px; }
         .header p { color: var(--muted); font-size: 1rem; }
 
         .team-section { padding: 40px 20px; max-width: 1000px; margin: 0 auto; width: 100%; display: flex; flex-wrap: wrap; gap: 30px; justify-content: center; flex: 1; }
         
-        .id-card { background: var(--panel); border: 1px solid var(--border); border-radius: 12px; width: 100%; max-width: 380px; overflow: hidden; position: relative; transition: 0.3s; }
+        .id-card { background: var(--panel); border: 1px solid var(--border); border-radius: 12px; width: 100%; max-width: 420px; overflow: hidden; position: relative; transition: 0.3s; }
         .id-card.alexis:hover { border-color: var(--cyan); box-shadow: 0 0 20px rgba(0, 240, 255, 0.1); }
         .id-card.pigman:hover { border-color: var(--pink); box-shadow: 0 0 20px rgba(255, 0, 127, 0.1); }
         
@@ -35,19 +41,26 @@
         .card-top h4 { font-family: var(--font-mono); font-size: 0.75rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
         .card-top span { font-family: var(--font-mono); font-size: 0.75rem; color: var(--border); }
 
-        .photo-placeholder { width: 100%; height: 200px; background: var(--bg); display: flex; flex-direction: column; justify-content: center; align-items: center; border-bottom: 1px solid var(--border); background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px); background-size: 20px 20px; }
+        .photo-placeholder { width: 100%; height: 180px; background: var(--bg); display: flex; flex-direction: column; justify-content: center; align-items: center; border-bottom: 1px solid var(--border); background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px); background-size: 20px 20px; }
         .photo-placeholder h2 { font-family: var(--font-mono); font-size: 3rem; line-height: 1; color: var(--border); margin-bottom: 5px; }
         .photo-placeholder p { font-family: var(--font-mono); font-size: 0.75rem; color: var(--muted); letter-spacing: 2px; text-transform: uppercase; }
 
         .card-body { padding: 25px 20px; }
         .name { font-size: 1.5rem; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 5px; }
-        .role { font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 20px; }
+        .role { font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 25px; }
         .role.cyan { color: var(--cyan); }
         .role.pink { color: var(--pink); }
 
-        .data-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px dashed var(--border); font-size: 0.85rem; }
-        .data-label { color: var(--muted); }
-        .data-value { font-weight: 500; }
+        .skills-list { list-style: none; padding: 0; margin: 0 0 25px 0; }
+        .skills-list li { font-size: 0.9rem; color: #D4D4D8; padding: 10px 0; border-bottom: 1px solid var(--border); display: flex; align-items: center; }
+        .skills-list li::before { content: '—'; margin-right: 10px; font-family: var(--font-mono); font-size: 0.8rem; }
+        
+        .skills-list.cyan-list li::before { color: var(--cyan); }
+        .skills-list.pink-list li::before { color: var(--pink); }
+
+        .status-row { display: flex; justify-content: space-between; align-items: center; font-family: var(--font-mono); font-size: 0.8rem; margin-top: 15px; }
+        .status-row span { color: var(--muted); }
+        .status-row strong { color: #27c93f; }
 
         footer { border-top: 1px solid var(--border); padding: 20px; display: flex; justify-content: space-between; align-items: center; font-family: var(--font-mono); font-size: 0.75rem; color: var(--muted); margin-top: auto; }
         .c-icon { border: 1px solid var(--border); width: 20px; height: 20px; border-radius: 50%; display: inline-flex; justify-content: center; align-items: center; margin-right: 5px;}
@@ -64,20 +77,25 @@
             <div class="nav-brand">FROST & HOG</div>
         </div>
         <div class="nav-links">
+            <a href="index.html">Interface</a>
             <a href="operations.html">Operations</a>
-            <a href="founders.html" class="active">Founder</a>
+            <a href="founders.html" class="active">Co-Founders</a>
             <a href="legalitas.html">Legal</a>
             <a href="layanan.html" class="btn-nav-hire">Hire Us</a>
         </div>
     </nav>
 
     <div class="header animate-in">
-        <h1>Founder Biodata.</h1>
+        <!-- Portal balik ke interface utama -->
+        <a href="index.html" class="back-nav">← Back to Interface</a>
+        
+        <h1>Co-Founders.</h1>
         <p>Data personel dan pembagian divisi operasional di Frost & Hog Cyber Team.</p>
     </div>
 
     <div class="team-section animate-in" style="animation-delay: 0.1s;">
         
+        <!-- ALEXIS WHITE -->
         <div class="id-card alexis">
             <div class="card-top">
                 <h4>FH2 PERSONNEL</h4>
@@ -89,13 +107,23 @@
             </div>
             <div class="card-body">
                 <div class="name">Alexis White</div>
-                <div class="role cyan">Lead Web Developer</div>
-                <div class="data-row"><div class="data-label">Bidang</div><div class="data-value">Web Development</div></div>
-                <div class="data-row"><div class="data-label">Keahlian</div><div class="data-value">HTML, CSS, JS, UI/UX</div></div>
-                <div class="data-row"><div class="data-label">Status</div><div class="data-value" style="color: #27c93f;">ACTIVE</div></div>
+                <div class="role cyan">Co-Founder / Lead Web Dev</div>
+                
+                <ul class="skills-list cyan-list">
+                    <li>End-to-End Web Development</li>
+                    <li>UI/UX Product Design</li>
+                    <li>Full-Stack Engineering</li>
+                    <li>System Architecture</li>
+                </ul>
+                
+                <div class="status-row">
+                    <span>Status</span>
+                    <strong>ACTIVE</strong>
+                </div>
             </div>
         </div>
 
+        <!-- PIG MAN -->
         <div class="id-card pigman">
             <div class="card-top">
                 <h4>FH2 PERSONNEL</h4>
@@ -107,10 +135,19 @@
             </div>
             <div class="card-body">
                 <div class="name">Pig Man</div>
-                <div class="role pink">Cyber Security Analyst</div>
-                <div class="data-row"><div class="data-label">Bidang</div><div class="data-value">Cyber Security</div></div>
-                <div class="data-row"><div class="data-label">Keahlian</div><div class="data-value">PenTest, Network Audit</div></div>
-                <div class="data-row"><div class="data-label">Status</div><div class="data-value" style="color: #27c93f;">ACTIVE</div></div>
+                <div class="role pink">Co-Founder / Cyber Security</div>
+                
+                <ul class="skills-list pink-list">
+                    <li>Penetration Testing</li>
+                    <li>Network Security Audit</li>
+                    <li>Web Application Security</li>
+                    <li>Vulnerability Assessment</li>
+                </ul>
+                
+                <div class="status-row">
+                    <span>Status</span>
+                    <strong>ACTIVE</strong>
+                </div>
             </div>
         </div>
 
