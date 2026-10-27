@@ -30,6 +30,7 @@
         
         button { width: 100%; padding: 14px; background: var(--ink); color: var(--bg); border: none; border-radius: 6px; font-family: var(--font-mono); font-weight: 700; font-size: 0.85rem; cursor: pointer; transition: 0.2s; margin-top: 20px; text-transform: uppercase; letter-spacing: 1px; }
         button:hover { background: var(--cyan); color: #000; }
+        button:disabled { background: #333; color: #888; cursor: not-allowed; }
 
         .back-link { display: block; text-align: center; margin-top: 20px; font-size: 0.85rem; color: var(--muted); text-decoration: underline; }
 
@@ -68,7 +69,7 @@
                 </div>
                 <button type="submit" id="submitBtn">Send Request</button>
             </form>
-            <a href="index.html" class="back-link">← Back to Home</a>
+            <a href="index.html" class="back-link">← Back to Interface</a>
         </div>
     </div>
 
@@ -78,26 +79,32 @@
     </footer>
 
     <script>
+        // Ambil parameter service dari URL (jika ada)
         const urlParams = new URLSearchParams(window.location.search);
         const serviceParam = urlParams.get('service');
-        if(serviceParam) { document.getElementById('serviceInput').value = serviceParam; }
+        if(serviceParam) { 
+            document.getElementById('serviceInput').value = serviceParam; 
+        }
 
         document.getElementById('clientForm').addEventListener('submit', function(e) {
             e.preventDefault();
+            
             const btn = document.getElementById('submitBtn');
-            btn.innerText = "Sending..."; btn.disabled = true;
+            btn.innerText = "SENDING DATA..."; 
+            btn.disabled = true;
 
             const name = document.getElementById('nameInput').value;
             const contact = document.getElementById('contactInput').value;
             const detail = document.getElementById('detailInput').value;
             const service = document.getElementById('serviceInput').value;
 
+            // Struktur data untuk Discord
             const data = {
                 username: "🚨 FH2 EMERGENCY SYSTEM 🚨",
                 embeds: [{
                     title: "🚨 ATTENTION: NEW CLIENT REQUEST 🚨",
                     description: "**ACTION REQUIRED IMMEDIATELY**\n\nAda klien baru. Segera hubungi mereka!",
-                    color: 16711680, // MERAH MENYALA
+                    color: 16711680, // Warna Merah
                     fields: [
                         { name: "🛠️ Service", value: `\`${service}\``, inline: true },
                         { name: "👤 Name", value: name, inline: true },
@@ -109,29 +116,41 @@
                 }]
             };
 
-            // ==========================================
-            // ⚠️ GANTI URL DI BAWAH INI DENGAN 
-WEBHOOK DISCORD KAMU
-            // ==========================================
-            const webhookURL = "https://discord.com/api/webhooks/1562930745431826474/vO1UYMEEa3VpfgObIzqjlRF4CrlN8yjNmWBfNQuYPDRFdv-t71K_BStOe24KSiDX4Iw_"; 
+            // =========================================================
+            // ⚠️ GANTI BARIS DI BAWAH INI DENGAN LINK WEBHOOK DISCORD KAMU
+            // =========================================================
+            const webhookURL = "https://discord.com/api/webhooks/GANTI_DENGAN_LINK_KAMU"; 
             
-            if(webhookURL === "URL_WEBHOOK_DISCORD_KAMU") {
-                alert("Sistem belum terhubung ke Discord. Harap isi URL Webhook di kode form.html.");
-                btn.innerText = "Send Request"; btn.disabled = false; return;
+            // Pengaman: Jika link belum diganti, munculkan peringatan
+            if(webhookURL.includes("GANTI_DENGAN_LINK_KAMU")) {
+                alert("ERROR: Link Webhook Discord belum dimasukkan ke dalam kode.");
+                btn.innerText = "Send Request"; 
+                btn.disabled = false; 
+                return;
             }
 
+            // Proses pengiriman ke Discord
             fetch(webhookURL, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(data)
-            }).then(res => {
-                if(res.ok) {
-                    alert("Pesan terkirim. Anda akan diarahkan ke Surat Perjanjian.");
+            })
+            .then(response => {
+                if(response.ok) {
+                    alert("✅ Pesan berhasil terkirim ke Discord! Anda akan diarahkan ke Surat Perjanjian.");
+                    
+                    // Direct ke surat kuasa membawa data nama & layanan
                     window.location.href = "surat-kuasa.html?nama=" + encodeURIComponent(name) + "&layanan=" + encodeURIComponent(service);
-                } else { throw new Error('Gagal'); }
-            }).catch(err => {
-                alert("Terjadi kesalahan. Coba lagi.");
-                btn.innerText = "Send Request"; btn.disabled = false;
+                } else {
+                    throw new Error('Network response was not ok.');
+                }
+            })
+            .catch(error => {
+                // Jika gagal kirim, tampilkan pesan error
+                console.error('Error:', error);
+                alert("❌ GAGAL MENGIRIM. Periksa koneksi internetmu atau pastikan link Webhook benar.");
+                btn.innerText = "Send Request"; 
+                btn.disabled = false;
             });
         });
     </script>
