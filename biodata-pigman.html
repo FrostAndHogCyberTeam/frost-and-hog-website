@@ -6,8 +6,8 @@
     <title>Pig Man — Frost &amp; Hog</title>
     <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --bg: #09090B; --panel: #111113; --border: #27272A;
+        :root { 
+            --bg: #09090B; --panel: #111113; --border: #27272A; 
             --ink: #FAFAFA; --muted: #A1A1AA; --cyan: #00F0FF; --pink: #FF007F;
             --font-serif: 'Instrument Serif', serif; --font-sans: 'Inter', sans-serif;
             --font-mono: 'JetBrains Mono', monospace;
@@ -22,19 +22,20 @@
         .back-link { font-family: var(--font-mono); font-size: 0.85rem; color: var(--muted); transition: 0.2s; }
         .back-link:hover { color: var(--pink); }
 
-        /* Biodata Layout */
-        .biodata-container { padding: 140px 5vw 60px; max-width: 900px; margin: 0 auto; flex: 1; }
+        /* Layout Biodata */
+        .biodata-container { padding: 140px 5vw 60px; max-width: 900px; margin: 0 auto; flex: 1; width: 100%; }
         
         .profile-header { display: flex; align-items: center; gap: 40px; margin-bottom: 40px; padding-bottom: 40px; border-bottom: 1px solid var(--border); }
         
+        /* Placeholder Foto dengan Efek Grid */
         .photo-placeholder { width: 180px; height: 220px; flex-shrink: 0; background: var(--bg); display: flex; flex-direction: column; justify-content: center; align-items: center; border: 1px solid var(--border); border-radius: 12px; background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px); background-size: 20px 20px; }
-        .photo-placeholder h2 { font-family: var(--font-mono); font-size: 3rem; color: var(--border); margin-bottom: 5px; }
-        .photo-placeholder p { font-family: var(--font-mono); font-size: 0.75rem; color: var(--muted); letter-spacing: 1px; text-align: center; }
+        .photo-placeholder h2 { font-family: var(--font-mono); font-size: 3.5rem; color: var(--border); margin-bottom: 5px; }
+        .photo-placeholder p { font-family: var(--font-mono); font-size: 0.75rem; color: var(--muted); letter-spacing: 2px; text-align: center; }
 
         .profile-titles h1 { font-family: var(--font-serif); font-size: 3.5rem; line-height: 1.1; margin-bottom: 12px; }
         .role-tag { display: inline-block; font-family: var(--font-mono); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; padding: 6px 16px; border: 1px solid var(--pink); color: var(--pink); border-radius: 50px; }
 
-        /* Content */
+        /* Content Section */
         .bio-content h2 { font-family: var(--font-serif); font-size: 2rem; margin-bottom: 20px; margin-top: 40px; }
         .bio-content p { color: var(--muted); font-size: 1.05rem; margin-bottom: 20px; line-height: 1.8; }
         .bio-content strong { color: var(--ink); }
@@ -74,7 +75,7 @@
         </div>
 
         <div class="bio-content">
-            <h2>The Story</h2>
+            <h2>Genesis</h2>
             <p>Pig Man is the technical mastermind behind the scenes. With a background in computer science and a deep passion for open-source technology, he ensures that every project we build is fast, secure, and reliable.</p>
             <p>He believes that a beautiful design is nothing without a solid foundation. His expertise spans across <strong>Node.js</strong>, <strong>Python</strong>, and cloud infrastructure. He is the reason why Frost &amp; Hog's websites load in milliseconds while maintaining top-tier security standards.</p>
             <p>Outside of coding, he is an avid gamer and a proud collector of mechanical keyboards.</p>
@@ -87,7 +88,7 @@
             </div>
             <div class="meta-card">
                 <div class="meta-label">Location</div>
-                <div class="meta-value">Based in Berlin, DE</div>
+                <div class="meta-value">Unknown</div>
             </div>
         </div>
     </div>
