@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML5 — Frost & Hog Tech Stack</title>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root { 
+            --bg: #09090B; --panel: #111113; --border: #27272A; 
+            --ink: #FAFAFA; --muted: #A1A1AA; --cyan: #00F0FF; --pink: #FF007F; 
+            --font-serif: 'Instrument Serif', serif; --font-sans: 'Inter', sans-serif; --font-mono: 'JetBrains Mono', monospace; 
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { background-color: var(--bg); color: var(--ink); font-family: var(--font-sans); line-height: 1.6; display: flex; flex-direction: column; min-height: 100vh; }
+        a { color: var(--ink); text-decoration: none; }
+
+        /* Navbar */
+        nav { display: flex; justify-content: space-between; align-items: center; padding: 0 5vw; height: 70px; border-bottom: 1px solid var(--border); position: fixed; top: 0; width: 100%; background: rgba(9,9,11,0.95); backdrop-filter: blur(10px); z-index: 100; }
+        .nav-brand { font-family: var(--font-serif); font-size: 1.5rem; font-style: italic; }
+        .back-link { font-family: var(--font-mono); font-size: 0.85rem; color: var(--muted); transition: 0.2s; }
+        .back-link:hover { color: var(--cyan); }
+
+        /* Main Content */
+        .main-container { flex: 1; display: flex; justify-content: center; align-items: center; padding: 120px 5vw 60px; }
+        .content-box { max-width: 800px; width: 100%; background: var(--panel); border: 1px solid var(--border); border-radius: 16px; padding: 50px; position: relative; overflow: hidden; }
+        
+        /* Tech Header */
+        .tech-header { display: flex; align-items: center; gap: 30px; margin-bottom: 40px; border-bottom: 1px solid var(--border); padding-bottom: 30px; }
+        .tech-logo { width: 90px; height: 90px; object-fit: contain; background: var(--bg); padding: 15px; border-radius: 12px; border: 1px solid var(--border); }
+        .tech-title h1 { font-family: var(--font-serif); font-size: 3rem; font-weight: 400; line-height: 1; margin-bottom: 8px; }
+        .tech-title p { font-family: var(--font-mono); font-size: 0.85rem; color: var(--cyan); text-transform: uppercase; letter-spacing: 1px; }
+
+        /* Meta Data (Creator, Date, etc) */
+        .tech-meta { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; margin-bottom: 40px; }
+        .meta-item { background: var(--bg); border: 1px solid var(--border); padding: 20px; border-radius: 8px; }
+        .meta-item h4 { font-size: 0.75rem; color: var(--muted); text-transform: uppercase; margin-bottom: 8px; letter-spacing: 1px; }
+        .meta-item p { font-size: 1rem; font-weight: 600; color: var(--ink); }
+
+        /* Description */
+        .tech-desc h2 { font-family: var(--font-serif); font-size: 1.8rem; margin-bottom: 16px; font-weight: 400; }
+        .tech-desc p { font-size: 1rem; color: var(--muted); line-height: 1.8; margin-bottom: 20px; }
+
+        /* Footer */
+        footer { padding: 30px 5vw; text-align: center; font-family: var(--font-mono); font-size: 0.75rem; color: var(--muted); border-top: 1px solid var(--border); }
+
+        @media (max-width: 768px) {
+            .tech-header { flex-direction: column; text-align: center; }
+            .tech-meta { grid-template-columns: 1fr; }
+            .content-box { padding: 30px 20px; }
+            .tech-title h1 { font-size: 2.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html" class="nav-brand">Frost & Hog.</a>
+        <a href="index.html" class="back-link">← Back to Home</a>
+    </nav>
+
+    <div class="main-container">
+        <div class="content-box">
+            
+            <div class="tech-header">
+                <img src="https://cdn.simpleicons.org/html5/E34F26" alt="HTML5" class="tech-logo">
+                <div class="tech-title">
+                    <h1>HTML5</h1>
+                    <p>HyperText Markup Language</p>
+                </div>
+            </div>
+
+            <div class="tech-meta">
+                <div class="meta-item">
+                    <h4>Created By</h4>
+                    <p>WHATWG (Led by Ian Hickson)</p>
+                </div>
+                <div class="meta-item">
+                    <h4>Initial Release</h4>
+                    <p>January 22, 2008</p>
+                </div>
+                <div class="meta-item">
+                    <h4>Type</h4>
+                    <p>Markup Language</p>
+                </div>
+            </div>
+
+            <div class="tech-desc">
+                <h2>Why We Use It</h2>
+                <p>HTML5 is the structural foundation of every website we build. It is the skeleton that holds everything together. We use its modern semantic tags (like <code>&lt;header&gt;</code>, <code>&lt;article&gt;</code>, and <code>&lt;section&gt;</code>) to ensure your website is highly accessible and easily understood by search engines.</p>
+                <p>Before HTML5, playing videos or using complex graphics required clunky third-party plugins like Flash. Today, HTML5 natively supports audio, video, and scalable vector graphics (SVG), making the web faster, more secure, and mobile-friendly.</p>
+                <p>At Frost & Hog, we strictly write clean and standards-compliant HTML because a solid foundation is the first step to a secure digital infrastructure.</p>
+            </div>
+
+        </div>
+    </div>
+
+    <footer>
+        &copy; 2026 Frost & Hog Cyber Team. All rights reserved.
+    </footer>
+</body>
+</html>
