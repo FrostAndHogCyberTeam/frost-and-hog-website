@@ -1,103 +1,82 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Services — Frost & Hog</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        :root { --bg: #09090B; --panel: #111113; --border: #27272A; --ink: #FAFAFA; --muted: #A1A1AA; --cyan: #00F0FF; --pink: #FF007F; --font-sans: 'Inter', sans-serif; --font-mono: 'JetBrains Mono', monospace; }
+        :root { --bg: #09090B; --panel: #111113; --border: #27272A; --ink: #FAFAFA; --muted: #A1A1AA; --cyan: #00F0FF; --pink: #FF007F; --font-serif: 'Instrument Serif', serif; --font-sans: 'Inter', sans-serif; --font-mono: 'JetBrains Mono', monospace; }
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { background-color: var(--bg); color: var(--ink); font-family: var(--font-sans); line-height: 1.5; display: flex; flex-direction: column; min-height: 100vh; }
+        body { background-color: var(--bg); color: var(--ink); font-family: var(--font-sans); line-height: 1.6; display: flex; flex-direction: column; min-height: 100vh; }
         a { color: var(--ink); text-decoration: none; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        .animate-in { animation: fadeIn 0.6s ease-out forwards; }
 
-        nav { display: flex; justify-content: space-between; align-items: center; padding: 0 20px; height: 60px; border-bottom: 1px solid var(--border); position: fixed; top: 0; width: 100%; background: rgba(9, 9, 11, 0.8); backdrop-filter: blur(10px); z-index: 100; }
-        .nav-left { display: flex; align-items: center; gap: 20px; }
-        .nav-brand { font-family: var(--font-mono); font-size: 1.1rem; font-weight: 700; letter-spacing: -0.5px; }
-        .nav-links { display: flex; gap: 20px; align-items: center; }
-        .nav-links a { font-size: 0.85rem; font-weight: 500; color: var(--muted); transition: color 0.2s; }
-        .nav-links a:hover, .nav-links a.active { color: var(--ink); }
-        .btn-nav-hire { background: var(--ink); color: var(--bg); padding: 6px 16px; border-radius: 6px; font-size: 0.85rem; font-weight: 600; }
+        nav { display: flex; justify-content: space-between; align-items: center; padding: 0 5vw; height: 70px; border-bottom: 1px solid var(--border); position: fixed; top: 0; width: 100%; background: rgba(9,9,11,0.95); backdrop-filter: blur(10px); z-index: 100; }
+        .nav-brand { font-family: var(--font-serif); font-size: 1.5rem; font-style: italic; }
+        .back-link { font-family: var(--font-mono); font-size: 0.85rem; color: var(--muted); transition: 0.2s; }
+        .back-link:hover { color: var(--cyan); }
 
-        .header { padding: 120px 20px 40px; max-width: 1000px; margin: 0 auto; width: 100%; border-bottom: 1px solid var(--border); }
-        .back-nav { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 0.8rem; color: var(--muted); margin-bottom: 20px; transition: color 0.2s; }
-        .back-nav:hover { color: var(--cyan); }
-        .header h1 { font-size: 2.5rem; font-weight: 700; letter-spacing: -0.03em; margin-bottom: 10px; }
-        .header p { color: var(--muted); font-size: 1rem; }
+        .header { padding: 140px 5vw 60px; max-width: 1000px; margin: 0 auto; border-bottom: 1px solid var(--border); text-align: center; }
+        .header h1 { font-family: var(--font-serif); font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 400; margin-bottom: 16px; }
+        .header p { color: var(--muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
 
-        .service-list { padding: 40px 20px; max-width: 1000px; margin: 0 auto; width: 100%; display: flex; flex-direction: column; gap: 20px; flex: 1; }
-        .service-card { background: var(--panel); border: 1px solid var(--border); border-radius: 12px; padding: 30px; display: grid; grid-template-columns: 80px 1fr 1fr; gap: 30px; align-items: center; transition: 0.3s; }
-        .service-card:hover { border-color: #52525B; }
+        .service-list { padding: 60px 5vw; max-width: 1000px; margin: 0 auto; display: flex; flex-direction: column; gap: 30px; flex: 1; }
         
-        .service-num { font-family: var(--font-mono); font-size: 1.5rem; color: var(--border); font-weight: 700; }
-        .service-title { font-size: 1.5rem; font-weight: 700; letter-spacing: -0.02em; }
-        .service-desc { font-size: 0.9rem; color: var(--muted); margin-bottom: 20px; }
+        .service-card { background: var(--panel); border: 1px solid var(--border); border-radius: 16px; padding: 40px; display: flex; justify-content: space-between; align-items: center; transition: 0.3s; text-decoration: none; }
+        .service-card:hover { border-color: var(--cyan); transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,240,255,0.1); }
         
-        .btn-portal { display: inline-flex; align-items: center; gap: 8px; background: var(--ink); color: var(--bg); padding: 10px 20px; font-family: var(--font-mono); font-size: 0.8rem; font-weight: 700; border-radius: 6px; transition: 0.2s; }
-        .btn-portal:hover { background: var(--cyan); color: #000; }
+        .service-info h3 { font-family: var(--font-serif); font-size: 2rem; margin-bottom: 8px; }
+        .service-info p { color: var(--muted); font-size: 0.95rem; max-width: 500px; }
+        
+        .service-btn { background: var(--ink); color: var(--bg); padding: 12px 24px; border-radius: 6px; font-family: var(--font-mono); font-weight: 700; font-size: 0.85rem; transition: 0.3s; white-space: nowrap; }
+        .service-card:hover .service-btn { background: var(--cyan); color: #000; }
 
-        footer { border-top: 1px solid var(--border); padding: 20px; display: flex; justify-content: space-between; align-items: center; font-family: var(--font-mono); font-size: 0.75rem; color: var(--muted); margin-top: auto; }
-        .c-icon { border: 1px solid var(--border); width: 20px; height: 20px; border-radius: 50%; display: inline-flex; justify-content: center; align-items: center; margin-right: 5px;}
+        footer { padding: 40px 5vw; text-align: center; font-family: var(--font-mono); font-size: 0.8rem; color: var(--muted); border-top: 1px solid var(--border); margin-top: auto; }
 
         @media (max-width: 768px) {
-            .nav-links { display: none; }
-            .service-card { grid-template-columns: 1fr; gap: 15px; }
-            footer { flex-direction: column; gap: 10px; text-align: center; }
+            .service-card { flex-direction: column; align-items: flex-start; gap: 20px; padding: 30px; }
         }
     </style>
 </head>
 <body>
-    <nav class="animate-in">
-        <div class="nav-left">
-            <div class="nav-brand">FROST & HOG</div>
-        </div>
-        <div class="nav-links">
-            <a href="index.html">Interface</a>
-            <a href="operations.html">Operations</a>
-            <a href="founders.html">Co-Founders</a>
-            <a href="legalitas.html">Legal</a>
-            <a href="layanan.html" class="btn-nav-hire active">Hire Us</a>
-        </div>
+    <nav>
+        <a href="index.html" class="nav-brand">Frost & Hog.</a>
+        <a href="index.html" class="back-link">← Back to Home</a>
     </nav>
 
-    <div class="header animate-in">
-        <a href="index.html" class="back-nav">← Back to Interface</a>
+    <div class="header">
         <h1>Our Services.</h1>
-        <p>Kami menyediakan keahlian teknis untuk membangun dan mengamankan aset digital Anda.</p>
+        <p>We don't just build websites; we engineer secure digital experiences. Choose a service to see our detailed approach.</p>
     </div>
 
-    <div class="service-list animate-in" style="animation-delay: 0.1s;">
-        <div class="service-card">
-            <div class="service-num">01</div>
-            <div class="service-title">Web<br>Development</div>
-            <div>
-                <p class="service-desc">Pembuatan website dari nol. Fokus pada performa cepat, struktur kode yang bersih, dan desain antarmuka yang responsif.</p>
-                <a href="form.html?service=Web%20Development" class="btn-portal">Request Service →</a>
+    <div class="service-list">
+        <a href="service-web.html" class="service-card">
+            <div class="service-info">
+                <h3>Web Development</h3>
+                <p>End-to-end development, from high-converting landing pages to complex full-stack applications.</p>
             </div>
-        </div>
-        <div class="service-card">
-            <div class="service-num">02</div>
-            <div class="service-title">Cyber<br>Security</div>
-            <div>
-                <p class="service-desc">Audit keamanan web dan infrastruktur. Kami menguji celah keamanan (penetration testing) secara legal dan etis.</p>
-                <a href="form.html?service=Cyber%20Security" class="btn-portal">Request Service →</a>
+            <div class="service-btn">View Details →</div>
+        </a>
+
+        <a href="service-cyber.html" class="service-card">
+            <div class="service-info">
+                <h3>Cyber Security</h3>
+                <p>Ethical hacking, Penetration Testing, and server hardening to protect your digital assets.</p>
             </div>
-        </div>
-        <div class="service-card">
-            <div class="service-num">03</div>
-            <div class="service-title">UI/UX<br>Design</div>
-            <div>
-                <p class="service-desc">Perancangan antarmuka yang berpusat pada pengguna. Memastikan navigasi yang jelas dan pengalaman yang nyaman.</p>
-                <a href="form.html?service=UI/UX%20Design" class="btn-portal">Request Service →</a>
+            <div class="service-btn">View Details →</div>
+        </a>
+
+        <a href="service-design.html" class="service-card">
+            <div class="service-info">
+                <h3>UI/UX Design</h3>
+                <p>Human-centered design that ensures your users stay engaged and never get lost.</p>
             </div>
-        </div>
+            <div class="service-btn">View Details →</div>
+        </a>
     </div>
 
     <footer>
-        <span><span class="c-icon">C</span> 2026 FROST & HOG.</span>
-        <span>ALL RIGHTS RESERVED.</span>
+        &copy; 2026 Frost & Hog Cyber Team. All rights reserved.
     </footer>
 </body>
 </html>

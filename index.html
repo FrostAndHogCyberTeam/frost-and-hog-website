@@ -80,7 +80,7 @@
         .service-card p { font-size: 0.95rem; color: var(--muted); margin-bottom: 30px; flex: 1; }
         .service-link { font-family: var(--font-mono); font-size: 0.75rem; color: var(--cyan); text-transform: uppercase; font-weight: 700; }
 
-        /* TECH STACK (SUDAH DIPERBAIKI) */
+        /* TECH STACK */
         .tech-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 16px; margin-top: 40px; }
         .tech-item { background: var(--panel); border: 1px solid var(--border); border-radius: 8px; padding: 24px 10px; display: flex; flex-direction: column; align-items: center; gap: 12px; transition: 0.3s; cursor: pointer; }
         .tech-item:hover { border-color: var(--cyan); transform: translateY(-5px); box-shadow: 0 5px 15px rgba(0,240,255,0.1); }
@@ -226,9 +226,11 @@
             <p class="section-desc">We only use modern, stable technologies supported by the global community. Click to learn more.</p>
         </div>
         <div class="tech-grid">
-            <!-- Setiap logo sudah terhubung ke halamannya masing-masing -->
             <a href="html.html" class="tech-item"><img src="https://cdn.simpleicons.org/html5/E34F26" alt="HTML5"><span>HTML5</span></a>
-            <a href="css.html" class="tech-item"><img src="https://cdn.simpleicons.org/css3/1572B6" alt="CSS3"><span>CSS3</span></a>
+            
+            <!-- CSS3 LOKAL (Jika file kamu .jpg, ganti .png jadi .jpg) -->
+            <a href="css.html" class="tech-item"><img src="img/css3.png" alt="CSS3"><span>CSS3</span></a>
+            
             <a href="js.html" class="tech-item"><img src="https://cdn.simpleicons.org/javascript/F7DF1E" alt="JS"><span>JavaScript</span></a>
             <a href="node.html" class="tech-item"><img src="https://cdn.simpleicons.org/nodedotjs/339933" alt="Node"><span>Node.js</span></a>
             <a href="python.html" class="tech-item"><img src="https://cdn.simpleicons.org/python/3776AB" alt="Python"><span>Python</span></a>
